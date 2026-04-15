@@ -47,7 +47,7 @@ CREATE TABLE vies
     id_tipus_via		INT,
     nom					VARCHAR (20),
     llargada			TINYINT,
-    dificultad			CHAR (2),
+    dificultat			CHAR (2),
     orientacio			CHAR (2),
     ancoratge 			CHAR (7),
     troca				VARCHAR (11),
@@ -90,6 +90,8 @@ SELECT
 FROM sectors s
 LEFT JOIN vies v ON s.id = v.id_sector
 GROUP BY s.id, s.nom;
+
+
 
 
 
