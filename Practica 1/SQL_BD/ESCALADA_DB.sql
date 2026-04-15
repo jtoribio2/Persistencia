@@ -100,20 +100,19 @@ estilo 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
 CONSTRAINT pk_escaladors PRIMARY KEY(id),
 CONSTRAINT ck_escaladors_estilo CHECK(estilo BETWEEN 1 AND 3)
 );
--- ERRROR ALGO PASA
-CREATE TABLE escaladors_vies (
-id_escalador	INT ,
-id_via  		INT,
-nivell 			CHAR(3) COMMENT 'DIFICULTAT',
-via 			VARCHAR(20) COMMENT 'NOM DE LA VIA ',
-CONSTRAINT pk_escalados_vies PRIMARY KEY (id_escalador,id_via),
-CONSTRAINT uk_id_escalador UNIQUE(id_escalador),
-CONSTRAINT uk_id_via UNIQUE(id_via),
--- ID VIA
-CONSTRAINT fk_escaladors_vies_vies FOREIGN KEY(id_via,nivell,via)
-REFERENCES vies(id,dificultad,nom),
--- ID  ESCALADOR
-CONSTRAINT fk_escaladors_vies_escaladors FOREIGN KEY(id_escalador)
-REFERENCES escaladors(id)
 
+CREATE TABLE escaladors_vies (
+    id_escalador    INT,
+    id_via          INT,
+   
+    -- PK 
+    CONSTRAINT pk_escalados_vies PRIMARY KEY (id_escalador, id_via),
+
+    -- ID VIA: Ahora solo apunta al ID, que es la Primary Key de 'vies'
+    CONSTRAINT fk_escaladors_vies_vies FOREIGN KEY(id_via)
+        REFERENCES vies(id),
+        
+    -- ID ESCALADOR
+    CONSTRAINT fk_escaladors_vies_escaladors FOREIGN KEY(id_escalador)
+        REFERENCES escaladors(id)
 );
