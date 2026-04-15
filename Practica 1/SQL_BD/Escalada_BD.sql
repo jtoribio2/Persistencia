@@ -32,10 +32,19 @@ CREATE TABLE sectors
 				REFERENCES escoles (id)
 ) ;
 
+CREATE TABLE tipus_via
+(
+	id					INT,
+    tipus				VARCHAR(10),
+    CONSTRAINT pk_tipus_via PRIMARY KEY (id),
+    CONSTRAINT uk_tipus_via UNIQUE (id)
+);
+
 CREATE TABLE vies
 (
 	id 					INT,
 	id_sector			INT,
+    id_tipus_via		INT,
     nom					VARCHAR (20),
     llargada			TINYINT,
     dificultad			CHAR (2),
@@ -45,7 +54,9 @@ CREATE TABLE vies
     CONSTRAINT pk_vies PRIMARY KEY (id),
     CONSTRAINT uk_vies UNIQUE (id),
     CONSTRAINT fk_vies_sectors FOREIGN KEY (id_sector)
-				REFERENCES sectors (id)
+				REFERENCES sectors (id),
+	CONSTRAINT fk_vies_tipus_via FOREIGN KEY (id_tipus_via)
+				REFERENCES tipus_via (id)
 ) ;
 
 CREATE TABLE disponibilitats
@@ -60,5 +71,27 @@ CREATE TABLE disponibilitats
     CONSTRAINT fk_disponibilitat_sectors FOREIGN KEY (id_sectors)
 				REFERENCES sectors (id)
 ) ;
+
+CREATE VIEW vista_vias_per_escola AS
+SELECT 
+    e.id,
+    e.nom,
+    COUNT(v.id) AS numero_vias
+FROM escoles e
+JOIN sectors s ON e.id = s.id_escoles
+LEFT JOIN vies v ON s.id = v.id_sector
+GROUP BY e.id, e.nom;
+
+CREATE VIEW vista_vias_per_sector AS
+SELECT 
+    s.id,
+    s.nom,
+    COUNT(v.id) AS numero_vias
+FROM sectors s
+LEFT JOIN vies v ON s.id = v.id_sector
+GROUP BY s.id, s.nom;
+
+
+
 
 
