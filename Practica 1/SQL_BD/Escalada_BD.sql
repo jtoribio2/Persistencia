@@ -22,8 +22,8 @@ CREATE TABLE sectors
 	id 					INT,
 	id_escoles			INT,
     nom					VARCHAR (20),
-    latitud				DECIMAL (9,6),
-    longitud			DECIMAL (5,2),
+    latitut				DECIMAL (9,6),
+    longitut			DECIMAL (5,2),
     aproximacio			VARCHAR (50),
     popularitat 		TINYINT COMMENT'1=baixa 2=mitjana 3=alta', 
     CONSTRAINT pk_sectors PRIMARY KEY (id),
@@ -47,7 +47,7 @@ CREATE TABLE vies
     id_tipus_via		INT,
     nom					VARCHAR (20),
     llargada			TINYINT,
-    dificultat			CHAR (2),
+    dificultat			CHAR (3),
     orientacio			CHAR (2),
     ancoratge 			CHAR (7),
     troca				VARCHAR (11),
@@ -62,15 +62,52 @@ CREATE TABLE vies
 CREATE TABLE disponibilitats
 (
 	id 					INT,
-	id_sectors			INT,
+	id_via				INT,
     inici				DATE,
     final				DATE,
     rao					VARCHAR(40),
     CONSTRAINT pk_disponibilitat PRIMARY KEY (id),
     CONSTRAINT uk_disponibilitat UNIQUE (id),
-    CONSTRAINT fk_disponibilitat_sectors FOREIGN KEY (id_sectors)
-				REFERENCES sectors (id)
+    CONSTRAINT fk_disponibilitat_vies FOREIGN KEY (id_via)
+				REFERENCES vies (id)
 ) ;
+
+CREATE TABLE llars
+(
+	id					INT,
+    id_via				INT,
+    metres				TINYINT,
+    CONSTRAINT pk_llars PRIMARY KEY (id),
+    CONSTRAINT uk_llars UNIQUE (id),
+    CONSTRAINT fk_llars_vies FOREIGN KEY (id_via)
+				REFERENCES vies (id)
+);
+
+CREATE TABLE escaladors (
+id 			INT,
+nom 		VARCHAR(20),
+edat 		TINYINT,
+estil 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
+
+CONSTRAINT pk_escaladors PRIMARY KEY(id),
+CONSTRAINT ck_escaladors_estilo CHECK(estilo BETWEEN 1 AND 3)
+);
+
+CREATE TABLE escaladors_vies (
+    id_escalador    INT,
+    id_via          INT,
+   
+    -- PK 
+    CONSTRAINT pk_escalados_vies PRIMARY KEY (id_escalador, id_via),
+
+    -- ID VIA: Ahora solo apunta al ID, que es la Primary Key de 'vies'
+    CONSTRAINT fk_escaladors_vies_vies FOREIGN KEY(id_via)
+        REFERENCES vies(id),
+        
+    -- ID ESCALADOR
+    CONSTRAINT fk_escaladors_vies_escaladors FOREIGN KEY(id_escalador)
+        REFERENCES escaladors(id)
+);
 
 CREATE VIEW vista_vias_per_escola AS
 SELECT 
