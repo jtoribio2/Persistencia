@@ -90,7 +90,11 @@ edat 		TINYINT,
 estil 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
 
 CONSTRAINT pk_escaladors PRIMARY KEY(id),
+<<<<<<<< HEAD:Practica 1/SQL_BD/Escalada_dw_Db.sql
 CONSTRAINT ck_escaladors_estil CHECK(estil BETWEEN 1 AND 3)
+========
+CONSTRAINT ck_escaladors_estilo CHECK(estilo BETWEEN 1 AND 3)
+>>>>>>>> main:Practica 1/SQL_BD/Escalada_BD.sql
 );
 
 CREATE TABLE escaladors_vies (
@@ -126,4 +130,15 @@ SELECT
     COUNT(v.id) AS numero_vias
 FROM sectors s
 LEFT JOIN vies v ON s.id = v.id_sector
+<<<<<<<< HEAD:Practica 1/SQL_BD/Escalada_dw_Db.sql
 GROUP BY s.id, s.nom;
+========
+GROUP BY s.id, s.nom;
+
+
+
+
+
+
+
+>>>>>>>> main:Practica 1/SQL_BD/Escalada_BD.sql
