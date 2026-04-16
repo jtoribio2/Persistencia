@@ -1,9 +1,9 @@
 package NEGOCI.MODEL;
 
-public class escola {
+public class Escola {
 protected int id;
 protected String nom,lloc,aproximacio,popularitat;
-    public escola(int id, String nom, String lloc, String aproximacio, String popularitat){
+    public Escola(int id, String nom, String lloc, String aproximacio, String popularitat){
 
         this.id = id;
         this.nom = nom;
