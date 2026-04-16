@@ -1,36 +1,36 @@
 package CAPA_PERSISTENCIA;
-import DAO.ESCOLADAO;
-import NEGOCI.MODEL.escola;
-import BD_CONEXIONS.MYSQL;
+import DAO.EscolaDAO;
+import NEGOCI.MODEL.Escola;
+
 import java.sql.*;
 import java.util.List;
 import PRESENTACIO.VISTA_1;
-public class MYSQL_ESCOLA_DAO implements ESCOLADAO {
+public class MYSQL_ESCOLA_DAO implements EscolaDAO {
 
 
     @Override
-    public void inserir(escola o) {
+    public void inserir(Escola o) {
 
 
     }
 
     @Override
-    public void modificar(escola o) {
+    public void modificar(Escola o) {
 
     }
 
     @Override
-    public void eliminar(escola o) {
+    public void eliminar(Escola o) {
 
     }
 
     @Override
-    public List<escola> obtindreTots() {
+    public List<Escola> obtindreTots() {
         return List.of();
     }
 
     @Override
-    public escola obtenir(Integer id) {
+    public Escola obtenir(Integer id) {
         return null;
 
     }

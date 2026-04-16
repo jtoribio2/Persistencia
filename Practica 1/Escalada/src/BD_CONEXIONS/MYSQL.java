@@ -5,7 +5,7 @@ public class MYSQL {
     // Parámetros de conexión
     private static final String URL = "jdbc:mysql://localhost:3306/escalada?serverTimezone=UTC+1";
     private static final String USER = "root";
-    private static final String PASS = "pepe@123";
+    private static final String PASS = "1234";
     private static Connection conexion = null;
     // OBTENIR REFERENCIA DE COMNEXIO PER GESTIONAR
     public static Connection getConexio(){
