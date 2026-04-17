@@ -1,7 +1,7 @@
 package model.entity;
 
 public class Sector {
-    private int id;
+    private int id_sector;
     private int id_escoles;
     private String nom;
     private float latitut;
@@ -9,8 +9,8 @@ public class Sector {
     private String aproximacio;
     private int popularitat;
 
-    public Sector(int id, int id_escoles, String nom, float latitut, float longitut, String aproximacio, int popularitat) {
-        this.id = id;
+    public Sector(int id_sector, int id_escoles, String nom, float latitut, float longitut, String aproximacio, int popularitat) {
+        this.id_sector = id_sector;
         this.id_escoles = id_escoles;
         this.nom = nom;
         this.latitut = latitut;
@@ -19,8 +19,8 @@ public class Sector {
         this.popularitat = popularitat;
     }
 
-    public int getId() {
-        return id;
+    public int getId_sector() {
+        return id_sector;
     }
 
     public int getId_escoles() {
@@ -47,8 +47,8 @@ public class Sector {
         return popularitat;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_sector(int id_sector) {
+        this.id_sector = id_sector;
     }
 
     public void setId_escoles(int id_escoles) {

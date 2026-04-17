@@ -3,29 +3,31 @@ import java.sql.*;
 public class MYSQL {
 
     // Parámetros de conexión
-    private static final String URL = "jdbc:mysql://localhost:3306/escalada?serverTimezone=UTC+1";
+    private static final String URL = "jdbc:mysql://localhost:3306/escalada?serverTimezone=Europe/Madrid";
     private static final String USER = "root";
-    private static final String PASS = "1234";
-    private static Connection conexion = null;
-    // OBTENIR REFERENCIA DE COMNEXIO PER GESTIONAR
-    public static Connection getConexio(){
-        return conexion;
-    }
-    //OBRIR CONEXIO
-    public static  void OnBd() {
+    private static final String PASS = "pepe@123";
+
+    public  static Connection openCon() {
+
+
         try {
-            conexion = DriverManager.getConnection(URL, USER, PASS);
-            if (conexion != null) {
-                System.out.println("CONECTAT A LA BD ");
-            }
+            Connection con = DriverManager.getConnection(URL,USER,PASS);
+            System.out.println("Connexió establerta");
+            return con;
         } catch (SQLException e) {
-            System.err.println("ERROR AL CONECTAR : " + e.getMessage());
+            System.out.println(e.getMessage());
+            return null;
         }
+
     }
-    //TANCAR CONEXIO
-    public static void offBd() {
+
+    /**
+     * Desconnectar d'una BD.
+     * @param con Connexió amb la BD
+     */
+    private static void closeCon(Connection con) {
         try {
-            if (conexion != null) conexion.close();
+            if (con != null) con.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

@@ -1,7 +1,7 @@
 package model.entity;
 
 public class Via {
-    private int id;
+    private int id_via;
     private int id_sector;
     private int id_tipus_via;
     private String nom;
@@ -11,8 +11,8 @@ public class Via {
     private String ancoratge;
     private String troca;
 
-    public Via(int id, int id_sector, int id_tipus_via, String nom, int llargada, String dificultat, String orientacio, String ancoratge, String troca) {
-        this.id = id;
+    public Via(int id_via, int id_sector, int id_tipus_via, String nom, int llargada, String dificultat, String orientacio, String ancoratge, String troca) {
+        this.id_via = id_via;
         this.id_sector = id_sector;
         this.id_tipus_via = id_tipus_via;
         this.nom = nom;
@@ -22,9 +22,10 @@ public class Via {
         this.ancoratge = ancoratge;
         this.troca = troca;
     }
+    
 
-    public int getId() {
-        return id;
+    public int getId_via() {
+        return id_via;
     }
 
     public int getId_sector() {
@@ -59,8 +60,8 @@ public class Via {
         return troca;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_via(int id_via) {
+        this.id_via = id_via;
     }
 
     public void setId_sector(int id_sector) {

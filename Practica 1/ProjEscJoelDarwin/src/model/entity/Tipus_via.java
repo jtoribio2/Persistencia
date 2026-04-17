@@ -1,16 +1,16 @@
 package model.entity;
 
 public class Tipus_via {
-    private int id;
+    private int id_tipus_via;
     private String tipus;
 
-    public Tipus_via(int id, String tipus) {
-        this.id = id;
+    public Tipus_via(int id_tipus_via, String tipus) {
+        this.id_tipus_via = id_tipus_via;
         this.tipus = tipus;
     }
 
     public int getId() {
-        return id;
+        return id_tipus_via;
     }
 
     public String getTipus() {
@@ -18,7 +18,7 @@ public class Tipus_via {
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.id_tipus_via = id;
     }
 
     public void setTipus(String tipus) {

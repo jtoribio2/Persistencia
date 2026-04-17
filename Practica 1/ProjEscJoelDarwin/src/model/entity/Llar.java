@@ -1,9 +1,9 @@
 package model.entity;
 
 public class Llar {
-    private int id,id_via,metres;
-    public Llar(int id,int id_via,int metres){
-        this.id = id;
+    private int id_llar,id_via,metres;
+    public Llar(int id_llar,int id_via,int metres){
+        this.id_llar = id_llar;
         this.id_via = id_via;
         this.metres = metres;
     }
@@ -16,12 +16,12 @@ public class Llar {
         this.id_via = id_via;
     }
 
-    public int getId() {
-        return id;
+    public int getId_llar() {
+        return id_llar;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_llar(int id_llar) {
+        this.id_llar = id_llar;
     }
 
     public int getMetres() {

@@ -1,4 +1,5 @@
 package CAPA_PERSISTENCIA;
+import BD_CONEXIONS.MYSQL;
 import DAO.EscolaDAO;
 import NEGOCI.MODEL.Escola;
 
@@ -38,11 +39,9 @@ public class MYSQL_ESCOLA_DAO implements EscolaDAO {
 
     @Override
     public void mostrar(Integer id ){
-        final String URL = "jdbc:mysql://localhost:3306/escalada";
-        final String USER = "root";
-        final String PASS = "pepe@123";
+
         try {
-            Connection conexion = DriverManager.getConnection(URL, USER, PASS);
+            Connection conexion = MYSQL.openCon();
 
             if (conexion != null) {
                 System.out.println("CONECTAT A LA BD ");

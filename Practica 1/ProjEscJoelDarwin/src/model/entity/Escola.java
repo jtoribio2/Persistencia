@@ -1,22 +1,22 @@
 package model.entity;
 
 public class Escola {
-private int id,popularitat;
+private int id_escola,popularitat;
 private String nom,lloc,aproximacio;
-    public Escola(int id, String nom,String lloc, String aproximacio, int popularitat){
-    this.id = id;
+    public Escola(int id_escola, String nom,String lloc, String aproximacio, int popularitat){
+    this.id_escola = id_escola;
     this.nom = nom;
     this.lloc = lloc;
     this.aproximacio = aproximacio;
     this.popularitat = popularitat;
 }
 
-    public int getId() {
-        return id;
+    public int getId_escola() {
+        return id_escola;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId_escola(int id_escola) {
+        this.id_escola = id_escola;
     }
 
     public int getPopularitat() {
