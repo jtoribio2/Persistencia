@@ -90,7 +90,7 @@ edat 		TINYINT,
 estil 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
 
 CONSTRAINT pk_escaladors PRIMARY KEY(id),
-CONSTRAINT ck_escaladors_estilo CHECK(estilo BETWEEN 1 AND 3)
+CONSTRAINT ck_escaladors_estil CHECK(estil BETWEEN 1 AND 3)
 );
 
 CREATE TABLE escaladors_vies (
