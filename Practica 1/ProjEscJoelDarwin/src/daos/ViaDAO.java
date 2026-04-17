@@ -1,4 +1,4 @@
-package Daos;
+package daos;
 import model.entity.Via;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface ViaDAO extends Dao<Via,Integer>{
     void modificar(Via o);
 
     @Override
-    void eliminar(Via o);
+    void eliminar(Integer o);
 
     @Override
     List<Via> obtindreTots();

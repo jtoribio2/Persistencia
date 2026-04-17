@@ -1,6 +1,5 @@
-package Daos;
+package daos;
 
-import model.entity.Escalador;
 import model.entity.Sector;
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface SectorDAO extends Dao<Sector,Integer> {
     void modificar(Sector o);
 
     @Override
-    void eliminar(Sector  o);
+    void eliminar(Integer o);
 
     @Override
     List<Sector> obtindreTots();

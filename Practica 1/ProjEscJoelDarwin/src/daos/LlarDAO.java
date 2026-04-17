@@ -1,4 +1,4 @@
-package Daos;
+package daos;
 import model.entity.Llar;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public interface LlarDAO extends Dao<Llar,Integer>{
     void modificar(Llar o);
 
     @Override
-    void eliminar(Llar o);
+    void eliminar(Integer o);
 
     @Override
     List<Llar> obtindreTots();

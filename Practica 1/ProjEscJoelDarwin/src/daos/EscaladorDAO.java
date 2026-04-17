@@ -1,4 +1,4 @@
-package Daos;
+package daos;
 import model.entity.Escalador;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     void modificar(Escalador o);
 
     @Override
-    void eliminar(Escalador o);
+    void eliminar(Integer o);
 
     @Override
     List<Escalador> obtindreTots();

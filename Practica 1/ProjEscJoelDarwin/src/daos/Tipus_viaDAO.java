@@ -1,4 +1,4 @@
-package Daos;
+package daos;
 import model.entity.Tipus_via;
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface Tipus_viaDAO extends Dao<Tipus_via,Integer>{
     void modificar(Tipus_via o);
 
     @Override
-    void eliminar(Tipus_via o);
+    void eliminar(Integer o);
 
     @Override
     List<Tipus_via> obtindreTots();

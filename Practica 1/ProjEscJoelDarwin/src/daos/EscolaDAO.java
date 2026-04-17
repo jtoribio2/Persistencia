@@ -1,19 +1,18 @@
-package Daos;
+package daos;
 
 
-import model.entity.Escalador;
 import model.entity.Escola;
 import java.util.List;
 public interface EscolaDAO extends Dao<Escola,Integer> {
 
     @Override
-    void inserir(Escola o);
+   public  void inserir(Escola o);
 
     @Override
     void modificar(Escola o);
 
     @Override
-    void eliminar(Escola o);
+    void eliminar(Integer o);
 
     @Override
     List<Escola> obtindreTots();
