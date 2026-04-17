@@ -1,9 +1,11 @@
-package DAO;
-import NEGOCI.MODEL.Escola;
+package Daos;
 
+
+import model.entity.Escalador;
+import model.entity.Escola;
 import java.util.List;
+public interface EscolaDAO extends Dao<Escola,Integer> {
 
-public interface EscolaDAO extends DAO<Escola,Integer> {
     @Override
     void inserir(Escola o);
 
@@ -16,8 +18,7 @@ public interface EscolaDAO extends DAO<Escola,Integer> {
     @Override
     List<Escola> obtindreTots();
 
-    @Override
-    Escola obtenir(Integer id);
+    Escola  obtenir (Integer id);
+    //METODOS  PROPIOS
 
-    void mostrar(Integer id );
 }

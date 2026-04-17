@@ -45,6 +45,10 @@ public class ConnectionFactory {
     }
 
     //Este es el metodo que cuando utilizemos la interfaz ConnectionProvider nos dejara elegir cual base de datos queremos usar
+    /**
+     * @param type String  indicamos la tecnologia/SGBD que queramos acceder
+     * @return Devuelve el objeto ConnectionProvider
+     **/
     public static ConnectionProvider getProvider(String type) {
 
         ConnectionProvider provider = providers.get(type);  // Aqui le metemos del map los credenciales escogidos
