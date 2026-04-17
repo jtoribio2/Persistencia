@@ -14,8 +14,7 @@ public class DBConnection {
 
     static {
         try {
-            InputStream input = DBConnection.class
-                    .getClassLoader() //le decimos desde donde buscar
+            InputStream input = DBConnection.class.getClassLoader() //le decimos desde donde buscar
                     .getResourceAsStream("resources/properties/db-mysql.properties"); // le decimos donde esta el archivo que indica donde esta la base de datos
 
             if (input == null) {
@@ -28,12 +27,10 @@ public class DBConnection {
             url = prop.getProperty("db.url");
             user = prop.getProperty("db.user");
             password = prop.getProperty("db.password"); // le metemos a las variantes de la clase estaticas la ifnormacion para poder hacer la conecion
-
         } catch (Exception e) {
             throw new RuntimeException("Error cargando configuración de BD", e);
         }
     }
-
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     } // creamos el metodo para poder conectarnos a la base mediante un try(Connection conn = DBConnection.getConnection()) que automaticamente abre conexion y lo cierra cuando salimos del try

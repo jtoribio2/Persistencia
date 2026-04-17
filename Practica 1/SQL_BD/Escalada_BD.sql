@@ -7,42 +7,42 @@ CREATE DATABASE escalada;
 USE escalada;
 CREATE TABLE escoles
 (
-	id 					INT,
+	id_escola 	INT,
 	nom 		VARCHAR(25),
     lloc		VARCHAR(40),
     aproximacio VARCHAR(50),
     popularitat TINYINT COMMENT'1=baixa 2=mitjana 3=alta', 
-	CONSTRAINT pk_escoles PRIMARY KEY (id),
-    CONSTRAINT uk_escoles_id UNIQUE (id),
+	CONSTRAINT pk_escoles PRIMARY KEY (id_escola),
+    CONSTRAINT uk_escoles_id UNIQUE (id_escola),
     CONSTRAINT ck_escoles_popularitat CHECK (popularitat BETWEEN 1 AND 3)
 ) ;
 
 CREATE TABLE sectors
 (
-	id 					INT,
-	id_escoles			INT,
+	id_sector			INT,
+	id_escola			INT,
     nom					VARCHAR (20),
     latitut				DECIMAL (9,6),
     longitut			DECIMAL (5,2),
     aproximacio			VARCHAR (50),
     popularitat 		TINYINT COMMENT'1=baixa 2=mitjana 3=alta', 
-    CONSTRAINT pk_sectors PRIMARY KEY (id),
-    CONSTRAINT uk_sectors UNIQUE (id),
-    CONSTRAINT fk_sectors_escoles FOREIGN KEY (id_escoles)
-				REFERENCES escoles (id)
+    CONSTRAINT pk_sectors PRIMARY KEY (id_sector),
+    CONSTRAINT uk_sectors UNIQUE (id_sector),
+    CONSTRAINT fk_sectors_escoles FOREIGN KEY (id_escola)
+				REFERENCES escoles (id_escola)
 ) ;
 
 CREATE TABLE tipus_via
 (
-	id					INT,
+	id_tipus_via		INT,
     tipus				VARCHAR(10),
-    CONSTRAINT pk_tipus_via PRIMARY KEY (id),
-    CONSTRAINT uk_tipus_via UNIQUE (id)
+    CONSTRAINT pk_tipus_via PRIMARY KEY (id_tipus_via),
+    CONSTRAINT uk_tipus_via UNIQUE (id_tipus_via)
 );
 
 CREATE TABLE vies
 (
-	id 					INT,
+	id_via 				INT,
 	id_sector			INT,
     id_tipus_via		INT,
     nom					VARCHAR (20),
@@ -51,50 +51,47 @@ CREATE TABLE vies
     orientacio			CHAR (2),
     ancoratge 			CHAR (7),
     troca				VARCHAR (11),
-    CONSTRAINT pk_vies PRIMARY KEY (id),
-    CONSTRAINT uk_vies UNIQUE (id),
+    CONSTRAINT pk_vies PRIMARY KEY (id_via),
+    CONSTRAINT uk_vies UNIQUE (id_via),
     CONSTRAINT fk_vies_sectors FOREIGN KEY (id_sector)
-				REFERENCES sectors (id),
+				REFERENCES sectors (id_sector),
 	CONSTRAINT fk_vies_tipus_via FOREIGN KEY (id_tipus_via)
-				REFERENCES tipus_via (id)
+				REFERENCES tipus_via (id_tipus_via)
 ) ;
 
 CREATE TABLE disponibilitats
 (
-	id 					INT,
+	id_disponibilitat 	INT,
 	id_via				INT,
     inici				DATE,
     final				DATE,
     rao					VARCHAR(40),
-    CONSTRAINT pk_disponibilitat PRIMARY KEY (id),
-    CONSTRAINT uk_disponibilitat UNIQUE (id),
+    CONSTRAINT pk_disponibilitat PRIMARY KEY (id_disponibilitat),
+    CONSTRAINT uk_disponibilitat UNIQUE (id_disponibilitat),
     CONSTRAINT fk_disponibilitat_vies FOREIGN KEY (id_via)
-				REFERENCES vies (id)
+				REFERENCES vies (id_via)
 ) ;
 
 CREATE TABLE llars
 (
-	id					INT,
+	id_llar				INT,
     id_via				INT,
     metres				TINYINT,
-    CONSTRAINT pk_llars PRIMARY KEY (id),
-    CONSTRAINT uk_llars UNIQUE (id),
+    CONSTRAINT pk_llars PRIMARY KEY (id_llar),
+    CONSTRAINT uk_llars UNIQUE (id_llar),
     CONSTRAINT fk_llars_vies FOREIGN KEY (id_via)
-				REFERENCES vies (id)
+				REFERENCES vies (id_via)
 );
 
 CREATE TABLE escaladors (
-id 			INT,
+id_escalador INT,
 nom 		VARCHAR(20),
 edat 		TINYINT,
 estil 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
 
-CONSTRAINT pk_escaladors PRIMARY KEY(id),
-<<<<<<<< HEAD:Practica 1/SQL_BD/Escalada_dw_Db.sql
+CONSTRAINT pk_escaladors PRIMARY KEY(id_escalador),
+CONSTRAINT uk_escaladors UNIQUE (id_escalador),
 CONSTRAINT ck_escaladors_estil CHECK(estil BETWEEN 1 AND 3)
-========
-CONSTRAINT ck_escaladors_estilo CHECK(estilo BETWEEN 1 AND 3)
->>>>>>>> main:Practica 1/SQL_BD/Escalada_BD.sql
 );
 
 CREATE TABLE escaladors_vies (
@@ -106,34 +103,31 @@ CREATE TABLE escaladors_vies (
 
     -- ID VIA: Ahora solo apunta al ID, que es la Primary Key de 'vies'
     CONSTRAINT fk_escaladors_vies_vies FOREIGN KEY(id_via)
-        REFERENCES vies(id),
+        REFERENCES vies(id_via),
         
     -- ID ESCALADOR
     CONSTRAINT fk_escaladors_vies_escaladors FOREIGN KEY(id_escalador)
-        REFERENCES escaladors(id)
+        REFERENCES escaladors(id_escalador)
 );
 
 CREATE VIEW vista_vias_per_escola AS
 SELECT 
-    e.id,
+    e.id_escola,
     e.nom,
-    COUNT(v.id) AS numero_vias
+    COUNT(v.id_via) AS numero_vias
 FROM escoles e
-JOIN sectors s ON e.id = s.id_escoles
-LEFT JOIN vies v ON s.id = v.id_sector
-GROUP BY e.id, e.nom;
+JOIN sectors s ON e.id_escola = s.id_escola
+LEFT JOIN vies v ON s.id_sector = v.id_sector
+GROUP BY e.id_escola, e.nom;
 
 CREATE VIEW vista_vias_per_sector AS
 SELECT 
-    s.id,
+    s.id_sector,
     s.nom,
-    COUNT(v.id) AS numero_vias
+    COUNT(v.id_via) AS numero_vias
 FROM sectors s
-LEFT JOIN vies v ON s.id = v.id_sector
-<<<<<<<< HEAD:Practica 1/SQL_BD/Escalada_dw_Db.sql
-GROUP BY s.id, s.nom;
-========
-GROUP BY s.id, s.nom;
+LEFT JOIN vies v ON s.id_sector = v.id_sector
+GROUP BY s.id_sector, s.nom;
 
 
 
@@ -141,4 +135,3 @@ GROUP BY s.id, s.nom;
 
 
 
->>>>>>>> main:Practica 1/SQL_BD/Escalada_BD.sql
