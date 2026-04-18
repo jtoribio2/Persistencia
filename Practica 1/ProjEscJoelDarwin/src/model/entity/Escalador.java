@@ -4,7 +4,7 @@ public class Escalador {
     private int id_escalador,edat,estil;
     private String nom;
 
-    public Escalador(String nom, int edat,int id_escalador, int estil){
+    public Escalador(int id_escalador,String nom, int edat, int estil){
         this.id_escalador = id_escalador;
         this.nom = nom;
         this.edat = edat;

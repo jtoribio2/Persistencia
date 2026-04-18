@@ -1,4 +1,4 @@
-package resources.properties.services;
+package services;
 
 import daos.EscolaDAO;
 import db.ConnectionFactory;
@@ -10,7 +10,7 @@ import java.util.List;
 
 // AQUI IMPLEMENTAREMOS  LOS METODOS DE LA INTERFICIE DESDE EL CONTROLADOR LLAMAREMOS ESOS METODOS
 // TODOS LOS METODOS ABRIRAN LA CONEXION
-public class MySqlEscolaDao implements EscolaDAO {
+public class Escola_service implements EscolaDAO {
     /**
      * @param o Objeto que añadiremos a la bd
      * **/
@@ -48,8 +48,7 @@ public class MySqlEscolaDao implements EscolaDAO {
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
         final String SQL = "UPDATE escoles  SET nom=?,lloc=?,aproximacio=?,popularitat=? WHERE id_escola = ?"; // EL ? representa un parametro
         //CONECTAMOS A LA BD
-        ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
-        try(Connection conn = provider.getConnection()){
+        try(Connection conn = getCon()){
             /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
             PreparedStatement ps = conn.prepareStatement(SQL);
             //DEBEMO DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
@@ -76,8 +75,7 @@ public class MySqlEscolaDao implements EscolaDAO {
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
         final String SQL = "DELETE FROM  escoles  WHERE id_escola = ?"; // EL ? representa un parametro
         //CONECTAMOS A LA BD
-        ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
-        try(Connection conn = provider.getConnection()){
+        try(Connection conn = getCon()){
             /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
             PreparedStatement ps = conn.prepareStatement(SQL);
             //DEBEMOS DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
@@ -101,8 +99,8 @@ public class MySqlEscolaDao implements EscolaDAO {
     public List<Escola> obtindreTots() {
         List<Escola> llista = new ArrayList<>();
         String sql = "SELECT * FROM escoles ";
-        ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
-        try (Connection conn = provider.getConnection()) {
+       // ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
+        try (Connection conn = getCon()) {
             // Resulset  obejto que se encarga leer las filas del resultado de la comanda/consulta de mysql
             ResultSet rs = conn.prepareStatement(sql).executeQuery();
             while (rs.next()) { // Recorremos las filas que  la bd  nos ha dado
@@ -136,8 +134,7 @@ public class MySqlEscolaDao implements EscolaDAO {
                 //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
                 final String SQL = "SELECT * FROM escoles  WHERE id_escola = ?  "; // EL ? representa un parametro
                 //CONECTAMOS A LA BD
-                ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
-                try(Connection conn = provider.getConnection()){
+                try(Connection conn = getCon()){
                 /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
                 PreparedStatement ps = conn.prepareStatement(SQL);
                 ps.setInt(1,id);
@@ -165,7 +162,12 @@ public class MySqlEscolaDao implements EscolaDAO {
                 e.printStackTrace();
             }
             return null;
+
+
 }
+    private Connection getCon() throws SQLException {
+        return ConnectionFactory.getProvider("mysql").getConnection();
+    }
 
 }
 
