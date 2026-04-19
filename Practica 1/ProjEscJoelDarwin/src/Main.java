@@ -1,9 +1,13 @@
 import controlador.ControladorEscalador;
 import controlador.ControladorEscola;
+import controlador.ControladorLlar;
+import controlador.ControladorSector;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import model.entity.Escalador;
 import model.entity.Escola;
+import model.entity.Llar;
+import model.entity.Sector;
 import services.Escola_service;
 
 import java.sql.Connection;
@@ -11,25 +15,29 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //OBJETOS DAOS  SOLO ES DE PRUEBAS QUITARLO AL IMPLEMNTAR TODAS LAS
-        //Escola_service edao = new Escola_service();
+        //OBJETOS DAOS  SOLO ES DE PRUEBAS QUITARLO AL IMPLEMNTAR TODAS LOS CONTROLADORES
+        //Escola_service edao = new Escola_service(); // ACCEDER DIRECTAMENTE LOS METODOS DAO
 
         //Registro
         Escola  e1 = new Escola(100,"San pere pi","por ahi","mas o menos",1);
         Escalador e2 = new Escalador(100,"Pere pi",1,1);
-
+        Llar l = new Llar(1000,1,20);
+        Sector s = new Sector(201,1,"Un sector",10.05f,12.05f,"Algo",1);
         //FUNCIONA PERO SE APLICAN EN EL MISMO  REGISTRO (e1 ) Descomentalo y miralo
 
         //AÑADIR
         try {
           //  ControladorEscola.addEscola(e1); // SOLO AÑADI ESTE metodo en el controlador
-            ControladorEscalador.addEscalador(e2);
+            //ControladorEscalador.addEscalador(e2);
+           // ControladorLlar.addLlar(l);
+            ControladorSector.addSector(s);
         }
         catch (Exception e){
            System.out.println("ERROR");
             e.printStackTrace();
         }
         //MODIFICAR ESCOLA SAN PERE PI
+        // BUSCARA EL ID EXISTENTE
       //  edao.modificar(new Escola(100,"Bomba","sitio","mas",2));
 
         //Eliminar
