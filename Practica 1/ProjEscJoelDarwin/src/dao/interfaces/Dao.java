@@ -1,4 +1,4 @@
-package daos;
+package dao.interfaces;
 
 import java.util.List;
 // DAO GENERICO DONDE AQUI PONEMOS TODOS LOS METODOS QUE TIENE EN COMUN  ENTRE LOS DIFERENTES DAOS DE LAS CLASSES

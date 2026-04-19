@@ -1,8 +1,8 @@
-package services;
+package service;
 
 
 
-import daos.EscaladorDAO;
+import dao.interfaces.EscaladorDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import model.entity.Escalador;

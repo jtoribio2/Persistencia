@@ -1,6 +1,6 @@
-package services;
+package service;
 
-import daos.EscolaDAO;
+import dao.interfaces.EscolaDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import model.entity.Escola;

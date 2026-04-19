@@ -1,4 +1,4 @@
-package daos;
+package dao.interfaces;
 import model.entity.Tipus_via;
 import java.util.List;
 

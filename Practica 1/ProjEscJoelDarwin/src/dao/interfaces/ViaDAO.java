@@ -1,4 +1,4 @@
-package daos;
+package dao.interfaces;
 import model.entity.Via;
 import java.util.List;
 

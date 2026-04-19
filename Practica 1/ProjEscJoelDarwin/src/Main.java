@@ -1,17 +1,18 @@
-import controlador.ControladorEscalador;
-import controlador.ControladorEscola;
+import controller.ControladorEscalador;
+import controller.SectorController;
+import dao.impl.mysql.SectorDAOImpl;
+import dao.interfaces.SectorDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import model.entity.Escalador;
 import model.entity.Escola;
-import services.Escola_service;
+import service.SectorService;
 
 import java.sql.Connection;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //OBJETOS DAOS  SOLO ES DE PRUEBAS QUITARLO AL IMPLEMNTAR TODAS LAS
+        /*//OBJETOS DAOS  SOLO ES DE PRUEBAS QUITARLO AL IMPLEMNTAR TODAS LAS
         //Escola_service edao = new Escola_service();
 
         //Registro
@@ -39,7 +40,7 @@ public class Main {
        /*List<Escola> es = edao.obtindreTots();
         for(Escola e : es){
             System.out.println(e.getNom());
-        }*/
+        }
 
         //OBTENER FILA CONCRETA
 
@@ -61,6 +62,20 @@ public class Main {
             System.out.println("Error en la conexión");
             e.printStackTrace();
             }
+        */
+        // 🔹 1. Provider
+        ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
 
+        // 🔹 2. DAO
+        SectorDAO dao = new SectorDAOImpl(provider);
+
+        // 🔹 3. Service
+        SectorService service = new SectorService(dao);
+
+        // 🔹 4. Controller
+        SectorController controller = new SectorController(service);
+
+        // 🔥 5. LLAMADA
+        controller.mostrarTots();
     }
 }

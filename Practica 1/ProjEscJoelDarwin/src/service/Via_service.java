@@ -1,4 +1,4 @@
-package services;
+package service;
 
 public class Via_service {
 }
