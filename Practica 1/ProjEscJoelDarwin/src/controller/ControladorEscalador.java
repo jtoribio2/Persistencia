@@ -1,10 +1,7 @@
-package controlador;
+package controller;
 
-import daos.EscolaDAO;
 import model.entity.Escalador;
-import model.entity.Escola;
-import services.Escalador_service;
-import services.Escola_service;
+import service.Escalador_service;
 
 
 import java.util.List;

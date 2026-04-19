@@ -1,9 +1,8 @@
-package controlador;
+package controller;
 
 import model.entity.Escola;
-import services.Escola_service;
+import service.Escola_service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ControladorEscola {

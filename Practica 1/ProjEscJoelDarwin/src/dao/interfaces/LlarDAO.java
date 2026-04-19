@@ -1,4 +1,4 @@
-package daos;
+package dao.interfaces;
 import model.entity.Llar;
 
 import java.util.List;

@@ -9,6 +9,10 @@ public class Sector {
     private String aproximacio;
     private int popularitat;
 
+    public Sector() {
+
+    }
+
     public Sector(int id_sector, int id_escoles, String nom, float latitut, float longitut, String aproximacio, int popularitat) {
         this.id_sector = id_sector;
         this.id_escoles = id_escoles;
