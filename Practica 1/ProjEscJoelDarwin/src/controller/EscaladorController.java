@@ -1,13 +1,15 @@
 package controller;
 
 import model.entity.Escalador;
-import service.Escalador_service;
+import service.EscaladorService;
 
 
 import java.util.List;
 
-public class ControladorEscalador  {
-    private static Escalador_service dao = new Escalador_service();
+public class EscaladorController {
+    private static EscaladorService dao = new EscaladorService();
+
+
     public static  void addEscalador(Escalador e ) throws  Exception{
         if(e == null) throw new Exception("ERROR DADES BUIDES");
         dao.inserir(e);

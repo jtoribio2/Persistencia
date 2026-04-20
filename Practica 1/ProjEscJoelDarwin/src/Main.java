@@ -5,12 +5,13 @@ import dao.impl.mysql.SectorMySQLDAO;
 import dao.interfaces.SectorDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
+import model.entity.Escola;
 import service.SectorService;
 
 public class Main {
     public static void main(String[] args) {
         /*//OBJETOS DAOS  SOLO ES DE PRUEBAS QUITARLO AL IMPLEMNTAR TODAS LAS
-        //Escola_service edao = new Escola_service();
+        //EscolaService edao = new EscolaService();
 
         //Registro
         Escola  e1 = new Escola(100,"San pere pi","por ahi","mas o menos",1);
@@ -20,8 +21,8 @@ public class Main {
 
         //AÑADIR
         try {
-          //  ControladorEscola.addEscola(e1); // SOLO AÑADI ESTE metodo en el controlador
-            ControladorEscalador.addEscalador(e2);
+          //  EscolaController.addEscola(e1); // SOLO AÑADI ESTE metodo en el controlador
+            EscaladorController.addEscalador(e2);
         }
         catch (Exception e){
            System.out.println("ERROR");
@@ -61,5 +62,11 @@ public class Main {
             }
         */
         AppConfig.getSectorController().mostrarTots();
+        try{
+            //OBTENIR LA COLUMNA NOM
+         System.out.println( AppConfig.getEscolaController().getEscola(1).getNom());
+
+        }
+        catch (Exception e ){System.out.println(e);}
     }
 }

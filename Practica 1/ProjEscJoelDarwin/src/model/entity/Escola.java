@@ -11,6 +11,10 @@ private String nom,lloc,aproximacio;
     this.popularitat = popularitat;
 }
 
+    public Escola() {
+
+    }
+
     public int getId_escola() {
         return id_escola;
     }

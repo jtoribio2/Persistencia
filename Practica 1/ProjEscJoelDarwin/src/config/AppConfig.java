@@ -1,9 +1,12 @@
 package config;
 
+import controller.EscolaController;
 import controller.SectorController;
+import dao.interfaces.EscolaDAO;
 import dao.interfaces.SectorDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
+import service.EscolaService;
 import service.SectorService;
 
 public class AppConfig {
@@ -25,5 +28,20 @@ public class AppConfig {
 
     public static SectorController getSectorController() {
         return sectorController;
+    }
+
+    //ESCOLA
+
+    private static final EscolaDAO escolaDAO =
+            DAOFactory.getEscolaDAO(dbType, provider); //le decimos que va usar el dao de msql y el provedor de mysql
+
+    private static final EscolaService escolaService =
+            new EscolaService(escolaDAO); // le decimos al service que sus metodos usaran este dao
+
+    private static final EscolaController escolaController =
+            new EscolaController(escolaService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
+
+    public static EscolaController getEscolaController() {
+        return escolaController;
     }
 }
