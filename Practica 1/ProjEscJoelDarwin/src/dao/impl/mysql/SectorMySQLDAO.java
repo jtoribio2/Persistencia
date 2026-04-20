@@ -8,11 +8,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SectorDAOImpl implements SectorDAO {
+public class SectorMySQLDAO implements SectorDAO {
 
     private final ConnectionProvider provider;
 
-    public SectorDAOImpl(ConnectionProvider provider) {
+    public SectorMySQLDAO(ConnectionProvider provider) {
         this.provider = provider;
     }
 

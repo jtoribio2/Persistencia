@@ -1,14 +1,11 @@
-import controller.ControladorEscalador;
+import config.AppConfig;
+import config.DAOFactory;
 import controller.SectorController;
-import dao.impl.mysql.SectorDAOImpl;
+import dao.impl.mysql.SectorMySQLDAO;
 import dao.interfaces.SectorDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
-import model.entity.Escalador;
-import model.entity.Escola;
 import service.SectorService;
-
-import java.sql.Connection;
 
 public class Main {
     public static void main(String[] args) {
@@ -63,19 +60,6 @@ public class Main {
             e.printStackTrace();
             }
         */
-        // 🔹 1. Provider
-        ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
-
-        // 🔹 2. DAO
-        SectorDAO dao = new SectorDAOImpl(provider);
-
-        // 🔹 3. Service
-        SectorService service = new SectorService(dao);
-
-        // 🔹 4. Controller
-        SectorController controller = new SectorController(service);
-
-        // 🔥 5. LLAMADA
-        controller.mostrarTots();
+        AppConfig.getSectorController().mostrarTots();
     }
 }
