@@ -73,21 +73,21 @@ INSERT INTO llars VALUES
 (6, 6, 18),
 (7, 7, 20),
 (8, 8, 25),
-(9, 9, 5),
+(9, 9, 5), 
 (10, 10, 12);
 
 -- ESCALADORS
 INSERT INTO escaladors VALUES
-(1, 'Carlos', 28, 1),
-(2, 'Marta', 25, 1),
-(3, 'Luis', 32, 2),
-(4, 'Ana', 27, 1),
-(5, 'Javi', 35, 2),
-(6, 'Lucia', 24, 1),
-(7, 'Pedro', 30, 3),
-(8, 'Elena', 29, 1),
-(9, 'Raul', 33, 2),
-(10, 'Sara', 26, 1);
+(1, '12345678A', 'Carlos', 28, 1),
+(2, '12345678B','Marta', 25, 1),
+(3,'12345678C', 'Luis', 32, 2),
+(4, '12345678D','Ana', 27, 1),
+(5, '12345678E','Javi', 35, 2),
+(6,'12345678F', 'Lucia', 24, 1),
+(7, '12345678G','Pedro', 30, 3),
+(8, '12345678I','Elena', 29, 1),
+(9, '12345678J','Raul', 33, 2),
+(10, '12345678K','Sara', 26, 1);
 
 -- ESCALADORS_VIES
 INSERT INTO escaladors_vies VALUES

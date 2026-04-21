@@ -85,12 +85,13 @@ CREATE TABLE llars
 
 CREATE TABLE escaladors (
 id_escalador INT,
+dni			CHAR(9),
 nom 		VARCHAR(20),
 edat 		TINYINT,
 estil 		TINYINT COMMENT'1.esportiva, 2.clàssica, 3.gel' ,
 
 CONSTRAINT pk_escaladors PRIMARY KEY(id_escalador),
-CONSTRAINT uk_escaladors UNIQUE (id_escalador),
+CONSTRAINT uk_escaladors UNIQUE (id_escalador,dni),
 CONSTRAINT ck_escaladors_estil CHECK(estil BETWEEN 1 AND 3)
 );
 
