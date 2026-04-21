@@ -2,13 +2,22 @@ package model.entity;
 
 public class Escalador {
     private int id_escalador,edat,estil;
-    private String nom;
+    private String nom,dni;
 
-    public Escalador(int id_escalador,String nom, int edat, int estil){
+    public Escalador(int id_escalador,String dni,String nom, int edat, int estil){
         this.id_escalador = id_escalador;
         this.nom = nom;
         this.edat = edat;
         this.estil = estil;
+    }
+
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public int getId_escalador() {

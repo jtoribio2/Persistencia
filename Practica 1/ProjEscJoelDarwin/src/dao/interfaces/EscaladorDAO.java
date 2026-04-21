@@ -11,7 +11,7 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     void modificar(Escalador o);
 
     @Override
-    void eliminar(Integer o);
+    void eliminar(String dni);
 
     @Override
     List<Escalador> obtindreTots();
