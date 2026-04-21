@@ -8,8 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EscaladorMySQLDAO  implements EscaladorDAO{
-
+public class EscaladorMySQLDAO  {
+/*
     private final ConnectionProvider provider;
 
     public EscaladorMySQLDAO(ConnectionProvider provider) {
@@ -82,7 +82,7 @@ public class EscaladorMySQLDAO  implements EscaladorDAO{
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, id);
+            ps.setString(1, dni);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -90,8 +90,61 @@ public class EscaladorMySQLDAO  implements EscaladorDAO{
         }
     }
 
+    @Override
+    public List<Escalador> obtindreTots() {
+
+        List<Escalador> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM escaladors";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(map(rs));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sectores", e);
+        }
+
+        return lista;
+    }
+
+    // implementacion de obtenir bector le pasas un id y te devuelve el objeto sector que le has pedido si no lo encuentra devuelve null
+    @Override
+    public Sector obtenir(Integer id) {
+
+        String sql = "SELECT * FROM sectors WHERE id_sector = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return map(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sector por id", e);
+        }
+
+        return null;
+    }
+
+    // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
+    private Sector map(ResultSet rs) throws SQLException {
+
+        Escalador e  = new Escalador();
 
 
+    }
+
+*/
 
 
 }

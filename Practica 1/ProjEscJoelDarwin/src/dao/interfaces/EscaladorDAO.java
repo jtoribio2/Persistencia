@@ -2,7 +2,7 @@ package dao.interfaces;
 import model.entity.Escalador;
 import java.util.List;
 
-public interface EscaladorDAO extends Dao<Escalador,Integer> {
+public interface EscaladorDAO extends Dao<Escalador,String> {
    //METODOS  GENERICOS
     @Override
     void inserir(Escalador o);
@@ -16,7 +16,7 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     @Override
     List<Escalador> obtindreTots();
 
-    Escalador obtenir (Integer id);
+    Escalador obtenir (String dni);
     //METODOS  PROPIOS
 
 }

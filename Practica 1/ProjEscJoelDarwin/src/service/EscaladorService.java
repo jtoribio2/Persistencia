@@ -12,17 +12,19 @@ import java.util.List;
 
 // AQUI IMPLEMENTAREMOS  LOS METODOS DE LA INTERFICIE DESDE EL CONTROLADOR LLAMAREMOS ESOS METODOS
 // TODOS LOS METODOS ABRIRAN LA CONEXION
-public class EscaladorService implements EscaladorDAO {
+
+public class EscaladorService /*implements EscaladorDAO*/ {
     /**
      * @param o Objeto que añadiremos a la bd
      * **/
+/*
     @Override
     public void inserir(Escalador o) {
         final String SQL = "INSERT INTO escaladors VALUES (?,?,?,?)"; // EL ? representa un parametro
         //CONECTAMOS A LA BD
         ConnectionProvider provider = ConnectionFactory.getProvider("mysql");
         try(Connection conn = provider.getConnection()){
-            /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
+
             PreparedStatement ps = conn.prepareStatement(SQL); //  LE MANDA A LA BD COM EL FORMATO DEL SQL NO HACE NADA DE MOMENTO
             //DEBEMOS DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
             ps.setInt(1, o.getId_escalador()); // REPRESENTA CADA "?" aqui indicamos el primer "?"
@@ -41,16 +43,14 @@ public class EscaladorService implements EscaladorDAO {
         }
     }
 
-    /**
-     * @param o Objeto quemodificaremos a la bd
-     * **/
+
     @Override
     public void modificar(Escalador  o) {
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
         final String SQL = "UPDATE escalador  SET nom=?,edat=?,estil=? WHERE id_escalador  = ?"; // EL ? representa un parametro
         //CONECTAMOS A LA BD
         try(Connection conn = getCon()){
-            /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
+
             PreparedStatement ps = conn.prepareStatement(SQL);
             //DEBEMO DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
             ps.setString(1,o.getNom());
@@ -68,16 +68,14 @@ public class EscaladorService implements EscaladorDAO {
 
         System.out.println("SE MODIFICO  A LA BD  ");
     }
-    /**
-     * @param o Objeto que elimnaremos  a la bd
-     * **/
+
     @Override
     public void eliminar(Integer o) {
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
         final String SQL = "DELETE FROM  escaladors  WHERE id_escalador = ?"; // EL ? representa un parametro
         //CONECTAMOS A LA BD
         try(Connection conn = getCon()){
-            /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
+
             PreparedStatement ps = conn.prepareStatement(SQL);
             //DEBEMOS DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
             ps.setInt(1, o);
@@ -93,9 +91,7 @@ public class EscaladorService implements EscaladorDAO {
 
 
     }
-    /**
-     * @return devuelve un List
-     * **/
+
     @Override
     public List<Escalador> obtindreTots() {
         List<Escalador> llista = new ArrayList<>();
@@ -126,9 +122,7 @@ public class EscaladorService implements EscaladorDAO {
 
         return llista;
     }
-    /**
-     * @param id Intger introducimos un numero
-     * **/
+
     @Override
     public Escalador  obtenir(Integer id) {
 
@@ -136,7 +130,7 @@ public class EscaladorService implements EscaladorDAO {
         final String SQL = "SELECT * FROM escaladors  WHERE id_escalador= ?  "; // EL ? representa un parametro
         //CONECTAMOS A LA BD
         try(Connection conn = getCon()){
-            /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
+
             PreparedStatement ps = conn.prepareStatement(SQL);
             ps.setInt(1,id);
 
@@ -169,7 +163,7 @@ public class EscaladorService implements EscaladorDAO {
     private Connection getCon() throws SQLException {
         return ConnectionFactory.getProvider("mysql").getConnection();
     }
-
+*/
 }
 
 

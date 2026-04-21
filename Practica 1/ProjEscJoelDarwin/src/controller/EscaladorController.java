@@ -1,13 +1,13 @@
 package controller;
 
 import model.entity.Escalador;
-import service.EscaladorService;
+ // import service.EscaladorService;
 
 
 import java.util.List;
 
 public class EscaladorController {
-    private static EscaladorService dao = new EscaladorService();
+  /*  private static EscaladorService dao = new EscaladorService();
 
 
     public static  void addEscalador(Escalador e ) throws  Exception{
@@ -34,5 +34,5 @@ public class EscaladorController {
     public static Escalador getEscalador(Integer id ) throws Exception{
         if(id < 0 ) throw new  Exception("ERROR ID ");
         return  dao.obtenir(id);
-    }
+    }*/
 }
