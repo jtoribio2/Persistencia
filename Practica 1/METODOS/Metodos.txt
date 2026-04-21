@@ -1,0 +1,21 @@
+METODOS :
+
+viasDisponibles(Escola){} : Mostrar via de una escola disponibles implementarlo en el ControllerVia
+
+
+Buscar vies por dificultad
+ viesPerDificultat(String d){
+codigo
+}
+
+viesPerEstat(String e ){codigo }
+
+
+escolesDisponibles(){} --> Void 
+
+escaladorsEqNivell(String ){}
+
+viesAptes(int diasa){ codigo }
+
+MostrarViasLlargues(Escola o ){}
+
