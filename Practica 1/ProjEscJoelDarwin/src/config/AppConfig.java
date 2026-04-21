@@ -2,12 +2,15 @@ package config;
 
 import controller.EscolaController;
 import controller.SectorController;
+import controller.ViaController;
 import dao.interfaces.EscolaDAO;
 import dao.interfaces.SectorDAO;
+import dao.interfaces.ViaDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import service.EscolaService;
 import service.SectorService;
+import service.ViaService;
 
 public class AppConfig {
 
@@ -43,5 +46,19 @@ public class AppConfig {
 
     public static EscolaController getEscolaController() {
         return escolaController;
+    }
+
+    // VIA
+    private static final ViaDAO viaDAO =
+            DAOFactory.getViaDAO(dbType, provider);
+
+    private static final ViaService viaService =
+            new ViaService(viaDAO);
+
+    private static final ViaController viaController =
+            new ViaController(viaService);
+
+    public static ViaController getViaController() {
+        return viaController;
     }
 }

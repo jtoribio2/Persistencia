@@ -17,6 +17,8 @@ public interface SectorDAO extends Dao<Sector,Integer> {
     @Override
     List<Sector> obtindreTots();
 
+    List<Sector> buscarPorNombre(String nombre);
+
     Sector  obtenir (Integer id);
     //METODOS  PROPIOS
 

@@ -61,7 +61,8 @@ public class Main {
             e.printStackTrace();
             }
         */
-        AppConfig.getSectorController().mostrarTots();
+        AppConfig.getSectorController().buscarPorNombre("Pati");
+
         try{
             //OBTENIR LA COLUMNA NOM
          System.out.println( AppConfig.getEscolaController().getEscola(1).getNom());
