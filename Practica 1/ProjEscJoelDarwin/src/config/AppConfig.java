@@ -1,13 +1,7 @@
 package config;
 
-import controller.EscaladorController;
-import controller.EscolaController;
-import controller.SectorController;
-import controller.ViaController;
-import dao.interfaces.EscaladorDAO;
-import dao.interfaces.EscolaDAO;
-import dao.interfaces.SectorDAO;
-import dao.interfaces.ViaDAO;
+import controller.*;
+import dao.interfaces.*;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
 import model.entity.Escalador;
@@ -68,6 +62,20 @@ public class AppConfig {
         return escalorController;
     }
 
+    //LLAR
+
+    private static final LlarDAO llarDAO =
+            DAOFactory.getLlarDAO(dbType, provider); //le decimos que va usar el dao de msql y el provedor de mysql
+
+    private static final LlarService Llarservice =
+            new LlarService(llarDAO); // le decimos al service que sus metodos usaran este dao
+
+    private static final LlarController llarControlador =
+            new LlarController(Llarservice); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
+
+    public static LlarController getLlarController() {
+        return llarControlador;
+    }
     // VIA
     private static final ViaDAO viaDAO =
             DAOFactory.getViaDAO(dbType, provider);

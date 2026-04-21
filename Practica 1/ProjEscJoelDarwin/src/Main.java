@@ -63,6 +63,7 @@ public class Main {
         */
         AppConfig.getSectorController().buscarPorNombre("Pati");
        System.out.println( AppConfig.getEscaladorController().getEscaldorDni("12345678A").getNom());
+        System.out.println( AppConfig.getLlarController().getLlar(1).getId_llar());
         try{
             //OBTENIR LA COLUMNA NOM
          System.out.println( AppConfig.getEscolaController().getEscola(1).getNom());

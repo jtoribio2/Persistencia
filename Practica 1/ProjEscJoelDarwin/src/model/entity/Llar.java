@@ -8,6 +8,10 @@ public class Llar {
         this.metres = metres;
     }
 
+    public Llar() {
+
+    }
+
     public int getId_via() {
         return id_via;
     }

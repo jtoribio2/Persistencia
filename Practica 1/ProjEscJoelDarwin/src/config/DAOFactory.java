@@ -1,15 +1,9 @@
 package config;
 
-import dao.impl.mysql.EscaladorMySQLDAO;
-import dao.impl.mysql.EscolaMySQLDAO;
-import dao.impl.mysql.ViaMySQLDAO;
-import dao.interfaces.EscaladorDAO;
-import dao.interfaces.EscolaDAO;
-import dao.interfaces.SectorDAO;
-import dao.impl.mysql.SectorMySQLDAO;
+import dao.impl.mysql.*;
+import dao.interfaces.*;
 // import dao.impl.postgres.SectorPostgresDAO;
 
-import dao.interfaces.ViaDAO;
 import db.ConnectionProvider;
 import model.entity.Escalador;
 
@@ -62,6 +56,20 @@ public class DAOFactory {
         }
     }
 
+//LLAR
+public static LlarDAO getLlarDAO(String dbType, ConnectionProvider provider) {
+    switch (dbType) {
+
+        case "mysql":
+            return new LlarMySQLDAO(provider);
+
+        case "postgres":
+            throw new RuntimeException("Postgres aún no implementado");
+
+        default:
+            throw new RuntimeException("BD no soportada: " + dbType);
+    }
+}
 
     //VIA
     public static ViaDAO getViaDAO(String dbType, ConnectionProvider provider) {

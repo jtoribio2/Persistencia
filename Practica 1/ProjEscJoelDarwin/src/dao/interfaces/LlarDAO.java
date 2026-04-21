@@ -16,7 +16,7 @@ public interface LlarDAO extends Dao<Llar,Integer>{
 
     @Override
     List<Llar> obtindreTots();
-
+    @Override
     Llar obtenir (Integer id);
     //METODOS  PROPIOS
 
