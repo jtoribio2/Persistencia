@@ -6,9 +6,14 @@ public class Escalador {
 
     public Escalador(int id_escalador,String dni,String nom, int edat, int estil){
         this.id_escalador = id_escalador;
+        this.dni = dni;
         this.nom = nom;
         this.edat = edat;
         this.estil = estil;
+    }
+
+    public Escalador() {
+
     }
 
 

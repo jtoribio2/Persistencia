@@ -1,38 +1,42 @@
 package controller;
 
 import model.entity.Escalador;
- // import service.EscaladorService;
+ import service.EscaladorService;
 
 
 import java.util.List;
 
 public class EscaladorController {
-  /*  private static EscaladorService dao = new EscaladorService();
 
+   private  EscaladorService dao ;
 
-    public static  void addEscalador(Escalador e ) throws  Exception{
-        if(e == null) throw new Exception("ERROR DADES BUIDES");
-        dao.inserir(e);
+public EscaladorController(EscaladorService s){this.dao = s;}
+    public  void addEscalador(Escalador e ) throws  Exception{
+        dao.crearEscalador(e);
     }
 
-    public static  void SetEscalador(Escalador  e ) throws  Exception{
-        if(e == null) throw new Exception("ERROR DADES BUIDES");
-        dao.modificar(e);
+    public   void SetEscalador(Escalador  e ) throws  Exception{
+        dao.modificarEscalador(e);
     }
 
-    public static void removeEscalador(Integer id  ) throws  Exception{
-        if(id < 0 ) throw  new Exception("Error id ");
-        dao.eliminar(id);
+    public  void removeEscalador(Integer id ) throws  Exception{
+        dao.eliminarEscalador(id);
     }
 
-    public static List<Escalador> getList(){
+    public Escalador getEscaldorDni(String dni){
+        return dao.obtenerPorDni(dni);
+    }
+
+    public  void removedni(String dni){
+        dao.eliminarPerDni(dni);
+    }
+    public  List<Escalador> getList(){
         //Hacer comprovaciones o algo
-        List<Escalador> e = dao.obtindreTots();
+        List<Escalador> e = dao.obtenerTodos();
         return e;
     }
 
-    public static Escalador getEscalador(Integer id ) throws Exception{
-        if(id < 0 ) throw new  Exception("ERROR ID ");
-        return  dao.obtenir(id);
-    }*/
+    public  Escalador getEscalador(Integer id  ) throws Exception{
+        return  dao.obtenerPorId(id);
+    }
 }

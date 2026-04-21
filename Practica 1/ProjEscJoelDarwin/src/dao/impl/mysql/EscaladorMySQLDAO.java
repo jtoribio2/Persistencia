@@ -8,8 +8,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EscaladorMySQLDAO  {
-/*
+public class EscaladorMySQLDAO implements EscaladorDAO  {
+
     private final ConnectionProvider provider;
 
     public EscaladorMySQLDAO(ConnectionProvider provider) {
@@ -75,14 +75,14 @@ public class EscaladorMySQLDAO  {
     }
 
     @Override
-    public void eliminar(String dni ) {
+    public void eliminar(Integer id) {
 
         String sql = "DELETE FROM escaladors  WHERE id_escalador= ?";
 
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, dni);
+            ps.setInt(1,id);
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -114,9 +114,9 @@ public class EscaladorMySQLDAO  {
 
     // implementacion de obtenir bector le pasas un id y te devuelve el objeto sector que le has pedido si no lo encuentra devuelve null
     @Override
-    public Sector obtenir(Integer id) {
+    public Escalador obtenir(Integer id)  {
 
-        String sql = "SELECT * FROM sectors WHERE id_sector = ?";
+        String sql = "SELECT * FROM escaladors WHERE id_escalador = ?";
 
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -136,15 +136,57 @@ public class EscaladorMySQLDAO  {
         return null;
     }
 
-    // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
-    private Sector map(ResultSet rs) throws SQLException {
+    @Override
+    public void eliminarDni(String dni){
 
-        Escalador e  = new Escalador();
+        String sql = "DELETE FROM escaladors  WHERE dni = ?";
 
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
+            ps.setString(1,dni);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error eliminando sector", e);
+        }
     }
 
-*/
+    @Override
+    public Escalador obtenirPerDni(String dni){
+        String sql = "SELECT * FROM escaladors WHERE dni = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, dni);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return map(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sector por id", e);
+        }
+
+        return null;
+    }
+    // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
+    private Escalador map(ResultSet rs) throws SQLException {
+
+        Escalador e  = new Escalador();
+        e.setId_escalador(rs.getInt("id_escalador"));
+        e.setDni(rs.getString("dni"));
+        e.setNom(rs.getString("nom"));
+        e.setEdat(rs.getInt("edat"));
+        e.setEstil(rs.getInt("estil"));
+
+        return e;
+    }
+
+
 
 
 }

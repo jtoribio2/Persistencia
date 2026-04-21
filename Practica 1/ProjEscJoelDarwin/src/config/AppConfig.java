@@ -1,17 +1,22 @@
 package config;
 
+import controller.EscaladorController;
 import controller.EscolaController;
 import controller.SectorController;
 import controller.ViaController;
+import dao.interfaces.EscaladorDAO;
 import dao.interfaces.EscolaDAO;
 import dao.interfaces.SectorDAO;
 import dao.interfaces.ViaDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
+import model.entity.Escalador;
 import service.EscolaService;
 import service.SectorService;
 import service.ViaService;
+import service.*;
 
+//APP CONFIG DEFINE CON QUE TECNOLOGIAS TRABAJAREMOS
 public class AppConfig {
 
     private static final String dbType = "mysql"; //todo añadir diferentes tecnologias
@@ -46,6 +51,21 @@ public class AppConfig {
 
     public static EscolaController getEscolaController() {
         return escolaController;
+    }
+
+    //ESCALADOR
+
+    private static final EscaladorDAO escaladorDAO =
+            DAOFactory.getEscaladorDAO(dbType, provider); //le decimos que va usar el dao de msql y el provedor de mysql
+
+    private static final EscaladorService Escaladorservice =
+            new EscaladorService(escaladorDAO); // le decimos al service que sus metodos usaran este dao
+
+    private static final EscaladorController escalorController =
+            new EscaladorController(Escaladorservice); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
+
+    public static EscaladorController getEscaladorController() {
+        return escalorController;
     }
 
     // VIA
