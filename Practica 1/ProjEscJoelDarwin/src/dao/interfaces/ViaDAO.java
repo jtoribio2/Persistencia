@@ -17,5 +17,5 @@ public interface ViaDAO extends Dao<Via,Integer>{
     List<Via> obtindreTots();
     Via obtenir (Integer id);
     //METODOS  PROPIOS
-
+    List<Via> buscarPorNombre(String nombre);
 }

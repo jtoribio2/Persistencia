@@ -145,6 +145,31 @@ public class SectorMySQLDAO implements SectorDAO {
         return null;
     }
 
+    @Override
+    public List<Sector> buscarPorNombre(String nombre) {
+
+        List<Sector> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM sectors WHERE nom LIKE ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(map(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error buscando por nombre", e);
+        }
+
+        return lista;
+    }
+
     // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
     private Sector map(ResultSet rs) throws SQLException {
 

@@ -72,4 +72,19 @@ public class SectorService {
 
         sectorDAO.modificar(s);
     }
+
+    public List<Sector> buscarPorNombre(String nombre) {
+
+        List<Sector> lista = sectorDAO.buscarPorNombre(nombre);
+
+        if (nombre == null || nombre.isEmpty()) {
+            throw new RuntimeException("Nombre vacío");
+        }
+
+        if (lista.isEmpty()) {
+            throw new RuntimeException("No se encontraron sectores con ese nombre");
+        }
+
+        return lista;
+    }
 }

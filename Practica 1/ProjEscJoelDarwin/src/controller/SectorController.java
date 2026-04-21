@@ -39,4 +39,12 @@ public class SectorController {
         service.eliminarSector(id);
         System.out.println("Sector eliminado correctamente");
     }
+
+    //Busca por nombre un
+    public void buscarPorNombre(String nombre) {
+
+        List<Sector> lista = service.buscarPorNombre(nombre);
+
+        lista.forEach(s -> System.out.println(s));
+    }
 }

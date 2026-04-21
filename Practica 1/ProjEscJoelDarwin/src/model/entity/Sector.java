@@ -78,4 +78,17 @@ public class Sector {
     public void setPopularitat(int popularitat) {
         this.popularitat = popularitat;
     }
+
+    @Override
+    public String toString() {
+        return "Sector{" +
+                "id=" + id_sector +
+                ", escola=" + id_escoles +
+                ", nom='" + nom + '\'' +
+                ", lat=" + latitut +
+                ", lon=" + longitut +
+                ", aprox='" + aproximacio + '\'' +
+                ", popularitat=" + popularitat +
+                '}';
+    }
 }
