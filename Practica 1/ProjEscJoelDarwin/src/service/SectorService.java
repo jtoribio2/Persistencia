@@ -60,7 +60,7 @@ public class SectorService {
     }
 
     // modifica un sector y lo busca a traves de su id en el caso que no existe te dice que no ha podido modificarlo
-    public void modificarSector(Sector s) {
+    public void modificarSector(Sector s)throws Exception {
 
         if (s == null) {
             throw new RuntimeException("Sector no puede ser null");
@@ -73,7 +73,7 @@ public class SectorService {
         sectorDAO.modificar(s);
     }
 
-    public List<Sector> buscarPorNombre(String nombre) {
+    public List<Sector> buscarPorNombre(String nombre)throws Exception {
 
         List<Sector> lista = sectorDAO.buscarPorNombre(nombre);
 

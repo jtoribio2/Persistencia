@@ -30,6 +30,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
     public  void removedni(String dni){
         dao.eliminarPerDni(dni);
     }
+
     public  List<Escalador> getList(){
         //Hacer comprovaciones o algo
         List<Escalador> e = dao.obtenerTodos();
