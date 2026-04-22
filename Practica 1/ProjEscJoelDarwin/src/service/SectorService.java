@@ -14,7 +14,7 @@ public class SectorService {
     }
 
     // inserta un sector a la base de datos
-    public void crearSector(Sector s) {
+    public void crearSector(Sector s) throws Exception {
 
         if (s == null) {
             throw new RuntimeException("El sector no puede ser null");
@@ -40,7 +40,7 @@ public class SectorService {
     }
 
     // devuelve un sector a traves de su id
-    public Sector obtenerPorId(int id) {
+    public Sector obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
@@ -50,7 +50,7 @@ public class SectorService {
     }
 
     // elimina un sector a traves de un id
-    public void eliminarSector(int id) {
+    public void eliminarSector(int id)throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
