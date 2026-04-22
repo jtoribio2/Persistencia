@@ -13,57 +13,69 @@ public class ViaController {
         this.service = service;
     }
 
-    // 🔹 LISTAR TODAS
+    // LISTAR TODAS
     public void listar() {
-
-        List<Via> lista = service.obtenerTodos();
-
-        if (lista.isEmpty()) {
-            System.out.println("No hay vías registradas");
-            return;
+        try {
+            List<Via> lista = service.obtenerTodos();
+            lista.forEach(System.out::println);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
 
-        lista.forEach(System.out::println);
     }
 
-    // 🔹 BUSCAR POR NOMBRE
+    // BUSCAR POR NOMBRE
     public void buscarPorNombre(String nombre) {
-
-        List<Via> lista = service.buscarPorNombre(nombre);
-
-        if (lista.isEmpty()) {
-            System.out.println("No se encontraron vías con ese nombre");
-            return;
+        try {
+            List<Via> lista = service.buscarPorNombre(nombre);
+            lista.forEach(System.out::println);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
         }
-
-        lista.forEach(System.out::println);
     }
 
-    // 🔹 CREAR
+    // CREAR
     public void crear(Via v) {
 
-        service.crear(v);
-        System.out.println("Vía creada correctamente");
+        try {
+            service.crear(v);
+            System.out.println("Vía creada correctamente");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
-    // 🔹 ELIMINAR
+    // ELIMINAR
     public void eliminar(int id) {
+        try {
+            service.eliminar(id);
+            System.out.println("Vía eliminada correctamente");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
-        service.eliminar(id);
-        System.out.println("Vía eliminada correctamente");
     }
 
-    // 🔹 MODIFICAR
+    // MODIFICAR
     public void modificar(Via v) {
+        try {
+            service.modificar(v);
+            System.out.println("Vía modificada correctamente");
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
-        service.modificar(v);
-        System.out.println("Vía modificada correctamente");
     }
 
-    // 🔹 BUSCAR POR ID
+    // BUSCAR POR ID
     public void obtenerPorId(int id) {
+        try {
+            Via v = service.obtenerPorId(id);
+            System.out.println(v);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
-        Via v = service.obtenerPorId(id);
-        System.out.println(v);
     }
 }

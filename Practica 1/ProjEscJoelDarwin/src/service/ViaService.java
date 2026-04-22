@@ -14,7 +14,7 @@ public class ViaService {
     }
 
     // inserta una via
-    public void crear(Via v) {
+    public void crear(Via v) throws Exception {
 
         if (v == null) {
             throw new RuntimeException("La vía no puede ser null");
@@ -40,12 +40,16 @@ public class ViaService {
     }
 
     // Lista todas la vias
-    public List<Via> obtenerTodos() {
-        return viaDAO.obtindreTots();
+    public List<Via> obtenerTodos() throws Exception  {
+        List<Via> lista = viaDAO.obtindreTots();
+        if(lista.isEmpty()){
+            throw new RuntimeException("No hi ha vies inserides a la BD");
+        }
+        return lista;
     }
 
     // busca una via por id
-    public Via obtenerPorId(int id) {
+    public Via obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
@@ -61,7 +65,7 @@ public class ViaService {
     }
 
     // Borra una via per id
-    public void eliminar(int id) {
+    public void eliminar(int id) throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
@@ -71,7 +75,7 @@ public class ViaService {
     }
 
     // Modifica una via
-    public void modificar(Via v) {
+    public void modificar(Via v) throws Exception {
 
         if (v == null) {
             throw new RuntimeException("La vía no puede ser null");
@@ -89,7 +93,7 @@ public class ViaService {
     }
 
     // Busca por nombre y devuelve una lista con todas las vias que se llamana asi
-    public List<Via> buscarPorNombre(String nombre) {
+    public List<Via> buscarPorNombre(String nombre) throws Exception  {
 
         if (nombre == null || nombre.isEmpty()) {
             throw new RuntimeException("El nombre no puede estar vacío");
