@@ -30,8 +30,13 @@ public class SectorController {
 
     // modificar un sector de la base de datos
     public void modificarSector(Sector s) {
-        service.modificarSector(s);
-        System.out.println("Sector modificado correctamente");
+        try {
+            service.modificarSector(s);
+            System.out.println("Sector modificado correctamente");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     // eliminar un sector de la base de datos
@@ -42,9 +47,13 @@ public class SectorController {
 
     //Busca por nombre un
     public void buscarPorNombre(String nombre) {
-
-        List<Sector> lista = service.buscarPorNombre(nombre);
-
-        lista.forEach(s -> System.out.println(s));
+        List<Sector> lista=null;
+        try {
+            lista = service.buscarPorNombre(nombre);
+            lista.forEach(s -> System.out.println(s));
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
