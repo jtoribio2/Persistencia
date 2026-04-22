@@ -1,5 +1,7 @@
 package service;
 
+import config.AppConfig;
+import controller.SectorController;
 import dao.interfaces.ViaDAO;
 import model.entity.Via;
 
@@ -8,6 +10,7 @@ import java.util.List;
 public class ViaService {
 
     private final ViaDAO viaDAO;
+
 
     public ViaService(ViaDAO viaDAO) {
         this.viaDAO = viaDAO;
@@ -19,7 +22,8 @@ public class ViaService {
         if (v == null) {
             throw new RuntimeException("La vía no puede ser null");
         }
-
+        //todo hacer un metodo que te diga si una escola es de hielo o no
+        //if (v.getId_tipus_via()==3 && AppConfig.getEscolaController().getEscola(AppConfig.getSectorController().getVector(v.getId_sector()).getId_escoles()) )
         if (v.getNom() == null || v.getNom().isEmpty()) {
             throw new RuntimeException("El nombre de la vía es obligatorio");
         }
