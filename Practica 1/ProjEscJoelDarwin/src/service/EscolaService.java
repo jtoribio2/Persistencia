@@ -82,5 +82,10 @@ public class EscolaService {
         escoladao.modificar(e);
     }
 
+
+    public boolean isGel(Escola o ){
+      //YA HARE LAS EXEPCIONES
+        return   escoladao.isGel(o);
+    }
 }
 

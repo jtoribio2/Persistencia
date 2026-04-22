@@ -11,33 +11,71 @@ public class EscaladorController {
    private  EscaladorService dao ;
 
 public EscaladorController(EscaladorService s){this.dao = s;}
-    public  void addEscalador(Escalador e ) throws  Exception{
-        dao.crearEscalador(e);
-    }
+    public  void addEscalador(Escalador e ) {
 
-    public   void SetEscalador(Escalador  e ) throws  Exception{
+    try{dao.crearEscalador(e);}
+    catch (Exception e2 ) {
+        System.out.println(e2);
+    }
+}
+
+    public   void SetEscalador( Escalador e ) {
+      try{
         dao.modificarEscalador(e);
+      }
+      catch (Exception e2  ){
+          System.out.println(e2);
+      }
     }
 
-    public  void removeEscalador(Integer id ) throws  Exception{
-        dao.eliminarEscalador(id);
+    public  void removeEscalador(Integer id ) {
+        try {
+            dao.eliminarEscalador(id);
+        }
+        catch (Exception e ){
+            System.out.println(id);
+        }
     }
 
     public Escalador getEscaldorDni(String dni){
-        return dao.obtenerPorDni(dni);
+        try {
+            return dao.obtenerPorDni(dni);
+        }
+        catch (Exception e ){
+        return null;
+        }
     }
 
     public  void removedni(String dni){
-        dao.eliminarPerDni(dni);
+       try {
+           dao.eliminarPerDni(dni);
+       }
+       catch (Exception e ){
+           System.out.println(e);
+       }
     }
 
     public  List<Escalador> getList(){
         //Hacer comprovaciones o algo
-        List<Escalador> e = dao.obtenerTodos();
+        List<Escalador> e = null;
+        try {
+             e = dao.obtenerTodos();
+        }
+        catch (Exception e2 ){
+
+            return null;
+        }
+
         return e;
     }
 
-    public  Escalador getEscalador(Integer id  ) throws Exception{
-        return  dao.obtenerPorId(id);
+    public  Escalador getEscalador(Integer id  ) {
+    try {
+        return dao.obtenerPorId(id);
+    }
+    catch(Exception e ){
+        return null;
+    }
+
     }
 }

@@ -32,11 +32,14 @@ public class EscolaController {
         return e ;
     }
 
-    public  Escola getEscola(Integer id ) throws Exception{
-        if(id < 0 ) throw new  Exception("ERROR ID ");
+    public  Escola getEscola(Integer id ){
+
         return   service2.obtenerPorId(id);
     }
 
-
+public boolean isGel(Escola o ) {
+        //if(o == null) throw  new Exception("Error buit");
+        return service2.isGel(o);
+}
 //OTROS.... CONFIRMAMELO
 }

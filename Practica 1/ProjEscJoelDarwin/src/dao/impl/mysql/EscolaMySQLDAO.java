@@ -161,6 +161,41 @@ public class EscolaMySQLDAO implements EscolaDAO {
 
     }
 
+    @Override
+    public boolean isGel(Escola o ){
+        //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
+        final String SQL = """
+                SELECT *
+                FROM escoles e
+                INNER JOIN sectors s ON s.id_escola=e.id_escola
+                INNER JOIN vies v ON v.id_sector=s.id_sector
+                WHERE v.id_tipus_via = 3 AND e.id_escola = ?
+                
+                """;
+        //CONECTAMOS A LA BD
+        try(Connection conn = provider.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL)){
+            /*PREPARED STATMENT ES MEJOR QUE  STATMENT NO LE AFECTA ATAQUES SQL INJECTION */
+
+            //DEBEMOS DE INDICAR EN CADA ? EL TIPO DE DATO QUE REEMPLEZARA EL ?
+            ps.setInt(1, o.getId_escola());
+            try (ResultSet rs = ps.executeQuery()) {
+              boolean tf = rs.next();
+                if(tf) System.out.println("hi ha gel ");
+                //DEVOLVERA TRUE O FALSE
+                return tf;
+            }
+
+
+        }
+
+        catch (SQLException e){
+            System.out.println("Error no se pudo modificar el registro ");
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     private Escola map(ResultSet rs) throws SQLException {
 
         Escola s = new Escola();

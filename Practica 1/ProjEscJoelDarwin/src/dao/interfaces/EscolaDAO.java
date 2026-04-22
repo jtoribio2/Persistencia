@@ -20,4 +20,5 @@ public interface EscolaDAO extends Dao<Escola,Integer> {
     Escola  obtenir (Integer id);
     //METODOS  PROPIOS
 
+    boolean isGel(Escola o );
 }
