@@ -13,10 +13,25 @@ public class SectorController {
         this.service = service;
     }
 
+    public Sector getVector(Integer id){
+        try {
+            return service.obtenerPorId(id);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
     // Añadir un sector
     public void crearSector(Sector s) {
-        service.crearSector(s);
-        System.out.println("Sector creado correctamente");
+        try {
+            service.crearSector(s);
+            System.out.println("Sector creado correctamente");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     // mostrar todos los sectores de la base de datos
@@ -41,8 +56,14 @@ public class SectorController {
 
     // eliminar un sector de la base de datos
     public void eliminarSector(int id) {
-        service.eliminarSector(id);
-        System.out.println("Sector eliminado correctamente");
+        try {
+            service.eliminarSector(id);
+            System.out.println("Sector eliminado correctamente");
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
     }
 
     //Busca por nombre un
