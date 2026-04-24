@@ -5,25 +5,40 @@ import service.EscolaService;
 
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class EscolaController {
 
     private   final EscolaService service2;
     public EscolaController(EscolaService e ){this.service2= e;}
 
-    public   void addEscola(Escola e ) throws  Exception{
-       if(e == null) throw new Exception("ERROR DADES BUIDES");
-       service2.crearEscola(e);
+    public   void addEscola(Escola e ) {
+       // if(e == null) throw new Exception("ERROR DADES BUIDES");
+        try{
+           service2.crearEscola(e);
+        }
+        catch (Exception err ){
+            System.out.println(err);
+        }
     }
 
-    public  void SetEscola(Escola e ) throws  Exception{
-        if(e == null) throw new Exception("ERROR DADES BUIDES");
-        service2.modificarSector(e);
+    public  void SetEscola(Escola e )  {
+       // if(e == null) throw new Exception("ERROR DADES BUIDES");
+        try {
+            service2.modificarSector(e);
+        }
+        catch(Exception err){
+            System.out.println(err);
+        }
     }
 
-    public  void removeEscola(Integer id  ) throws  Exception{
-        if(id < 0 ) throw  new Exception("Error id ");
-        service2.eliminarSector(id);
+    public  void removeEscola(Integer id  ) {
+       try {
+           service2.eliminarSector(id);
+       }
+       catch (Exception err){
+           System.out.println(err);
+       }
     }
 
     public  List<Escola> getList(){
@@ -32,14 +47,24 @@ public class EscolaController {
         return e ;
     }
 
-    public  Escola getEscola(Integer id ){
-
-        return   service2.obtenerPorId(id);
+    public  Escola getEscola(Integer id ) {
+        try {
+            return service2.obtenerPorId(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
 public boolean isGel(Escola o ) {
-        //if(o == null) throw  new Exception("Error buit");
-        return service2.isGel(o);
+try {
+    return service2.isGel(o);
 }
-//OTROS.... CONFIRMAMELO
+catch (Exception e ){
+    System.out.println(e);
+    return false;
+}
+
+}
+
 }

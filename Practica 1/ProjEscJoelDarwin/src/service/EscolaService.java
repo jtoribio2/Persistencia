@@ -18,27 +18,27 @@ public class EscolaService {
     }
 
     // inserta un sector a la base de datos
-    public void crearEscola(Escola e ) {
+    public void crearEscola(Escola e )  throws  Exception{
 
         if (e == null) {
-            throw new RuntimeException("El sector no puede ser null");
+            throw new Exception("El sector no puede ser null");
         }
 
         if (e.getNom() == null || e.getNom().isEmpty()) {
-            throw new RuntimeException("El nombre es obligatorio");
+            throw new Exception("El nombre es obligatorio");
         }
 
         if (e.getLloc() == null || e.getLloc().isEmpty()) {
-            throw new RuntimeException("El nombre es obligatorio");
+            throw new Exception("El nombre es obligatorio");
         }
 
         if (e.getAproximacio() == null || e.getAproximacio().isEmpty()) {
-            throw new RuntimeException("El nombre es obligatorio");
+            throw new Exception("El nombre es obligatorio");
         }
 
 
         if (e.getPopularitat() > 0 && e.getPopularitat() <= 3) {
-            throw new RuntimeException("Debe indicar una escola válida");
+            throw new Exception("Debe indicar una escola válida");
         }
         escoladao.inserir(e);
     }
@@ -49,42 +49,44 @@ public class EscolaService {
     }
 
     // devuelve un sector a traves de su id
-    public Escola  obtenerPorId(int id) {
+    public Escola  obtenerPorId (int id) throws  Exception{
 
         if (id <= 0) {
-            throw new RuntimeException("ID inválido");
+            throw new Exception("ID inválido");
         }
 
         return escoladao.obtenir(id);
     }
 
     // elimina un sector a traves de un id
-    public void eliminarSector(int id) {
+    public void eliminarSector(int id) throws  Exception{
 
         if (id <= 0) {
-            throw new RuntimeException("ID inválido");
+            throw new Exception("ID inválido");
         }
 
         escoladao.eliminar(id);
     }
 
     // modifica un sector y lo busca a traves de su id en el caso que no existe te dice que no ha podido modificarlo
-    public void modificarSector(Escola e) {
+    public void modificarSector(Escola e) throws Exception{
 
         if (e == null) {
-            throw new RuntimeException("Sector no puede ser null");
+            throw new Exception("Sector no puede ser null");
         }
 
         if (e.getId_escola() <= 0) {
-            throw new RuntimeException("ID inválido");
+            throw new Exception("ID inválido");
         }
 
         escoladao.modificar(e);
     }
 
 
-    public boolean isGel(Escola o ){
-      //YA HARE LAS EXEPCIONES
+    public boolean isGel(Escola o ) throws  Exception{
+
+        if (o == null) throw new Exception("Escola no puede ser null");
+
         return   escoladao.isGel(o);
     }
 }
