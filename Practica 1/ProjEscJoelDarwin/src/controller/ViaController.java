@@ -1,5 +1,6 @@
 package controller;
 
+import model.entity.Escola;
 import model.entity.Via;
 import service.ViaService;
 
@@ -77,5 +78,19 @@ public class ViaController {
             System.out.println(e.getMessage());
         }
 
+
+
+    }
+
+    //LISTAR VIAS DISPONIBLES
+    public String viesDisponibles(Escola e ){
+        try {
+            String missatge = service.viesDisponibles(e);
+            return missatge;
+        }
+        catch (Exception err ){
+            System.out.println(err);
+            return null;
+        }
     }
 }

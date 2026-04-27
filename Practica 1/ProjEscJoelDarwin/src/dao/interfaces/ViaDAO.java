@@ -1,6 +1,7 @@
 package dao.interfaces;
 import model.entity.Via;
 import java.util.List;
+import model.entity.Escola;
 
 public interface ViaDAO extends Dao<Via,Integer>{
     // METODOS GENERICOS
@@ -18,4 +19,9 @@ public interface ViaDAO extends Dao<Via,Integer>{
     Via obtenir (Integer id);
     //METODOS  PROPIOS
     List<Via> buscarPorNombre(String nombre);
+
+    //AQUI PONDRE EL METODO QUE MUETRAS LAS VIAS DISPONIBLES
+    String viesDisponibles(Escola es);
+    //TODO: Pensar si ha que crrar una tabla
+    //List<Via>viesPerDificultat(String d);
 }

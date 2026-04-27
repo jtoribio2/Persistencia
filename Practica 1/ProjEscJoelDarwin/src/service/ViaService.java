@@ -3,6 +3,7 @@ package service;
 import config.AppConfig;
 import controller.SectorController;
 import dao.interfaces.ViaDAO;
+import model.entity.Escola;
 import model.entity.Via;
 
 import java.util.List;
@@ -110,5 +111,9 @@ public class ViaService {
         }
 
         return lista;
+    }
+
+    public String viesDisponibles(Escola e ) throws Exception{
+        return viaDAO.viesDisponibles(e);
     }
 }

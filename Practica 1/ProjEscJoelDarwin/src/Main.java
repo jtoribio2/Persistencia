@@ -13,5 +13,8 @@ public class Main {
         AppConfig.getSectorController().buscarPorNombre("Pati");
         Escola  e = AppConfig.getEscolaController().getEscola(1);
         System.out.println(AppConfig.getEscolaController().isGel(e));
+
+
+       System.out.println(AppConfig.getViaController().viesDisponibles(e));
     }
 }

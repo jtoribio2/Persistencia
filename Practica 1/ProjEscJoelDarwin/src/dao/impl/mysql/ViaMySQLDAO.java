@@ -2,7 +2,7 @@ package dao.impl.mysql;
 
 import dao.interfaces.ViaDAO;
 import db.ConnectionProvider;
-import model.entity.Via;
+import model.entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -185,4 +185,41 @@ public class ViaMySQLDAO implements ViaDAO {
                 rs.getString("troca")
         );
     }
+
+    @Override
+    public String viesDisponibles(Escola es ) {
+        String resultat = "";
+        final String SQL = """
+                SELECT s.nom ,v.nom 
+                FROM vies v
+                LEFT JOIN disponibilitats d ON v.id_via = d.id_via
+                LEFT JOIN sectors s ON s.id_sector = v.id_sector
+                LEFT JOIN escoles es ON es.id_escola = s.id_escola
+                WHERE s.id_escola = ? AND d.id_via IS NULL;
+                """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+             ) {
+            ps.setInt(1, es.getId_escola());
+
+                //ALMACENAR LOS VALORES EN LAS VARIABLES
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    resultat += rs.getString("s.nom") + " " +
+                            rs.getString("v.nom") + "\n";
+                }
+            }
+            if(resultat.isBlank()) return "VIES DE LA ESCOLA NO DISPONIBLES";
+            return resultat;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo vias", e);
+        }
+    }
+/*
+    @Override
+    public List<Via>viesPerDificultat(String dades){
+        List <Via> v
+    }*/
+
 }
