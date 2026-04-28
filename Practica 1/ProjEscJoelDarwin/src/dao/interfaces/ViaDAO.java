@@ -1,4 +1,5 @@
 package dao.interfaces;
+import model.entity.Sector;
 import model.entity.Via;
 import java.util.List;
 import model.entity.Escola;
@@ -24,4 +25,8 @@ public interface ViaDAO extends Dao<Via,Integer>{
     String viesDisponibles(Escola es);
     //TODO: Pensar si ha que crrar una tabla
     //List<Via>viesPerDificultat(String d);
+
+    Sector buscarSector(Via via);
+
+    Escola buscarEscola(Via via);
 }

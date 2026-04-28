@@ -216,7 +216,88 @@ public class ViaMySQLDAO implements ViaDAO {
             throw new RuntimeException("Error obteniendo vias", e);
         }
     }
-/*
+    @Override
+    public Sector buscarSector(Via via) {
+
+        if (via == null || via.getId_via() <= 0) {
+            throw new RuntimeException("Via inválida");
+        }
+
+        String sql = """
+        SELECT s.*
+        FROM vies v
+        JOIN sectors s ON v.id_sector = s.id_sector
+        WHERE v.id_via = ?
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, via.getId_via());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    return new Sector(
+                            rs.getInt("id_sector"),
+                            rs.getInt("id_escola"),
+                            rs.getString("nom"),
+                            rs.getFloat("latitut"),
+                            rs.getFloat("longitut"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("popularitat")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sector", e);
+        }
+
+        return null;
+    }
+
+    @Override
+    public Escola buscarEscola(Via via) {
+
+        if (via == null || via.getId_via() <= 0) {
+            throw new RuntimeException("Via inválida");
+        }
+
+        String sql = """
+        SELECT e.*
+        FROM vies v
+        JOIN sectors s ON v.id_sector = s.id_sector
+        JOIN escoles e ON s.id_escola = e.id_escola
+        WHERE v.id_via = ?
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, via.getId_via());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    return new Escola(
+                            rs.getInt("id_escola"),
+                            rs.getString("nom"),
+                            rs.getString("lloc"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("popularitat")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo escola", e);
+        }
+
+        return null;
+    }
+
+    /*
     @Override
     public List<Via>viesPerDificultat(String dades){
         List <Via> v

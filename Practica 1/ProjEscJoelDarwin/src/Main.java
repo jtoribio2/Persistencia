@@ -11,10 +11,5 @@ import service.SectorService;
 public class Main {
     public static void main(String[] args) {
         AppConfig.getSectorController().buscarPorNombre("Pati");
-        Escola  e = AppConfig.getEscolaController().getEscola(1);
-        System.out.println(AppConfig.getEscolaController().isGel(e));
-
-
-       System.out.println(AppConfig.getViaController().viesDisponibles(e));
     }
 }
