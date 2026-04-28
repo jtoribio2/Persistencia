@@ -22,5 +22,6 @@ public interface EscolaDAO extends Dao<Escola,Integer> {
 
     boolean isGel(Escola o );
 
+    List<Escola> escolesDisponibles();
 
 }

@@ -159,4 +159,10 @@ public class ViaService {
 
         return escola;
     }
+
+    public List<Via> viesPerDificultat(String rang) throws  Exception{
+        if(rang.isBlank())  throw  new Exception("Error rang no especificat");
+
+        return viaDAO.viesPerDificultat(rang);
+    }
 }

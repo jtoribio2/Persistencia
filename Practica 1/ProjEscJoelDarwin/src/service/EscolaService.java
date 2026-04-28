@@ -89,5 +89,10 @@ public class EscolaService {
 
         return   escoladao.isGel(o);
     }
+
+    public List<Escola> escolesDisponibles(){
+        List<Escola> escoles = escoladao.escolesDisponibles();
+        return escoles;
+    }
 }
 

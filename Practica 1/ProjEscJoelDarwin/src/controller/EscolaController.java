@@ -67,4 +67,8 @@ catch (Exception e ){
 
 }
 
+public List<Escola> escolesDisponibles(){
+        return service2.escolesDisponibles();
+}
+
 }
