@@ -8,9 +8,10 @@ import model.entity.Sector;
 import model.entity.Via;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class ViaService {
-
+    private static Scanner scan = new Scanner(System.in);
     private final ViaDAO viaDAO;
 
 
@@ -25,7 +26,7 @@ public class ViaService {
             throw new RuntimeException("La vía no puede ser null");
         }
 
-        Escola escola = viaDAO.buscarEscola(v);
+        Escola escola = AppConfig.getSectorController().mostrarEscola(v.getId_sector());
         //excepcion de añadir una via de en escolas de gel
         if (AppConfig.getEscolaController().isGel(escola)){
             int tipus = v.getId_tipus_via();
@@ -34,10 +35,11 @@ public class ViaService {
             }
         }
 
+
         if (!AppConfig.getEscolaController().isGel(escola)){
             int tipus = v.getId_tipus_via();
             if (tipus == 3){
-                throw  new RuntimeException("no pots inserir una via de gel en una escola que vies clasiques y esportives");
+                throw  new RuntimeException("no pots inserir una via de gel en una escola de vies clasiques y esportives");
             }
         }
 
@@ -159,4 +161,6 @@ public class ViaService {
 
         return escola;
     }
+
+
 }

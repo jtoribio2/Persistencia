@@ -1,6 +1,7 @@
 package service;
 
 import dao.interfaces.SectorDAO;
+import model.entity.Escola;
 import model.entity.Sector;
 
 import java.util.List;
@@ -86,5 +87,20 @@ public class SectorService {
         }
 
         return lista;
+    }
+
+    public Escola buscarEscola(int idSector) {
+
+        if (idSector <= 0) {
+            throw new RuntimeException("ID inválido");
+        }
+
+        Escola escola = sectorDAO.buscarEscola(idSector);
+
+        if (escola == null) {
+            throw new RuntimeException("No se encontró escola para ese sector");
+        }
+
+        return escola;
     }
 }

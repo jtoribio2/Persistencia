@@ -95,13 +95,13 @@ public class ViaController {
         }
     }
 
-    public void mostrarSector(Via via) {
+    public Sector mostrarSector(Via via) {
         Sector s = service.buscarSector(via);
-        System.out.println(s);
+        return s;
     }
 
-    public void mostrarEscola(Via via) {
+    public Escola mostrarEscola(Via via) {
         Escola e = service.buscarEscola(via);
-        System.out.println(e);
+        return e;
     }
 }
