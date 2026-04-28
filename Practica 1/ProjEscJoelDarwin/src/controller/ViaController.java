@@ -1,6 +1,7 @@
 package controller;
 
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 import service.ViaService;
 
@@ -92,5 +93,15 @@ public class ViaController {
             System.out.println(err);
             return null;
         }
+    }
+
+    public void mostrarSector(Via via) {
+        Sector s = service.buscarSector(via);
+        System.out.println(s);
+    }
+
+    public void mostrarEscola(Via via) {
+        Escola e = service.buscarEscola(via);
+        System.out.println(e);
     }
 }

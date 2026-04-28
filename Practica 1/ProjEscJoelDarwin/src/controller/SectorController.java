@@ -13,7 +13,7 @@ public class SectorController {
         this.service = service;
     }
 
-    public Sector getVector(Integer id){
+    public Sector getSector(Integer id){
         try {
             return service.obtenerPorId(id);
         }

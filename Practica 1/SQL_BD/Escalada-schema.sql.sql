@@ -7,7 +7,7 @@ CREATE DATABASE escalada;
 USE escalada;
 CREATE TABLE escoles
 (
-	id_escola 	INT,
+	id_escola 	INT AUTO_INCREMENT,
 	nom 		VARCHAR(25),
     lloc		VARCHAR(40),
     aproximacio VARCHAR(50),
@@ -19,7 +19,7 @@ CREATE TABLE escoles
 
 CREATE TABLE sectors
 (
-	id_sector			INT,
+	id_sector			INT AUTO_INCREMENT,
 	id_escola			INT,
     nom					VARCHAR (20),
     latitut				DECIMAL (9,6),
@@ -34,7 +34,7 @@ CREATE TABLE sectors
 
 CREATE TABLE tipus_via
 (
-	id_tipus_via		INT,
+	id_tipus_via		INT AUTO_INCREMENT,
     tipus				VARCHAR(10),
     CONSTRAINT pk_tipus_via PRIMARY KEY (id_tipus_via),
     CONSTRAINT uk_tipus_via UNIQUE (id_tipus_via)
@@ -42,7 +42,7 @@ CREATE TABLE tipus_via
 
 CREATE TABLE vies
 (
-	id_via 				INT,
+	id_via 				INT AUTO_INCREMENT,
 	id_sector			INT,
     id_tipus_via		INT,
     nom					VARCHAR (20),
@@ -61,7 +61,7 @@ CREATE TABLE vies
 
 CREATE TABLE disponibilitats
 (
-	id_disponibilitat 	INT,
+	id_disponibilitat 	INT AUTO_INCREMENT,
 	id_via				INT,
     inici				DATE,
     final				DATE,
@@ -74,7 +74,7 @@ CREATE TABLE disponibilitats
 
 CREATE TABLE llars
 (
-	id_llar				INT,
+	id_llar				INT AUTO_INCREMENT,
     id_via				INT,
     metres				TINYINT,
     CONSTRAINT pk_llars PRIMARY KEY (id_llar),
@@ -84,7 +84,7 @@ CREATE TABLE llars
 );
 
 CREATE TABLE escaladors (
-id_escalador INT,
+id_escalador INT AUTO_INCREMENT,
 dni			CHAR(9),
 nom 		VARCHAR(20),
 edat 		TINYINT,

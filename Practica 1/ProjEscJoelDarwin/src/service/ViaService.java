@@ -4,6 +4,7 @@ import config.AppConfig;
 import controller.SectorController;
 import dao.interfaces.ViaDAO;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 
 import java.util.List;
@@ -23,8 +24,28 @@ public class ViaService {
         if (v == null) {
             throw new RuntimeException("La vía no puede ser null");
         }
-        //todo hacer un metodo que te diga si una escola es de hielo o no
-        //if (v.getId_tipus_via()==3 && AppConfig.getEscolaController().getEscola(AppConfig.getSectorController().getVector(v.getId_sector()).getId_escoles()) )
+
+        Escola escola = viaDAO.buscarEscola(v);
+        //excepcion de añadir una via de en escolas de gel
+        if (AppConfig.getEscolaController().isGel(escola)){
+            int tipus = v.getId_tipus_via();
+            if (tipus == 1 || tipus == 2){
+                throw  new RuntimeException("no pots inserir una via clasica o esportiva en una escola de gel");
+            }
+        }
+
+        if (!AppConfig.getEscolaController().isGel(escola)){
+            int tipus = v.getId_tipus_via();
+            if (tipus == 3){
+                throw  new RuntimeException("no pots inserir una via de gel en una escola que vies clasiques y esportives");
+            }
+        }
+
+        if (escola == null) {
+            throw new RuntimeException("No se pudo determinar la escola de la vía");
+        }
+
+
         if (v.getNom() == null || v.getNom().isEmpty()) {
             throw new RuntimeException("El nombre de la vía es obligatorio");
         }
@@ -115,5 +136,27 @@ public class ViaService {
 
     public String viesDisponibles(Escola e ) throws Exception{
         return viaDAO.viesDisponibles(e);
+    }
+
+    public Sector buscarSector(Via via) {
+
+        Sector sector = viaDAO.buscarSector(via);
+
+        if (sector == null) {
+            throw new RuntimeException("No se encontró sector");
+        }
+
+        return sector;
+    }
+
+    public Escola buscarEscola(Via via) {
+
+        Escola escola = viaDAO.buscarEscola(via);
+
+        if (escola == null) {
+            throw new RuntimeException("No se encontró escola");
+        }
+
+        return escola;
     }
 }
