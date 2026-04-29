@@ -297,7 +297,7 @@ public class ViaMySQLDAO implements ViaDAO {
         return null;
     }
 
-
+    // vies por dificultat
     @Override
     public List<Via>viesPerDificultat(String dades){
         List <Via> llista = new ArrayList<>();
@@ -340,6 +340,82 @@ public class ViaMySQLDAO implements ViaDAO {
 
     }
 
+    @Override
+   public  List<Via>viesPerEstatApte(){
+        List<Via> aptes = new ArrayList<>();
+        String SQL = """
+                	SELECT v.*
+                    FROM vies v
+                	LEFT JOIN disponibilitats d ON v.id_via = d.id_via
+                	WHERE  d.id_via IS NULL AND (d.inici IS NULL OR d.final IS NULL) ;
+                """;
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+        ) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Via vies = new Via(
+                            rs.getInt("v.id_via"),
+                            rs.getInt("v.id_sector"),
+                            rs.getInt("v.id_tipus_via"),
+                            rs.getString("v.nom"),
+                            rs.getInt("v.llargada"),
+                            rs.getString("v.dificultat"),
+                            rs.getString("v.orientacio"),
+                            rs.getString("v.ancoratge"),
+                            rs.getString("v.troca")
+                    );
+                    aptes.add(vies);
+                }
+                return aptes;
+            }
+        }
+        catch (SQLException e) {
+        // throw new RuntimeException("Error obteniendo vias", e);
+        return null;
+    }
+    }
+
+    @Override
+    public List<Via>viesPerEstatTancada(){
+        /*MOSTRAR
+        *
+        * v.nom, d.rao, d.inici,d.final*/
+        String SQL =
+        """
+        SELECT v.*
+        FROM vies v
+        INNER  JOIN disponibilitats d ON v.id_via = d.id_via
+        WHERE NOW() NOT BETWEEN d.inici AND d.final
+        ORDER BY v.nom  ASC;
+        """;
+        List<Via> tancats = new ArrayList<>();
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+        ) {
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Via vies = new Via(
+                            rs.getInt("v.id_via"),
+                            rs.getInt("v.id_sector"),
+                            rs.getInt("v.id_tipus_via"),
+                            rs.getString("v.nom"),
+                            rs.getInt("v.llargada"),
+                            rs.getString("v.dificultat"),
+                            rs.getString("v.orientacio"),
+                            rs.getString("v.ancoratge"),
+                            rs.getString("v.troca")
+                    );
+                    tancats.add(vies);
+                }
+                return tancats;
+            }
+        }
+        catch (SQLException e) {
+            // throw new RuntimeException("Error obteniendo vias", e);
+            return null;
+        }
+    }
 /*
     private Via mapParemetre(ResultSet rs) throws SQLException {
 

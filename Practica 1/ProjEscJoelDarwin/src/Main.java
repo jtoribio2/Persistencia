@@ -29,5 +29,7 @@ public class Main {
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
         AppConfig.getViaController().crear(via);
+
+
     }
 }
