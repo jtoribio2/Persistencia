@@ -14,7 +14,7 @@ import service.SectorService;
 public class Main {
     public static void main(String[] args) {
         Via via= new Via(
-                50,          // 🔥 se ignora (auto_increment)
+                50,          // se ignora (auto_increment)
                 6,          // id_sector
                 2,          // tipo GEL
                 "Via4",
@@ -28,6 +28,6 @@ public class Main {
         AppConfig.getSectorController().buscarPorNombre("Sector A");
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
-        AppConfig.getViaController().crear(via);
+        AppConfig.getViaController().crear();
     }
 }

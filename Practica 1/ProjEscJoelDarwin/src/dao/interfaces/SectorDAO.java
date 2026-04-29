@@ -25,5 +25,7 @@ public interface SectorDAO extends Dao<Sector,Integer> {
 
     Escola buscarEscola(int idSector);
 
+    List<Sector> buscarPorEscola(int idEscola);
+
 
 }
