@@ -1,5 +1,6 @@
 package controller;
 
+import model.entity.Escola;
 import model.entity.Sector;
 import service.SectorService;
 
@@ -76,5 +77,9 @@ public class SectorController {
         catch (Exception e){
             System.out.println(e.getMessage());
         }
+    }
+
+    public Escola mostrarEscola(int idSector) {
+        return  service.buscarEscola(idSector);
     }
 }

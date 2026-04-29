@@ -2,6 +2,7 @@ package dao.impl.mysql;
 
 import dao.interfaces.SectorDAO;
 import db.ConnectionProvider;
+import model.entity.Escola;
 import model.entity.Sector;
 
 import java.sql.*;
@@ -180,5 +181,40 @@ public class SectorMySQLDAO implements SectorDAO {
         s.setNom(rs.getString("nom"));
 
         return s;
+    }
+
+    @Override
+    public Escola buscarEscola(int idSector) {
+
+        String sql = """
+        SELECT e.*
+        FROM sectors s
+        JOIN escoles e ON s.id_escola = e.id_escola
+        WHERE s.id_sector = ?
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idSector);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+
+                    return new Escola(
+                            rs.getInt("id_escola"),
+                            rs.getString("nom"),
+                            rs.getString("lloc"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("popularitat")
+                    );
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo escola del sector", e);
+        }
+
+        return null;
     }
 }

@@ -181,7 +181,6 @@ public class EscolaMySQLDAO implements EscolaDAO {
             ps.setInt(1, o.getId_escola());
             try (ResultSet rs = ps.executeQuery()) {
               boolean tf = rs.next();
-                if(tf) System.out.println("hi ha gel ");
                 //DEVOLVERA TRUE O FALSE
                 return tf;
             }

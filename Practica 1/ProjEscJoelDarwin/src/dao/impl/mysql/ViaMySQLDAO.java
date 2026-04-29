@@ -260,7 +260,7 @@ public class ViaMySQLDAO implements ViaDAO {
     @Override
     public Escola buscarEscola(Via via) {
 
-        if (via == null || via.getId_via() <= 0) {
+        if (via == null) {
             throw new RuntimeException("Via inválida");
         }
 
