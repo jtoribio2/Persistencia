@@ -217,4 +217,41 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return null;
     }
+
+    @Override
+    public List<Sector> buscarPorEscola(int idEscola) {
+
+        List<Sector> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM sectors WHERE id_escola = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idEscola);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    Sector s = new Sector(
+                            rs.getInt("id_sector"),
+                            rs.getInt("id_escola"),
+                            rs.getString("nom"),
+                            rs.getFloat("latitut"),
+                            rs.getFloat("longitut"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("popularitat")
+                    );
+
+                    lista.add(s);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sectores por escola", e);
+        }
+
+        return lista;
+    }
 }
