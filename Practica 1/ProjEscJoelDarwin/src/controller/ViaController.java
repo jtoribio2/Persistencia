@@ -105,7 +105,7 @@ public class ViaController {
         return e;
     }
 
-/*
+
     public List<Via> viesPerDificultat(String format){
             try{
                 return service.viesPerDificultat(format);
@@ -114,5 +114,5 @@ public class ViaController {
                 System.out.println(e);
                 return null;
             }
-    }*/
+    }
 }

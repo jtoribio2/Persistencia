@@ -82,4 +82,6 @@ public class SectorController {
     public Escola mostrarEscola(int idSector) {
         return  service.buscarEscola(idSector);
     }
+
+
 }

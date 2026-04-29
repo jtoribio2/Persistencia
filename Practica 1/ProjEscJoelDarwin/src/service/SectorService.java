@@ -103,4 +103,19 @@ public class SectorService {
 
         return escola;
     }
+
+    public List<Sector> buscarPorEscola(int idEscola) {
+
+        if (idEscola <= 0) {
+            throw new RuntimeException("ID de escola inválido");
+        }
+
+        List<Sector> lista = sectorDAO.buscarPorEscola(idEscola);
+
+        if (lista.isEmpty()) {
+            System.out.println("No hay sectores para esta escola");
+        }
+
+        return lista;
+    }
 }

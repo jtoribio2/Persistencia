@@ -22,6 +22,18 @@ public class Via {
         this.ancoratge = ancoratge;
         this.troca = troca;
     }
+
+    public Via( int id_sector, int id_tipus_via, String nom, int llargada, String dificultat, String orientacio, String ancoratge, String troca) {
+        this.id_via = 10;
+        this.id_sector = id_sector;
+        this.id_tipus_via = id_tipus_via;
+        this.nom = nom;
+        this.llargada = llargada;
+        this.dificultat = dificultat;
+        this.orientacio = orientacio;
+        this.ancoratge = ancoratge;
+        this.troca = troca;
+    }
     
 
     public int getId_via() {
