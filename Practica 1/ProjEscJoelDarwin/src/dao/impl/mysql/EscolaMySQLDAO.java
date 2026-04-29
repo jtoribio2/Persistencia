@@ -208,6 +208,38 @@ public class EscolaMySQLDAO implements EscolaDAO {
         return s;
     }
 
+    @Override
+    public List<Escola> escolesDisponibles(){
+        String sql = """
+        SELECT e.*
+        FROM  escoles e
+        INNER JOIN sectors s ON s.id_escola = e.id_escola
+        INNER JOIN vies v ON v.id_sector = s.id_sector
+        INNER JOIN disponibilitats d ON d.id_via = v.id_via
+        WHERE d.inici >= NOW()    
+        """;
+        List<Escola> escoles = new ArrayList<>();
+        try(Connection conn = provider.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery()){
+            while(rs.next()){
+
+              Escola e = new Escola(rs.getInt("e.id_escola"),
+                      rs.getString("e.nom"),
+                      rs.getString("e.lloc"),
+                      rs.getString("e.aproximacio"),
+                      rs.getInt("e.popularitat")
+                      );
+              escoles.add(e);
+            }
+            return escoles;
+        }
+        catch (SQLException e ){
+            System.out.println("Error ");
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 }
 

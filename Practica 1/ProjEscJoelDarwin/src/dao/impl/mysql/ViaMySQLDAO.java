@@ -297,10 +297,64 @@ public class ViaMySQLDAO implements ViaDAO {
         return null;
     }
 
-    /*
+
     @Override
     public List<Via>viesPerDificultat(String dades){
-        List <Via> v
-    }*/
+        List <Via> llista = new ArrayList<>();
+        String SQL = """
+        SELECT  * 
+        FROM vies v
+        INNER JOIN sectors s ON s.id_sector = v.id_sector
+        INNER JOIN escoles e ON e.id_escola = s.id_escola
+        WHERE v.dificultat BETWEEN ? AND ?
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+            ) {
+            String[] rangs = dades.split(" +");
+            ps.setString(1, rangs[0]);
+            ps.setString(2, rangs[1]);
+            try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Via vies = new Via(
+                        rs.getInt("v.id_via"),
+                        rs.getInt("v.id_sector"),
+                        rs.getInt("v.id_tipus_via"),
+                        rs.getString("v.nom"),
+                        rs.getInt("v.llargada"),
+                        rs.getString("v.dificultat"),
+                        rs.getString("v.orientacio"),
+                        rs.getString("v.ancoratge"),
+                        rs.getString("v.troca")
+                );
+                llista.add(vies);
+            }
+                return llista;
+            }
+
+        } catch (SQLException e) {
+           // throw new RuntimeException("Error obteniendo vias", e);
+            return null;
+        }
+
+    }
+
+/*
+    private Via mapParemetre(ResultSet rs) throws SQLException {
+
+        return new Via(
+                rs.getInt("id_via"),
+                rs.getInt("id_sector"),
+                rs.getInt("id_tipus_via"),
+                rs.getString("nom"),
+                rs.getInt("llargada"),
+                rs.getString("dificultat"),
+                rs.getString("orientacio"),
+                rs.getString("ancoratge"),
+                rs.getString("troca")
+        );
+    }
+    */
 
 }

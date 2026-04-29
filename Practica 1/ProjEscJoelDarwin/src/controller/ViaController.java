@@ -104,4 +104,15 @@ public class ViaController {
         Escola e = service.buscarEscola(via);
         return e;
     }
+
+
+    public List<Via> viesPerDificultat(String format){
+            try{
+                return service.viesPerDificultat(format);
+            }
+            catch (Exception e ){
+                System.out.println(e);
+                return null;
+            }
+    }
 }
