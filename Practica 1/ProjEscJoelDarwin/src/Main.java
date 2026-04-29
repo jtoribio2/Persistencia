@@ -10,13 +10,11 @@ import model.entity.Escola;
 import model.entity.Via;
 import service.SectorService;
 
-import java.util.List;
-
 
 public class Main {
     public static void main(String[] args) {
         Via via= new Via(
-                50,          // 🔥 se ignora (auto_increment)
+                50,          // se ignora (auto_increment)
                 6,          // id_sector
                 2,          // tipo GEL
                 "Via4",
@@ -30,14 +28,6 @@ public class Main {
         AppConfig.getSectorController().buscarPorNombre("Sector A");
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
-        AppConfig.getViaController().crear(via);
-
-        List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
-        List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
-        for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
-        for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
-
-        List<Via> llargues = AppConfig.getViaController().mostrarViesLlargues(1);
-        for(Via v : llargues){System.out.println("NOM: "+ v.getNom());}
+        AppConfig.getViaController().crear();
     }
 }

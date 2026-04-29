@@ -3,19 +3,29 @@ package controller;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
+import service.EscolaService;
+import service.SectorService;
 import service.ViaService;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class ViaController {
-
     private final ViaService service;
+    private final EscolaService escolaService;
+    private final SectorService sectorService;
+    Scanner sc = new Scanner(System.in);
+    public ViaController(ViaService service,
+                         SectorService sectorService,
+                         EscolaService escolaService) {
 
-    public ViaController(ViaService service) {
         this.service = service;
+        this.sectorService = sectorService;
+        this.escolaService = escolaService;
     }
 
-    // LISTAR TODASgit revert <hash_del_commit>
+
+    // LISTAR TODAS
     public void listar() {
         try {
             List<Via> lista = service.obtenerTodos();
@@ -37,18 +47,79 @@ public class ViaController {
     }
 
     // CREAR
-    public void crear(Via v) {
 
+    public void crear() {
+        // enseñamos las escolas y el usuario elije una para meter la via
+        List<Escola> escolas = escolaService.obtenerTodos();
+
+        System.out.println("Elige una escola:");
+
+        for (Escola e : escolas) {
+            System.out.println(e.getId_escola() + " - " + e.getNom());
+        }
+
+        int idEscola = sc.nextInt();
+
+        // enseñamos los sectores de la escola de arriba, y el usuario elige uno
+        List<Sector> sectores = sectorService.buscarPorEscola(idEscola);
+
+        System.out.println("Elige un sector:");
+
+        for (Sector s : sectores) {
+            System.out.println(s.getId_sector() + " - " + s.getNom());
+        }
+
+        int idSector = sc.nextInt();
+
+        sc.nextLine();
+
+        // datos de la via
+        System.out.println("Nombre:");
+        String nom = sc.nextLine();
+
+        System.out.println("Llargada:");
+        int llargada = sc.nextInt();
+
+        System.out.println("tipus de via (1 Clasica, 2 Esportiva, 3 Gel:");
+        int tipus_via = sc.nextInt();
+
+        System.out.println("Dificultat (ex: 6a ):");
+        String dificultat = sc.nextLine();
+
+        System.out.println("Oreienciacio (ex: N)");
+        String orientacio = sc.nextLine();
+
+        System.out.println("Ancoratge:");
+        String ancoratge = sc.nextLine();
+
+        System.out.println("Tipus roca");
+        String troca = sc.nextLine();
+
+        // creamos la via
+        Via v = new Via(
+                idSector,
+                tipus_via,
+                nom,
+                llargada,
+                dificultat,
+                orientacio,
+                ancoratge,
+                troca
+        );
+
+        //  llamamos al service para introducir la via con su sector elegido
         try {
             service.crear(v);
-            System.out.println("Vía creada correctamente");
-        } catch (Exception e) {
+        }
+        catch (Exception e){
             System.out.println(e.getMessage());
         }
 
+
+        System.out.println("Vía creada correctamente");
     }
 
-    // ELIMINAR
+    // eliminar
     public void eliminar(int id) {
         try {
             service.eliminar(id);
@@ -105,8 +176,8 @@ public class ViaController {
         return e;
     }
 
-
-    public List<Via> viesPerDificultat(String format){
+    //todo implementarlo en el service
+    /*public List<Via> viesPerDificultat(String format){
             try{
                 return service.viesPerDificultat(format);
             }
@@ -114,36 +185,5 @@ public class ViaController {
                 System.out.println(e);
                 return null;
             }
-    }
-
-
-    public List<Via> viesPerEstatTancada(){
-        try{
-            return service.viesPerEstatTancat();
-        }
-        catch (Exception e ){
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    public List<Via> viesPerEstatApte(){
-        try{
-            return service.viesPerEstatApte();
-        }
-        catch (Exception e ){
-            System.out.println(e);
-            return null;
-        }
-    }
-
-    public List<Via> mostrarViesLlargues(int escola){
-        try{
-            return service.mostrarViesLlargues(escola);
-        }
-        catch (Exception e ){
-            System.out.println(e);
-            return null;
-        }
-    }
+    }*/
 }
