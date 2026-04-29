@@ -339,7 +339,103 @@ public class ViaMySQLDAO implements ViaDAO {
         }
 
     }
+@Override
+  public  List<Via> viesPerEstatApte(){
+        List<Via> aptes = new ArrayList<>();
+        String sql = """
+        SELECT *
+        FROM vies
+        WHERE id_via NOT IN (
+             SELECT d.id_via
+             FROM disponibilitats d
+             )
+             OR id_via IN (
+              SELECT d1.id_via
+              FROM disponibilitats d1
+              WHERE NOW() > d1.final 
+                    );
+    """;
+    try (Connection conn = provider.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+    ){
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                aptes.add(map(rs));
+            }
+        }
+        return aptes;
+    }
+    catch (SQLException e ){
+        System.out.println("ERRROR");
+        return null;
+    }
 
+}
+    @Override
+    public List<Via> viesPerEstatTancat(){
+        List<Via> tancats = new ArrayList<>();
+        String sql = """
+       SELECT v.*, d.rao, d.inici,d.final
+       FROM vies v
+       INNER  JOIN disponibilitats d ON v.id_via = d.id_via
+       WHERE NOW()  BETWEEN d.inici AND d.final
+       ORDER BY v.nom  ASC;
+    """;
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+        ){
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tancats.add(map(rs));
+                }
+            }
+            return tancats;
+        }
+        catch (SQLException e ){
+            System.out.println("ERROR");
+            return null;
+        }
+    }
+
+    @Override
+    public List<Via> mostrarViesLlargues(int escola){
+        List<Via> llargues = new ArrayList<>();
+        String SQL = """
+                SELECT v.*
+                FROM vies v
+                INNER JOIN sectors s ON s.id_sector = v.id_sector
+                WHERE s.id_escola = ? 
+                GROUP BY v.id_via
+                HAVING v.llargada = MAX(v.llargada);
+                """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+        ){
+            ps.setInt(1, escola);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Via vies = new Via(
+                            rs.getInt("v.id_via"),
+                            rs.getInt("v.id_sector"),
+                            rs.getInt("v.id_tipus_via"),
+                            rs.getString("v.nom"),
+                            rs.getInt("v.llargada"),
+                            rs.getString("v.dificultat"),
+                            rs.getString("v.orientacio"),
+                            rs.getString("v.ancoratge"),
+                            rs.getString("v.troca")
+                    );
+                    llargues.add(vies);
+                }
+            }
+            return llargues;
+        }
+        catch (SQLException e ){
+            System.out.println("ERROR");
+            return null;
+        }
+    }
 /*
     private Via mapParemetre(ResultSet rs) throws SQLException {
 

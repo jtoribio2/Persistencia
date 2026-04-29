@@ -162,5 +162,23 @@ public class ViaService {
         return escola;
     }
 
+    public List<Via> viesPerDificultat(String dades) throws  Exception{
+        if(dades.isBlank())throw new Exception("ERROR DADES NO INTROUIDES");
+      return   viaDAO.viesPerDificultat("dades");
+    }
+
+
+    public List<Via> viesPerEstatTancat(){
+        return viaDAO.viesPerEstatTancat();
+    }
+
+    public List<Via> viesPerEstatApte(){
+        return viaDAO.viesPerEstatApte();
+    }
+
+    public List<Via> mostrarViesLlargues(int escola) throws Exception{
+        if(escola < 0) throw new Exception("ID INCORRECTE");
+        return viaDAO.mostrarViesLlargues(escola);
+    }
 
 }
