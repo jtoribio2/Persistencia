@@ -10,6 +10,8 @@ import model.entity.Escola;
 import model.entity.Via;
 import service.SectorService;
 
+import java.util.List;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -29,5 +31,13 @@ public class Main {
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
         AppConfig.getViaController().crear(via);
+
+        List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
+        List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
+        for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
+        for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
+
+        List<Via> llargues = AppConfig.getViaController().mostrarViesLlargues(1);
+        for(Via v : llargues){System.out.println("NOM: "+ v.getNom());}
     }
 }
