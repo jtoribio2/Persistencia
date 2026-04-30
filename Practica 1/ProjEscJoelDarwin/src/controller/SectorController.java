@@ -83,5 +83,14 @@ public class SectorController {
         return  service.buscarEscola(idSector);
     }
 
+    public List<Sector> sectorViesDisponibles ( int quantitat) {
+        try {
+            return service.sectorViesDisponibles(quantitat);
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
+    }
 
 }

@@ -177,13 +177,51 @@ public class ViaController {
     }
 
     //todo implementarlo en el service
-    /*public List<Via> viesPerDificultat(String format){
-            try{
-                return service.viesPerDificultat(format);
-            }
-            catch (Exception e ){
-                System.out.println(e);
-                return null;
-            }
-    }*/
+
+
+    public List<Via> viesPerDificultat(String format){
+        try{
+            return service.viesPerDificultat(format);
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+
+
+    public List<Via> viesPerEstatTancada(){
+        try{
+            return service.viesPerEstatTancat();
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+    public List<Via> viesPerEstatApte(){
+        try{
+            return service.viesPerEstatApte();
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
+    }
+
+
+    public List<Via> mostrarViesLlargues(int escola){
+        try{
+            return service.mostrarViesLlargues(escola);
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
+    }
+
 }

@@ -78,4 +78,9 @@ public EscaladorController(EscaladorService s){this.dao = s;}
     }
 
     }
+
+    public List<Escalador> escaladorsEqNivell(){
+        return dao.escaladorsEqNivell();
+    }
+
 }

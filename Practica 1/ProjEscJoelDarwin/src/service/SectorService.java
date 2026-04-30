@@ -118,4 +118,10 @@ public class SectorService {
 
         return lista;
     }
+
+    public List<Sector> sectorViesDisponibles ( int quantitat) throws Exception{
+        if(quantitat < 0 ) throw new Exception("INCORRECTE");
+        return sectorDAO.sectorViesDisponibles(quantitat);
+    }
+
 }
