@@ -15,7 +15,7 @@ public class ViaController {
         this.service = service;
     }
 
-    // LISTAR TODAS
+    // LISTAR TODASgit revert <hash_del_commit>
     public void listar() {
         try {
             List<Via> lista = service.obtenerTodos();
