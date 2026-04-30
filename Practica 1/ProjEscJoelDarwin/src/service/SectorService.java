@@ -3,7 +3,9 @@ package service;
 import dao.interfaces.SectorDAO;
 import model.entity.Escola;
 import model.entity.Sector;
+import model.entity.Via;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SectorService {
@@ -102,5 +104,10 @@ public class SectorService {
         }
 
         return escola;
+    }
+
+    public List<Sector> sectorViesDisponibles ( int quantitat) throws Exception{
+         if(quantitat < 0 ) throw new Exception("INCORRECTE");
+         return sectorDAO.sectorViesDisponibles(quantitat);
     }
 }

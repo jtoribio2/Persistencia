@@ -23,4 +23,5 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     //METODOS  PROPIOS
     void eliminarDni(String dni);
     Escalador obtenirPerDni (String dni);
+    List<Escalador> escaladorsEqNivell();
 }

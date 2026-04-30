@@ -4,6 +4,7 @@ import model.entity.Escola;
 import model.entity.Sector;
 import service.SectorService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SectorController {
@@ -81,5 +82,15 @@ public class SectorController {
 
     public Escola mostrarEscola(int idSector) {
         return  service.buscarEscola(idSector);
+    }
+
+    public List<Sector> sectorViesDisponibles ( int quantitat) {
+        try {
+            return service.sectorViesDisponibles(quantitat);
+        }
+        catch (Exception e ){
+            System.out.println(e);
+            return null;
+        }
     }
 }

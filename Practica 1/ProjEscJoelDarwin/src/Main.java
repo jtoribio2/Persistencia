@@ -6,7 +6,9 @@ import dao.interfaces.SectorDAO;
 import dao.interfaces.ViaDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
+import model.entity.Escalador;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 import service.SectorService;
 
@@ -36,8 +38,14 @@ public class Main {
         List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
         for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
         for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
-
+        //MOSTRAR VIAS LARGUES DEUN A ESCOLA ESPECIFICA
         List<Via> llargues = AppConfig.getViaController().mostrarViesLlargues(1);
         for(Via v : llargues){System.out.println("NOM: "+ v.getNom());}
+        // SECTOR Me muestra las vias correctamente
+        List<Sector> ViasDisponibles = AppConfig.getSectorController().sectorViesDisponibles(1);
+        for(Sector s : ViasDisponibles){System.out.println(s.getNom());}
+
+        List<Escalador> escaladors = AppConfig.getEscaladorController().escaladorsEqNivell();
+        for(Escalador e : escaladors){System.out.println(e.getNom());}
     }
 }

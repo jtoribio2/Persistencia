@@ -217,4 +217,57 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return null;
     }
+    //BUSCAR SECTORES QUE TENGAN MAS DE X VIAS DISPONIBLES
+    //REUTILIZE UNA CONSULTA QUE BUSCA LAS VIAS DISPONIBLES TENIENDO EN CUENTAS LAS RESTRICCIONES YA PASSADAS/CADUCADAS
+    @Override
+    public List<Sector>  sectorViesDisponibles (int quantitatVies){
+        List<Sector> aptes = new ArrayList<>();
+        String sql = """
+                SELECT  s.* , COUNT(*)  AS vies
+                FROM sectors s
+                INNER JOIN (
+                SELECT *
+                FROM vies
+                WHERE id_via NOT IN (
+                    SELECT d.id_via
+                    FROM disponibilitats d
+                )
+                OR id_via IN (
+                    SELECT d1.id_via
+                    FROM disponibilitats d1
+                    WHERE NOW() > d1.final 
+                )
+                ) vies_disponibles ON   vies_disponibles.id_sector = s.id_sector
+                GROUP BY    vies_disponibles.id_sector
+                HAVING vies > ?;
+                """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, quantitatVies);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+
+                    Sector sector =   new Sector(
+                   rs.getInt("s.id_sector"),
+                            rs.getInt("s.id_escola"),
+                            rs.getString("s.nom"),
+                            rs.getFloat("s.latitut"),
+                            rs.getFloat("s.longitut"),
+                            rs.getString("s.aproximacio"),
+                            rs.getInt("s.popularitat")
+                    );
+
+                    aptes.add(sector);
+                }
+                return  aptes;
+            }
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException("Error obteniendo escola del sector", e);
+        }
+    }
 }

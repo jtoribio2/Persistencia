@@ -118,7 +118,9 @@ public class EscaladorService  {
         escaladorDao.modificar(e);
     }
 
-
+    public List<Escalador> escaladorsEqNivell(){
+        return escaladorDao.escaladorsEqNivell();
+    }
 
 }
 
