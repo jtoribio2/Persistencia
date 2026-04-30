@@ -6,19 +6,16 @@ import dao.interfaces.SectorDAO;
 import dao.interfaces.ViaDAO;
 import db.ConnectionFactory;
 import db.ConnectionProvider;
-import model.entity.Escalador;
 import model.entity.Escola;
-import model.entity.Sector;
 import model.entity.Via;
 import service.SectorService;
-
-import java.util.List;
-
+import model.entity.*;
+import  java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Via via= new Via(
-                50,          // 🔥 se ignora (auto_increment)
+                50,          // se ignora (auto_increment)
                 6,          // id_sector
                 2,          // tipo GEL
                 "Via4",
@@ -32,10 +29,13 @@ public class Main {
         AppConfig.getSectorController().buscarPorNombre("Sector A");
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
-        AppConfig.getViaController().crear(via);
+        AppConfig.getViaController().crear();
+        System.out.println("SE EJECUTA");
 
         List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
+
         List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
+
         for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
         for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
         //MOSTRAR VIAS LARGUES DEUN A ESCOLA ESPECIFICA
@@ -45,7 +45,10 @@ public class Main {
         List<Sector> ViasDisponibles = AppConfig.getSectorController().sectorViesDisponibles(1);
         for(Sector s : ViasDisponibles){System.out.println(s.getNom());}
 
+
         List<Escalador> escaladors = AppConfig.getEscaladorController().escaladorsEqNivell();
         for(Escalador e : escaladors){System.out.println(e.getNom());}
     }
+
 }
+

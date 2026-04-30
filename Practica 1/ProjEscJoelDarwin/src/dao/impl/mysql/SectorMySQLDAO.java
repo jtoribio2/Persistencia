@@ -217,41 +217,83 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return null;
     }
-    //BUSCAR SECTORES QUE TENGAN MAS DE X VIAS DISPONIBLES
-    //REUTILIZE UNA CONSULTA QUE BUSCA LAS VIAS DISPONIBLES TENIENDO EN CUENTAS LAS RESTRICCIONES YA PASSADAS/CADUCADAS
+
     @Override
-    public List<Sector>  sectorViesDisponibles (int quantitatVies){
-        List<Sector> aptes = new ArrayList<>();
-        String sql = """
-                SELECT  s.* , COUNT(*)  AS vies
-                FROM sectors s
-                INNER JOIN (
-                SELECT *
-                FROM vies
-                WHERE id_via NOT IN (
-                    SELECT d.id_via
-                    FROM disponibilitats d
-                )
-                OR id_via IN (
-                    SELECT d1.id_via
-                    FROM disponibilitats d1
-                    WHERE NOW() > d1.final 
-                )
-                ) vies_disponibles ON   vies_disponibles.id_sector = s.id_sector
-                GROUP BY    vies_disponibles.id_sector
-                HAVING vies > ?;
-                """;
+    public List<Sector> buscarPorEscola(int idEscola) {
+
+        List<Sector> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM sectors WHERE id_escola = ?";
 
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
+            ps.setInt(1, idEscola);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    Sector s = new Sector(
+                            rs.getInt("id_sector"),
+                            rs.getInt("id_escola"),
+                            rs.getString("nom"),
+                            rs.getFloat("latitut"),
+                            rs.getFloat("longitut"),
+                            rs.getString("aproximacio"),
+                            rs.getInt("popularitat")
+                    );
+
+                    lista.add(s);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sectores por escola", e);
+        }
+
+        return lista;
+    }
+
+    //BUSCAR SECTORES QUE TENGAN MAS DE X VIAS DISPONIBLES
+//REUTILIZE UNA CONSULTA QUE BUSCA LAS VIAS DISPONIBLES TENIENDO EN CUENTAS LAS RESTRICCIONES YA PASSADAS/CADUCADAS
+    @Override
+    public List<Sector>  sectorViesDisponibles (int quantitatVies){
+        List<Sector> aptes = new ArrayList<>();
+        String sql = """
+           SELECT  s.* , COUNT(*)  AS vies
+           FROM sectors s
+           INNER JOIN (
+           SELECT *
+           FROM vies
+           WHERE id_via NOT IN (
+               SELECT d.id_via
+               FROM disponibilitats d
+           )
+           OR id_via IN (
+               SELECT d1.id_via
+               FROM disponibilitats d1
+               WHERE NOW() > d1.final
+           )
+           ) vies_disponibles ON   vies_disponibles.id_sector = s.id_sector
+           GROUP BY    vies_disponibles.id_sector
+           HAVING vies > ?;
+           """;
+
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+
             ps.setInt(1, quantitatVies);
+
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
 
+
                     Sector sector =   new Sector(
-                   rs.getInt("s.id_sector"),
+                            rs.getInt("s.id_sector"),
                             rs.getInt("s.id_escola"),
                             rs.getString("s.nom"),
                             rs.getFloat("s.latitut"),
@@ -260,14 +302,18 @@ public class SectorMySQLDAO implements SectorDAO {
                             rs.getInt("s.popularitat")
                     );
 
+
                     aptes.add(sector);
                 }
                 return  aptes;
             }
 
+
         } catch (SQLException e) {
+
 
             throw new RuntimeException("Error obteniendo escola del sector", e);
         }
     }
+
 }

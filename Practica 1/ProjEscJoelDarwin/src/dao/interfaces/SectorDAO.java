@@ -25,5 +25,8 @@ public interface SectorDAO extends Dao<Sector,Integer> {
     List<Sector> sectorViesDisponibles(int num);
     Escola buscarEscola(int idSector);
 
+    List<Sector> buscarPorEscola(int idEscola);
+
+    List<Sector> sectorViesDisponibles(int num);
 
 }

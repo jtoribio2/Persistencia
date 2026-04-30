@@ -122,6 +122,7 @@ public class EscaladorService  {
         return escaladorDao.escaladorsEqNivell();
     }
 
+
 }
 
 

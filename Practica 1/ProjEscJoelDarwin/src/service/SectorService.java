@@ -3,9 +3,7 @@ package service;
 import dao.interfaces.SectorDAO;
 import model.entity.Escola;
 import model.entity.Sector;
-import model.entity.Via;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SectorService {
@@ -106,8 +104,24 @@ public class SectorService {
         return escola;
     }
 
-    public List<Sector> sectorViesDisponibles ( int quantitat) throws Exception{
-         if(quantitat < 0 ) throw new Exception("INCORRECTE");
-         return sectorDAO.sectorViesDisponibles(quantitat);
+    public List<Sector> buscarPorEscola(int idEscola) {
+
+        if (idEscola <= 0) {
+            throw new RuntimeException("ID de escola inválido");
+        }
+
+        List<Sector> lista = sectorDAO.buscarPorEscola(idEscola);
+
+        if (lista.isEmpty()) {
+            System.out.println("No hay sectores para esta escola");
+        }
+
+        return lista;
     }
+
+    public List<Sector> sectorViesDisponibles ( int quantitat) throws Exception{
+        if(quantitat < 0 ) throw new Exception("INCORRECTE");
+        return sectorDAO.sectorViesDisponibles(quantitat);
+    }
+
 }

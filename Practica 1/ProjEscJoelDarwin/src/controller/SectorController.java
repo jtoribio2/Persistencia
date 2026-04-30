@@ -4,7 +4,6 @@ import model.entity.Escola;
 import model.entity.Sector;
 import service.SectorService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SectorController {
@@ -93,4 +92,5 @@ public class SectorController {
             return null;
         }
     }
+
 }

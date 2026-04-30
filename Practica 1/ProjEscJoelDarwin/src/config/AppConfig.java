@@ -84,7 +84,7 @@ public class AppConfig {
             new ViaService(viaDAO);
 
     private static final ViaController viaController =
-            new ViaController(viaService);
+            new ViaController(viaService, sectorService, escolaService);
 
     public static ViaController getViaController() {
         return viaController;

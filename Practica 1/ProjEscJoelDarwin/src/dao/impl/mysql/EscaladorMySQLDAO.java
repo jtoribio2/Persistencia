@@ -190,21 +190,23 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
     public List<Escalador> escaladorsEqNivell(){
         List<Escalador> escaladors = new ArrayList<>();
         String SQL = """
-                SELECT e.*
-                FROM escaladors e
-                INNER JOIN escaladors_vies ev ON ev.id_escalador = e.id_escalador
-                INNER JOIN vies v ON v.id_via = ev.id_via
-                GROUP BY e.id_escalador
-                HAVING MAX(v.dificultat) = (
-                SELECT MAX(v2.dificultat)
-                FROM escaladors_vies ev2
-                INNER JOIN vies v2 ON v2.id_via = ev2.id_via
-                );
-                """;
+           SELECT e.*
+           FROM escaladors e
+           INNER JOIN escaladors_vies ev ON ev.id_escalador = e.id_escalador
+           INNER JOIN vies v ON v.id_via = ev.id_via
+           GROUP BY e.id_escalador
+           HAVING MAX(v.dificultat) = (
+           SELECT MAX(v2.dificultat)
+           FROM escaladors_vies ev2
+           INNER JOIN vies v2 ON v2.id_via = ev2.id_via
+           );
+           """;
+
 
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(SQL);
              ResultSet rs = ps.executeQuery()) {
+
 
             while (rs.next()) {
                 escaladors.add(map(rs));
