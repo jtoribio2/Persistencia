@@ -30,7 +30,7 @@ src/
 ├── dao/
 │   ├── impl.mysql/ # Implementació dels DAOs amb MySQL
 │   └── interfaces/ # Interfícies dels DAOs
-├── db/             # Plantilles com 
+├── db/             # Plantilles de credenacials de la bd...
 ├── lib/            # Controladors JDBC dels BDs
 ├── model.entity/   # Entitats del model de dades
 ├── service/        # Capa de serveis
