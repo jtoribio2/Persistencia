@@ -181,4 +181,7 @@ public class ViaService {
         return viaDAO.mostrarViesLlargues(escola);
     }
 
+    public List<Via> viesAptesRecent(){
+        return viaDAO.viasAptesRecent();
+    }
 }

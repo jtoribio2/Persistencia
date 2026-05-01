@@ -302,11 +302,12 @@ public class ViaMySQLDAO implements ViaDAO {
     public List<Via>viesPerDificultat(String dades){
         List <Via> llista = new ArrayList<>();
         String SQL = """
-        SELECT  * 
-        FROM vies v
-        INNER JOIN sectors s ON s.id_sector = v.id_sector
-        INNER JOIN escoles e ON e.id_escola = s.id_escola
-        WHERE v.dificultat BETWEEN ? AND ?
+                SELECT  *
+                FROM vies v
+                INNER JOIN sectors s ON s.id_sector = v.id_sector
+                INNER JOIN escoles e ON e.id_escola = s.id_escola
+                WHERE v.dificultat BETWEEN ? AND ?
+                ORDER BY v.id_via;
     """;
 
         try (Connection conn = provider.getConnection();
@@ -343,18 +344,15 @@ public class ViaMySQLDAO implements ViaDAO {
     public  List<Via> viesPerEstatApte(){
         List<Via> aptes = new ArrayList<>();
         String sql = """
-       SELECT *
-       FROM vies
-       WHERE id_via NOT IN (
-            SELECT d.id_via
-            FROM disponibilitats d
-            )
-            OR id_via IN (
-             SELECT d1.id_via
-             FROM disponibilitats d1
-             WHERE NOW() > d1.final
-                   );
-   """;
+                SELECT  *
+                FROM vies
+                WHERE id_via NOT IN (SELECT d.id_via
+                FROM disponibilitats d
+                ) OR id_via IN (SELECT d1.id_via
+                FROM disponibilitats d1
+                WHERE NOW() NOT BETWEEN d1.inici AND d1.final)
+                ORDER BY id_via;
+                """;
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
         ){
@@ -366,7 +364,7 @@ public class ViaMySQLDAO implements ViaDAO {
             return aptes;
         }
         catch (SQLException e ){
-            System.out.println("ERRROR");
+            System.out.println("ERROR");
             return null;
         }
 
@@ -440,21 +438,35 @@ public class ViaMySQLDAO implements ViaDAO {
         }
     }
 
-/*
-    private Via mapParemetre(ResultSet rs) throws SQLException {
+    @Override
+   public  List<Via> viasAptesRecent(){
+        List<Via> viesRecent = new ArrayList<>();
+        //VIAS QUE HAN PASSAT A SER APTES RECIENTMENT
+        String SQL =
+                """
+                SELECT v.*
+                FROM vies v
+                INNER JOIN disponibilitats d ON d.id_via = v.id_via
+                WHERE DATEDIFF(NOW(), d.final) <= 7
+                AND d.final <= CURDATE()
+                ORDER BY d.final DESC;
+                """;
 
-        return new Via(
-                rs.getInt("id_via"),
-                rs.getInt("id_sector"),
-                rs.getInt("id_tipus_via"),
-                rs.getString("nom"),
-                rs.getInt("llargada"),
-                rs.getString("dificultat"),
-                rs.getString("orientacio"),
-                rs.getString("ancoratge"),
-                rs.getString("troca")
-        );
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+        ){
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    viesRecent.add(map(rs));
+                }
+            }
+            return viesRecent;
+        }
+        catch (SQLException e ){
+            System.out.println("ERROR");
+            return null;
+        }
     }
-    */
+
 
 }

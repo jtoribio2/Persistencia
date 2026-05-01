@@ -32,5 +32,6 @@ public interface ViaDAO extends Dao<Via,Integer>{
     List<Via> mostrarViesLlargues(int Escola);
     Sector buscarSector(Via via);
 
+    List<Via> viasAptesRecent();
     Escola buscarEscola(Via via);
 }

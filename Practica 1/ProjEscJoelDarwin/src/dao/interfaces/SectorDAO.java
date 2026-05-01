@@ -22,11 +22,9 @@ public interface SectorDAO extends Dao<Sector,Integer> {
 
     Sector  obtenir (Integer id);
     //METODOS  PROPIOS
-    List<Sector> sectorViesDisponibles(int num);
     Escola buscarEscola(int idSector);
 
     List<Sector> buscarPorEscola(int idEscola);
 
     List<Sector> sectorViesDisponibles(int num);
-
 }

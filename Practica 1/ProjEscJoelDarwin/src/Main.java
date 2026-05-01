@@ -25,19 +25,20 @@ public class Main {
                 "Reunión",
                 "No"
         );
-
+        /*
         AppConfig.getSectorController().buscarPorNombre("Sector A");
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
         AppConfig.getViaController().crear();
         System.out.println("SE EJECUTA");
-
+*/
         List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
 
         List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
 
         for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
         for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
+
         //MOSTRAR VIAS LARGUES DEUN A ESCOLA ESPECIFICA
         List<Via> llargues = AppConfig.getViaController().mostrarViesLlargues(1);
         for(Via v : llargues){System.out.println("NOM: "+ v.getNom());}
@@ -48,7 +49,12 @@ public class Main {
 
         List<Escalador> escaladors = AppConfig.getEscaladorController().escaladorsEqNivell();
         for(Escalador e : escaladors){System.out.println(e.getNom());}
+
+        List<Via> viasRecent = AppConfig.getViaController().viesAptesRecent();
+        for(Via v : viasRecent){System.out.println(v.getNom());}
+
     }
+
 
 }
 

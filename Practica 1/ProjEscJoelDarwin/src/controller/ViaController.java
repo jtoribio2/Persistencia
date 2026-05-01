@@ -224,4 +224,7 @@ public class ViaController {
         }
     }
 
+    public List<Via> viesAptesRecent(){
+        return service.viesAptesRecent();
+    }
 }

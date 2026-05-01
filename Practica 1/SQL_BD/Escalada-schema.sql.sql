@@ -129,10 +129,3 @@ SELECT
 FROM sectors s
 LEFT JOIN vies v ON s.id_sector = v.id_sector
 GROUP BY s.id_sector, s.nom;
-
-
-
-
-
-
-
