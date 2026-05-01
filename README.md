@@ -37,5 +37,5 @@ src/
 └── Main.java       # Punt d'entrada de l'aplicació
 ```
 
-## Diagrama relacional 
+## Diagrama  Diagrama Entitat-Relació 
 ![alt text](./Practica%201/DIA/Diagrama1.png)
