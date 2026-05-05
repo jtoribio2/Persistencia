@@ -2,11 +2,13 @@ package dao.interfaces;
 
 
 import model.entity.Escola;
+import model.entity.Via;
+
 import java.util.List;
 public interface EscolaDAO extends Dao<Escola,Integer> {
 
     @Override
-   public  void inserir(Escola o);
+    public void inserir(Escola o);
 
     @Override
     void modificar(Escola o);
@@ -17,11 +19,12 @@ public interface EscolaDAO extends Dao<Escola,Integer> {
     @Override
     List<Escola> obtindreTots();
 
-    Escola  obtenir (Integer id);
+    Escola obtenir(Integer id);
     //METODOS  PROPIOS
 
-    boolean isGel(Escola o );
+    boolean isGel(Escola o);
 
     List<Escola> escolesDisponibles();
 
+    List<Via> viesDisponibles(Escola es);
 }

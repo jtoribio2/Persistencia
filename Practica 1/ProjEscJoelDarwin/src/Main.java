@@ -14,7 +14,7 @@ import  java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Via via = new Via(
+        Via via= new Via(
                 50,          // se ignora (auto_increment)
                 6,          // id_sector
                 2,          // tipo GEL
@@ -31,7 +31,8 @@ public class Main {
         System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
         AppConfig.getViaController().crear();
         System.out.println("SE EJECUTA");
-
+*/
+        /*
         List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
 
         List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
@@ -52,11 +53,12 @@ public class Main {
 
         List<Via> viasRecent = AppConfig.getViaController().viesAptesRecent();
         for(Via v : viasRecent){System.out.println(v.getNom());}
-
-    }
 */
-        System.out.println(AppConfig.getViaController().viesDisponibles(AppConfig.getEscolaController().getEscola(1)));
 
+      //  System.out.println(AppConfig.getViaController().viesDisponibles(AppConfig.getEscolaController().getEscola(1)));
+    AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
     }
+
+
 }
 

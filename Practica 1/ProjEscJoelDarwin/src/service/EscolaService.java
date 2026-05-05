@@ -2,6 +2,7 @@ package service;
 
 import dao.interfaces.EscolaDAO;
 import model.entity.Escola;
+import model.entity.Via;
 
 import java.util.List;
 
@@ -93,6 +94,14 @@ public class EscolaService {
     public List<Escola> escolesDisponibles(){
         List<Escola> escoles = escoladao.escolesDisponibles();
         return escoles;
+    }
+
+
+    public List<Via> viasDisponibles(Escola es) throws Exception{
+        if(es == null) throw new Exception("ERROR");
+        List<Via> viaD = escoladao.viesDisponibles(es);
+
+        return viaD;
     }
 }
 
