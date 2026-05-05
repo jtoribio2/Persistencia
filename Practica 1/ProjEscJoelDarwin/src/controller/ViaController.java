@@ -155,6 +155,7 @@ public class ViaController {
     }
 
     //LISTAR VIAS DISPONIBLES
+    /*
     public String viesDisponibles(Escola e ){
         try {
             String missatge = service.viesDisponibles(e);
@@ -165,7 +166,7 @@ public class ViaController {
             return null;
         }
     }
-
+*/
     public Sector mostrarSector(Via via) {
         Sector s = service.buscarSector(via);
         return s;

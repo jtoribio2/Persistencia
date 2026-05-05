@@ -135,10 +135,10 @@ public class ViaService {
 
         return lista;
     }
-
+/*
     public String viesDisponibles(Escola e ) throws Exception{
         return viaDAO.viesDisponibles(e);
-    }
+    }*/
 
     public Sector buscarSector(Via via) {
 
