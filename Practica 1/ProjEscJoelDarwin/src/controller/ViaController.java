@@ -37,6 +37,9 @@ public class ViaController {
     }
 
     // BUSCAR POR NOMBRE
+    /**
+     * @param nombre
+     * **/
     public void buscarPorNombre(String nombre) {
         try {
             List<Via> lista = service.buscarPorNombre(nombre);
@@ -47,7 +50,9 @@ public class ViaController {
     }
 
     // CREAR
-
+    /**
+     * Funcio que permet crear Via controller
+     * **/
     public void crear() {
         // enseñamos las escolas y el usuario elije una para meter la via
         List<Escola> escolas = escolaService.obtenerTodos();
@@ -120,6 +125,10 @@ public class ViaController {
     }
 
     // eliminar
+    /**
+     * Metode que elimina amb id
+     * @param id
+     * **/
     public void eliminar(int id) {
         try {
             service.eliminar(id);
@@ -131,6 +140,10 @@ public class ViaController {
     }
 
     // MODIFICAR
+    /**
+     * Metode que modifica vies
+     * @param v
+     * **/
     public void modificar(Via v) {
         try {
             service.modificar(v);
@@ -142,6 +155,10 @@ public class ViaController {
     }
 
     // BUSCAR POR ID
+    /**
+     * Metode per obtindre per id
+     * @param id
+     * **/
     public void obtenerPorId(int id) {
         try {
             Via v = service.obtenerPorId(id);
@@ -167,16 +184,28 @@ public class ViaController {
         }
     }
 */
+  /**
+   * @param via Via
+   * @return Retornar sector
+   * **/
     public Sector mostrarSector(Via via) {
         Sector s = service.buscarSector(via);
         return s;
     }
-
+/**
+ * @param  via Via
+ * @return retorna una Escola en Especifica
+ * **/
     public Escola mostrarEscola(Via via) {
         Escola e = service.buscarEscola(via);
         return e;
     }
     // rango (6a 9a)
+    /**
+    Parametre EX:  rango (6a 9a) *
+     @param format String
+
+     * **/
     public void viesPerDificultat(String format){
         try{
             List<Via> viesperdif = service.viesPerDificultat(format);
@@ -191,40 +220,64 @@ public class ViaController {
 
 
 
-
-    public List<Via> viesPerEstatTancada(){
+/**
+ * Mostra el nom de les vies
+ * **/
+    public void  viesPerEstatTancada(){
         try{
-            return service.viesPerEstatTancat();
+           List<Via> vias = service.viesPerEstatTancat();
+           for(Via v : vias){
+               System.out.println(v.getNom());
+           }
         }
         catch (Exception e ){
             System.out.println(e);
-            return null;
         }
     }
 
-
-    public List<Via> viesPerEstatApte(){
+/**
+ * Vias que son aptes
+ * **/
+    public void  viesPerEstatApte(){
         try{
-            return service.viesPerEstatApte();
+            List<Via> via =  service.viesPerEstatApte();
+            for(Via v : via){
+                System.out.println(v.getNom());
+            }
         }
         catch (Exception e ){
             System.out.println(e);
-            return null;
         }
     }
 
-
-    public List<Via> mostrarViesLlargues(int escola){
+/**
+ * Mostrar vias llargues
+ * @param escola INT id
+ * **/
+    public void mostrarViesLlargues(int escola){
         try{
-            return service.mostrarViesLlargues(escola);
+            List<Via> via = service.mostrarViesLlargues(escola);
+            for(Via v : via){
+                System.out.println(v.getNom());
+            }
         }
         catch (Exception e ){
             System.out.println(e);
-            return null;
+
         }
     }
-
-    public List<Via> viesAptesRecent(){
-        return service.viesAptesRecent();
+/**
+ * Retornar vies ates
+ * **/
+    public void viesAptesRecent(){
+        try {
+            List<Via> via = service.viesAptesRecent();
+            for(Via vias : via){
+                System.out.println(vias.getNom());
+            }
+        }
+        catch (Exception e ){
+            System.out.println(e);
+        }
     }
 }
