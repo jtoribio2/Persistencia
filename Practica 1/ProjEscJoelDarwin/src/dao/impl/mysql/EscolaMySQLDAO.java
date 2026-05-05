@@ -5,6 +5,8 @@ import dao.interfaces.EscolaDAO;
 
 import db.ConnectionProvider;
 import model.entity.Escola;
+import model.entity.Via;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -240,7 +242,53 @@ public class EscolaMySQLDAO implements EscolaDAO {
             return null;
         }
     }
+    @Override
+    public List<Via> viesDisponibles(Escola es ) {
+        List<Via> vies = new ArrayList<>();
+        final String SQL =
+                """
+                SELECT  v.*
+                FROM vies v
+                INNER JOIN  sectors s ON s.id_sector = v.id_sector
+                WHERE s.id_escola  = ? AND (
+                id_via NOT IN (SELECT d.id_via
+                FROM disponibilitats d
+                ) OR id_via IN (
+                SELECT d1.id_via
+                FROM disponibilitats d1
+                WHERE NOW() NOT BETWEEN d1.inici AND d1.final)
+                );  
+                """;
 
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL);
+        ) {
+            ps.setInt(1, es.getId_escola());
+
+            //ALMACENAR LOS VALORES EN LAS VARIABLES
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Via via = new Via(
+                            rs.getInt("v.id_via"),
+                            rs.getInt("v.id_sector"),
+                            rs.getInt("v.id_tipus_via"),
+                            rs.getString("v.nom"),
+                            rs.getInt("v.llargada"),
+                            rs.getString("v.dificultat"),
+                            rs.getString("v.orientacio"),
+                            rs.getString("v.ancoratge"),
+                            rs.getString("v.troca")
+                    );
+                    vies.add(via);
+                }
+                return vies;
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo vias", e);
+        }
+    }
 }
 
 

@@ -22,7 +22,7 @@ public interface ViaDAO extends Dao<Via,Integer>{
     List<Via> buscarPorNombre(String nombre);
 
     //AQUI PONDRE EL METODO QUE MUETRAS LAS VIAS DISPONIBLES
-    String viesDisponibles(Escola es);
+   // String viesDisponibles(Escola es);
     //TODO: Pensar si ha que crar una tabla
     List<Via>viesPerDificultat(String d);
 

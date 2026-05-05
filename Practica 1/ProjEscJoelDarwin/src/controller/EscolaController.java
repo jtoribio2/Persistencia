@@ -1,6 +1,7 @@
 package controller;
 
 import model.entity.Escola;
+import model.entity.Via;
 import service.EscolaService;
 
 
@@ -71,4 +72,16 @@ public List<Escola> escolesDisponibles(){
         return service2.escolesDisponibles();
 }
 
+
+    public void viaDisponibles(Escola es  ){
+        try {
+            List<Via> via = service2.viasDisponibles(es);
+            for(Via v : via){
+                System.out.println(v.getNom());
+            }
+        }
+        catch (Exception e ){
+            System.out.println(e);
+        }
+    }
 }
