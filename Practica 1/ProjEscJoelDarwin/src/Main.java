@@ -55,7 +55,7 @@ public class Main {
 
     }
 */
-        System.out.println(AppConfig.getViaController().viesDisponibles(AppConfig.getEscolaController().getEscola(1)));
+AppConfig.getViaController().viesPerDificultat("5c 6a");
 
     }
 }

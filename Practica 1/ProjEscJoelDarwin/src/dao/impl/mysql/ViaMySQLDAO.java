@@ -307,7 +307,7 @@ public class ViaMySQLDAO implements ViaDAO {
                 INNER JOIN sectors s ON s.id_sector = v.id_sector
                 INNER JOIN escoles e ON e.id_escola = s.id_escola
                 WHERE v.dificultat BETWEEN ? AND ?
-                ORDER BY v.id_via;
+                ORDER BY v.dificultat;
     """;
 
         try (Connection conn = provider.getConnection();

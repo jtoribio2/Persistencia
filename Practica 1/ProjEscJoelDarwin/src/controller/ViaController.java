@@ -175,14 +175,16 @@ public class ViaController {
         Escola e = service.buscarEscola(via);
         return e;
     }
-
-    public List<Via> viesPerDificultat(String format){
+    // rango (6a 9a)
+    public void viesPerDificultat(String format){
         try{
-            return service.viesPerDificultat(format);
+            List<Via> viesperdif = service.viesPerDificultat(format);
+            for (int i = 0 ; i < viesperdif.size(); i++){
+                System.out.println(viesperdif.get(i));
+            }
         }
         catch (Exception e ){
             System.out.println(e);
-            return null;
         }
     }
 

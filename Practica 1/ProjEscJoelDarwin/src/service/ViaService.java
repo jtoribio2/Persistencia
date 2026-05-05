@@ -164,7 +164,7 @@ public class ViaService {
 
     public List<Via> viesPerDificultat(String dades) throws  Exception{
         if(dades.isBlank())throw new Exception("ERROR DADES NO INTROUIDES");
-      return   viaDAO.viesPerDificultat("dades");
+      return   viaDAO.viesPerDificultat(dades);
     }
 
 
