@@ -57,6 +57,11 @@ public class Main {
     }
 */
 AppConfig.getViaController().viesPerDificultat("5c 6a");
+AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
+AppConfig.getViaController().viesAptesRecent();
+        AppConfig.getViaController().viesAptesRecent();
+        AppConfig.getViaController().viesPerEstatApte();
+        AppConfig.getViaController().viesPerEstatTancada();
         //FHDSUHSEF
     }
 }

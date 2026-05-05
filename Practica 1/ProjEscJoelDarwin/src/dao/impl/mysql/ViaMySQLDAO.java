@@ -323,7 +323,7 @@ public class ViaMySQLDAO implements ViaDAO {
                 ) OR id_via IN (SELECT d1.id_via
                 FROM disponibilitats d1
                 WHERE NOW() NOT BETWEEN d1.inici AND d1.final)
-                ORDER BY id_via;
+                ORDER BY nom ASC;
                 """;
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
