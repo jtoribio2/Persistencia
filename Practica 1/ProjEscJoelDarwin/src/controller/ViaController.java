@@ -176,9 +176,6 @@ public class ViaController {
         return e;
     }
 
-    //todo implementarlo en el service
-
-
     public List<Via> viesPerDificultat(String format){
         try{
             return service.viesPerDificultat(format);
