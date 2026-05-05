@@ -53,12 +53,11 @@ public class Main {
 
         List<Via> viasRecent = AppConfig.getViaController().viesAptesRecent();
         for(Via v : viasRecent){System.out.println(v.getNom());}
-*/
 
-      //  System.out.println(AppConfig.getViaController().viesDisponibles(AppConfig.getEscolaController().getEscola(1)));
-    AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
     }
+*/
+AppConfig.getViaController().viesPerDificultat("5c 6a");
 
-
+    }
 }
 

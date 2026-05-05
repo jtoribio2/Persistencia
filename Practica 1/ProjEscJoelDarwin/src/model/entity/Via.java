@@ -34,7 +34,21 @@ public class Via {
         this.ancoratge = ancoratge;
         this.troca = troca;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Via{" +
+                "id_via=" + id_via +
+                ", id_sector=" + id_sector +
+                ", id_tipus_via=" + id_tipus_via +
+                ", nom='" + nom + '\'' +
+                ", llargada=" + llargada +
+                ", dificultat='" + dificultat + '\'' +
+                ", orientacio='" + orientacio + '\'' +
+                ", ancoratge='" + ancoratge + '\'' +
+                ", troca='" + troca + '\'' +
+                '}';
+    }
 
     public int getId_via() {
         return id_via;
@@ -108,3 +122,4 @@ public class Via {
         this.troca = troca;
     }
 }
+
