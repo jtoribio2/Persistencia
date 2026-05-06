@@ -2,6 +2,7 @@ package dao.impl.mysql;
 
 import dao.interfaces.ViaDAO;
 import db.ConnectionProvider;
+import model.dto.ViaPerDifDTO;
 import model.entity.*;
 
 import java.sql.*;
@@ -271,46 +272,53 @@ public class ViaMySQLDAO implements ViaDAO {
 
 
     @Override
-    public List<Via>viesPerDificultat(String dades){
-        List <Via> llista = new ArrayList<>();
+    public List<ViaPerDifDTO> viesPerDificultat(String dades)  {
+
+        List<ViaPerDifDTO> llista = new ArrayList<>();
+
         String SQL = """
-                SELECT  *
-                FROM vies v
-                INNER JOIN sectors s ON s.id_sector = v.id_sector
-                INNER JOIN escoles e ON e.id_escola = s.id_escola
-                WHERE v.dificultat BETWEEN ? AND ?
-                ORDER BY v.dificultat;
+        SELECT  
+            v.nom AS nom,
+            v.dificultat AS dif,
+            s.nom AS sector,
+            e.nom AS escola
+        FROM vies v
+        INNER JOIN sectors s ON s.id_sector = v.id_sector
+        INNER JOIN escoles e ON e.id_escola = s.id_escola
+        WHERE v.dificultat BETWEEN ? AND ?
+        ORDER BY v.dificultat;
     """;
 
         try (Connection conn = provider.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SQL);
-            ) {
-            String[] rangs = dades.split(" +");
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            String[] rangs = dades.trim().split("\\s+");
+
+            if (rangs.length != 2) {
+                throw new RuntimeException("Formato incorrecto. Ej: '5a 6b'");
+            }
+
             ps.setString(1, rangs[0]);
             ps.setString(2, rangs[1]);
+
             try (ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) {
-                Via vies = new Via(
-                        rs.getInt("v.id_via"),
-                        rs.getInt("v.id_sector"),
-                        rs.getInt("v.id_tipus_via"),
-                        rs.getString("v.nom"),
-                        rs.getInt("v.llargada"),
-                        rs.getString("v.dificultat"),
-                        rs.getString("v.orientacio"),
-                        rs.getString("v.ancoratge"),
-                        rs.getString("v.troca")
-                );
-                llista.add(vies);
-            }
-                return llista;
+
+                while (rs.next()) {
+                    ViaPerDifDTO vies = new ViaPerDifDTO(
+                            rs.getString("nom"),
+                            rs.getString("dif"),
+                            rs.getString("sector"),
+                            rs.getString("escola")
+                    );
+                    llista.add(vies);
+                }
             }
 
         } catch (SQLException e) {
-           // throw new RuntimeException("Error obteniendo vias", e);
-            return null;
+            throw new RuntimeException("Error obteniendo vias por dificultad", e);
         }
 
+        return llista;
     }
     @Override
     public  List<Via> viesPerEstatApte(){

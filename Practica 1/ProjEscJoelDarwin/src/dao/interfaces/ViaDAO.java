@@ -1,4 +1,5 @@
 package dao.interfaces;
+import model.dto.ViaPerDifDTO;
 import model.entity.Sector;
 import model.entity.Via;
 import java.util.List;
@@ -24,7 +25,7 @@ public interface ViaDAO extends Dao<Via,Integer>{
     //AQUI PONDRE EL METODO QUE MUETRAS LAS VIAS DISPONIBLES
    // String viesDisponibles(Escola es);
     //TODO: Pensar si ha que crar una tabla
-    List<Via>viesPerDificultat(String d);
+    List<ViaPerDifDTO>viesPerDificultat(String d);
 
 
     List<Via> viesPerEstatApte();

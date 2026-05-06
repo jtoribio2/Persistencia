@@ -3,6 +3,7 @@ package service;
 import config.AppConfig;
 import controller.SectorController;
 import dao.interfaces.ViaDAO;
+import model.dto.ViaPerDifDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
@@ -162,7 +163,7 @@ public class ViaService {
         return escola;
     }
 
-    public List<Via> viesPerDificultat(String dades) throws  Exception{
+    public List<ViaPerDifDTO> viesPerDificultat(String dades) throws  Exception{
         if(dades.isBlank())throw new Exception("ERROR DADES NO INTROUIDES");
       return   viaDAO.viesPerDificultat(dades);
     }

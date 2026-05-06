@@ -1,5 +1,6 @@
 package controller;
 
+import model.dto.ViaPerDifDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
@@ -208,7 +209,7 @@ public class ViaController {
      * **/
     public void viesPerDificultat(String format){
         try{
-            List<Via> viesperdif = service.viesPerDificultat(format);
+            List<ViaPerDifDTO> viesperdif = service.viesPerDificultat(format);
             for (int i = 0 ; i < viesperdif.size(); i++){
                 System.out.println(viesperdif.get(i));
             }
