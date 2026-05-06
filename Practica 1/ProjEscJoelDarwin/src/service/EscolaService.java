@@ -1,6 +1,7 @@
 package service;
 
 import dao.interfaces.EscolaDAO;
+import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
 
@@ -91,8 +92,8 @@ public class EscolaService {
         return   escoladao.isGel(o);
     }
 
-    public List<Escola> escolesDisponibles(){
-        List<Escola> escoles = escoladao.escolesDisponibles();
+    public List<EscolesRestricDTO> escolesDisponibles(){
+        List<EscolesRestricDTO> escoles = escoladao.escolesDisponibles();
         return escoles;
     }
 
