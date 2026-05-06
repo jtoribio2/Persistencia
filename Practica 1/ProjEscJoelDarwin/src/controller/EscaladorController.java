@@ -1,5 +1,6 @@
 package controller;
 
+import model.dto.EscaladorNivellDTO;
 import model.entity.Escalador;
  import service.EscaladorService;
 
@@ -79,8 +80,17 @@ public EscaladorController(EscaladorService s){this.dao = s;}
 
     }
 
-    public List<Escalador> escaladorsEqNivell(){
-        return dao.escaladorsEqNivell();
+    public void buscarPorNivel(String dni){
+            List<EscaladorNivellDTO> llista = dao.buscarPorNivell(dni);
+            if (llista.isEmpty()){
+                System.out.println("No hi han escaladors amb el mateix nivell que tu asolit o superior");
+            }
+            else {
+                for (int i = 0; i < llista.size(); i++) {
+                    System.out.println(llista.get(i));
+                }
+            }
+
     }
 
 }

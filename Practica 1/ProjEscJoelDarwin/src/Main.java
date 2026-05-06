@@ -14,7 +14,7 @@ import  java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        AppConfig.getEscolaController().escolesDisponibles();
+        AppConfig.getEscaladorController().buscarPorNivel("11111111A");
 
     }
 }
