@@ -12,9 +12,8 @@ import service.SectorService;
 import model.entity.*;
 import  java.util.*;
 
-public class Main {
+public class MainD {
     public static void main(String[] args) {
 
     }
 }
-
