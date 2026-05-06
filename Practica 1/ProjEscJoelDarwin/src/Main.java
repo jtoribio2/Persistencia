@@ -14,55 +14,7 @@ import  java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Via via= new Via(
-                50,          // se ignora (auto_increment)
-                6,          // id_sector
-                2,          // tipo GEL
-                "Via4",
-                30,
-                "WI4",
-                "N2",
-                "Reunión",
-                "No"
-        );
-        /*
-        AppConfig.getSectorController().buscarPorNombre("Sector A");
-        System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getEscolaController().getEscola(6)));
-        System.out.println(AppConfig.getEscolaController().isGel(AppConfig.getSectorController().mostrarEscola(via.getId_sector())));
-        AppConfig.getViaController().crear();
-        System.out.println("SE EJECUTA");
-*/
-        /*
-        List<Via> aptes = AppConfig.getViaController().viesPerEstatApte();
 
-        List<Via> tancat = AppConfig.getViaController().viesPerEstatTancada();
-
-        for(Via v : aptes){System.out.println("NOM: "+ v.getNom());}
-        for(Via v : tancat){System.out.println("NOM: "+ v.getNom());}
-
-        //MOSTRAR VIAS LARGUES DEUN A ESCOLA ESPECIFICA
-        List<Via> llargues = AppConfig.getViaController().mostrarViesLlargues(1);
-        for(Via v : llargues){System.out.println("NOM: "+ v.getNom());}
-        // SECTOR Me muestra las vias correctamente
-        List<Sector> ViasDisponibles = AppConfig.getSectorController().sectorViesDisponibles(1);
-        for(Sector s : ViasDisponibles){System.out.println(s.getNom());}
-
-
-        List<Escalador> escaladors = AppConfig.getEscaladorController().escaladorsEqNivell();
-        for(Escalador e : escaladors){System.out.println(e.getNom());}
-
-        List<Via> viasRecent = AppConfig.getViaController().viesAptesRecent();
-        for(Via v : viasRecent){System.out.println(v.getNom());}
-
-    }
-*/
-AppConfig.getViaController().viesPerDificultat("5c 6a");
-AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
-AppConfig.getViaController().viesAptesRecent();
-        AppConfig.getViaController().viesAptesRecent();
-        AppConfig.getViaController().viesPerEstatApte();
-        AppConfig.getViaController().viesPerEstatTancada();
-        //FHDSUHSEF
     }
 }
 
