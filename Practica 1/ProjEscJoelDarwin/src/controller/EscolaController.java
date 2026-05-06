@@ -69,14 +69,16 @@ catch (Exception e ){
 }
 
 }
-//todo acabar esto que no funciona
+
 public void escolesDisponibles(){
         List<EscolesRestricDTO> llista = service2.escolesDisponibles();
         if (llista.isEmpty()){
             System.out.println("No hi han Escoles amb restriccions disponimbles actualment");
         }
-        for (int i = 0 ; i>llista.size() ; i++){
-            System.out.println(llista.get(i));
+        else {
+            for (int i = 0; i < llista.size(); i++) {
+                System.out.println(llista.get(i));
+            }
         }
 }
 

@@ -3,6 +3,7 @@ package service;
 
 
 import dao.interfaces.EscaladorDAO;
+import model.dto.EscaladorNivellDTO;
 import model.entity.Escalador;
 
 import java.util.List;
@@ -118,8 +119,8 @@ public class EscaladorService  {
         escaladorDao.modificar(e);
     }
 
-    public List<Escalador> escaladorsEqNivell(){
-        return escaladorDao.escaladorsEqNivell();
+    public List<EscaladorNivellDTO> buscarPorNivell(String dni){
+        return escaladorDao.buscarPorNivel(dni);
     }
 
 

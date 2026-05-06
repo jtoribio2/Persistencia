@@ -221,7 +221,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         INNER JOIN sectors s ON s.id_escola = e.id_escola
         INNER JOIN vies v ON v.id_sector = s.id_sector
         INNER JOIN disponibilitats d ON d.id_via = v.id_via
-        WHERE NOW() BETWEEN d.inici AND d.final
+        WHERE CURDATE() BETWEEN d.inici AND d.final
     """;
 
         List<EscolesRestricDTO> escoles = new ArrayList<>();

@@ -1,4 +1,5 @@
 package dao.interfaces;
+import model.dto.EscaladorNivellDTO;
 import model.entity.Escalador;
 import java.util.List;
 
@@ -24,5 +25,5 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     void eliminarDni(String dni);
     Escalador obtenirPerDni (String dni);
 
-    List<Escalador> escaladorsEqNivell();
+    List<EscaladorNivellDTO> buscarPorNivel(String dni);
 }

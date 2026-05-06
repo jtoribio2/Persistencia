@@ -1,6 +1,7 @@
 package dao.impl.mysql;
 import dao.interfaces.*;
 import db.ConnectionProvider;
+import model.dto.EscaladorNivellDTO;
 import model.entity.Escalador;
 import model.entity.*;
 
@@ -187,34 +188,69 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
     }
 
     @Override
-    public List<Escalador> escaladorsEqNivell(){
-        List<Escalador> escaladors = new ArrayList<>();
-        String SQL = """
-           SELECT e.*
-           FROM escaladors e
-           INNER JOIN escaladors_vies ev ON ev.id_escalador = e.id_escalador
-           INNER JOIN vies v ON v.id_via = ev.id_via
-           GROUP BY e.id_escalador
-           HAVING MAX(v.dificultat) = (
-           SELECT MAX(v2.dificultat)
-           FROM escaladors_vies ev2
-           INNER JOIN vies v2 ON v2.id_via = ev2.id_via
-           );
-           """;
+    public List<EscaladorNivellDTO> buscarPorNivel(String dni) {
 
+        List<EscaladorNivellDTO> lista = new ArrayList<>();
+
+        String sql = """
+        SELECT 
+            e.nom,
+            e.edat,
+            MAX(v.dificultat) AS nivell_maxim
+
+        FROM escaladors e
+
+        INNER JOIN escaladors_vies ev
+            ON ev.id_escalador = e.id_escalador
+
+        INNER JOIN vies v
+            ON v.id_via = ev.id_via
+        
+        WHERE e.dni != ?
+
+        GROUP BY e.id_escalador
+
+        HAVING MAX(v.dificultat) >= (
+
+            SELECT MAX(v2.dificultat)
+
+            FROM escaladors esc
+
+            INNER JOIN escaladors_vies ev2
+                ON ev2.id_escalador = esc.id_escalador
+
+            INNER JOIN vies v2
+                ON v2.id_via = ev2.id_via
+
+            WHERE esc.dni = ? 
+        )
+    """;
 
         try (Connection conn = provider.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SQL);
-             ResultSet rs = ps.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
+            ps.setString(1, dni);
+            ps.setString(2, dni);
 
-            while (rs.next()) {
-                escaladors.add(map(rs));
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    EscaladorNivellDTO dto = new EscaladorNivellDTO(
+                            rs.getString("nom"),
+                            rs.getInt("edat"),
+                            rs.getString("nivell_maxim")
+                    );
+
+                    lista.add(dto);
+                }
             }
-            return escaladors;
+
         } catch (SQLException e) {
-            throw new RuntimeException("Error obteniendo sectores", e);
+            throw new RuntimeException("Error buscando escaladores por nivel", e);
         }
+
+        return lista;
     }
 
 
