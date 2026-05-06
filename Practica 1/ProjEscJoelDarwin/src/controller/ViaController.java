@@ -1,6 +1,7 @@
 package controller;
 
 import model.dto.ViaPerDifDTO;
+import model.dto.ViesAptRecentDTO;
 import model.dto.ViesPerEstatApteDTO;
 import model.dto.ViesPerEstatTancatDTO;
 import model.entity.Escola;
