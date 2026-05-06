@@ -1,6 +1,7 @@
 package dao.interfaces;
 
 
+import model.dto.EscolaDisponibleDTO;
 import model.entity.Escola;
 import model.entity.Via;
 
@@ -26,5 +27,5 @@ public interface EscolaDAO extends Dao<Escola,Integer> {
 
     List<Escola> escolesDisponibles();
 
-    List<Via> viesDisponibles(Escola es);
+    List<EscolaDisponibleDTO> viesDisponibles(Escola es);
 }
