@@ -5,7 +5,7 @@ import db.ConnectionProvider;
 import model.dto.ViaPerDifDTO;
 import model.dto.ViesAptRecentDTO;
 import model.entity.*;
-
+import model.dto.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -322,8 +322,8 @@ public class ViaMySQLDAO implements ViaDAO {
         return llista;
     }
     @Override
-    public  List<Via> viesPerEstatApte(){
-        List<Via> aptes = new ArrayList<>();
+    public  List<ViesPerEstatApteDTO> viesPerEstatApte(){
+        List<ViesPerEstatApteDTO> aptes = new ArrayList<>();
         String sql = """
                 SELECT  *
                 FROM vies
@@ -339,7 +339,15 @@ public class ViaMySQLDAO implements ViaDAO {
         ){
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    aptes.add(map(rs));
+                    ViesPerEstatApteDTO v = new ViesPerEstatApteDTO(
+                            rs.getString("nom"),
+                                    rs.getInt("llargada"),
+                                    rs.getString("dificultat"),
+                                    rs.getString("orientacio"),
+                                    rs.getString("ancoratge"),
+                                    rs.getString("troca")
+                    );
+                    aptes.add(v);
                 }
             }
             return aptes;
@@ -352,8 +360,8 @@ public class ViaMySQLDAO implements ViaDAO {
 
     }
     @Override
-    public List<Via> viesPerEstatTancat(){
-        List<Via> tancats = new ArrayList<>();
+    public List<ViesPerEstatTancatDTO> viesPerEstatTancat(){
+        List<ViesPerEstatTancatDTO> tancats = new ArrayList<>();
         String sql = """
       SELECT v.*, d.rao, d.inici,d.final
       FROM vies v
@@ -366,10 +374,17 @@ public class ViaMySQLDAO implements ViaDAO {
         ){
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    tancats.add(map(rs));
+                ViesPerEstatTancatDTO dto = new ViesPerEstatTancatDTO(
+                        rs.getString("v.nom"),
+                        rs.getString("d.rao"),
+                        rs.getString("d.inici"),
+                        rs.getString("d.final")
+                );
+                    tancats.add(dto);
                 }
+                return tancats;
             }
-            return tancats;
+
         }
         catch (SQLException e ){
             System.out.println("ERROR");
