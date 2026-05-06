@@ -1,6 +1,7 @@
 package service;
 
 import dao.interfaces.SectorDAO;
+import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 
@@ -119,7 +120,7 @@ public class SectorService {
         return lista;
     }
 
-    public List<Sector> sectorViesDisponibles ( int quantitat) throws Exception{
+    public List<SectorViaDispDTO> sectorViesDisponibles (int quantitat) throws Exception{
         if(quantitat < 0 ) throw new Exception("INCORRECTE");
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
