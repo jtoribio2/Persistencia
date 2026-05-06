@@ -4,6 +4,7 @@ package dao.impl.mysql;
 import dao.interfaces.EscolaDAO;
 
 import db.ConnectionProvider;
+import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
 
@@ -211,36 +212,39 @@ public class EscolaMySQLDAO implements EscolaDAO {
     }
 
     @Override
-    public List<Escola> escolesDisponibles(){
+    public List<EscolesRestricDTO> escolesDisponibles() {
+
         String sql = """
-        SELECT e.*
-        FROM  escoles e
+        SELECT DISTINCT e.nom AS nom, v.nom AS via, d.rao
+        FROM escoles e
         INNER JOIN sectors s ON s.id_escola = e.id_escola
         INNER JOIN vies v ON v.id_sector = s.id_sector
         INNER JOIN disponibilitats d ON d.id_via = v.id_via
-        WHERE d.inici >= NOW()    
-        """;
-        List<Escola> escoles = new ArrayList<>();
-        try(Connection conn = provider.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()){
-            while(rs.next()){
+        WHERE NOW() BETWEEN d.inici AND d.final
+    """;
 
-              Escola e = new Escola(rs.getInt("e.id_escola"),
-                      rs.getString("e.nom"),
-                      rs.getString("e.lloc"),
-                      rs.getString("e.aproximacio"),
-                      rs.getInt("e.popularitat")
-                      );
-              escoles.add(e);
+        List<EscolesRestricDTO> escoles = new ArrayList<>();
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                EscolesRestricDTO e = new EscolesRestricDTO(
+                        rs.getString("nom"),
+                        rs.getString("via"),
+                        rs.getString("rao")
+                );
+
+                escoles.add(e);
             }
-            return escoles;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo escoles disponibles", e);
         }
-        catch (SQLException e ){
-            System.out.println("Error ");
-            e.printStackTrace();
-            return null;
-        }
+
+        return escoles;
     }
     @Override
     public List<Via> viesDisponibles(Escola es ) {
