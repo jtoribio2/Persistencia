@@ -1,5 +1,6 @@
 package controller;
 
+import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
@@ -82,9 +83,9 @@ public void escolesDisponibles(){
 
     public void viaDisponibles(Escola es  ){
         try {
-            List<Via> via = service2.viasDisponibles(es);
-            for(Via v : via){
-                System.out.println(v.getNom());
+            List<EscolaDisponibleDTO> via = service2.viasDisponibles(es);
+            for(EscolaDisponibleDTO v : via){
+                System.out.println(v);
             }
         }
         catch (Exception e ){

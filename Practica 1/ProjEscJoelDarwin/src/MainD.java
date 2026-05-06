@@ -17,5 +17,7 @@ public class MainD {
         System.out.println("SE EJECUTA");
         AppConfig.getViaController().viesPerEstatTancada();
         AppConfig.getViaController().viesPerEstatApte();
+        AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
+        AppConfig.getViaController().mostrarViesLlargues(1);
     }
 }

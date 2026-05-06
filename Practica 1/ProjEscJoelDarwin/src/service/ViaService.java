@@ -178,7 +178,7 @@ public class ViaService {
         return viaDAO.viesPerEstatApte();
     }
 
-    public List<Via> mostrarViesLlargues(int escola) throws Exception{
+    public List<ViesLlarguesDTO> mostrarViesLlargues(int escola) throws Exception{
         if(escola < 0) throw new Exception("ID INCORRECTE");
         return viaDAO.mostrarViesLlargues(escola);
     }
