@@ -4,7 +4,7 @@ package dao.impl.mysql;
 import dao.interfaces.EscolaDAO;
 
 import db.ConnectionProvider;
-import model.dto.EscolaDisponibleDTO;
+import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
 
@@ -212,40 +212,43 @@ public class EscolaMySQLDAO implements EscolaDAO {
     }
 
     @Override
-    public List<Escola> escolesDisponibles(){
+    public List<EscolesRestricDTO> escolesDisponibles() {
+
         String sql = """
-        SELECT e.*
-        FROM  escoles e
+        SELECT DISTINCT e.nom AS nom, v.nom AS via, d.rao
+        FROM escoles e
         INNER JOIN sectors s ON s.id_escola = e.id_escola
         INNER JOIN vies v ON v.id_sector = s.id_sector
         INNER JOIN disponibilitats d ON d.id_via = v.id_via
-        WHERE d.inici >= NOW()    
-        """;
-        List<Escola> escoles = new ArrayList<>();
-        try(Connection conn = provider.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()){
-            while(rs.next()){
+        WHERE NOW() BETWEEN d.inici AND d.final
+    """;
 
-              Escola e = new Escola(rs.getInt("e.id_escola"),
-                      rs.getString("e.nom"),
-                      rs.getString("e.lloc"),
-                      rs.getString("e.aproximacio"),
-                      rs.getInt("e.popularitat")
-                      );
-              escoles.add(e);
+        List<EscolesRestricDTO> escoles = new ArrayList<>();
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+
+                EscolesRestricDTO e = new EscolesRestricDTO(
+                        rs.getString("nom"),
+                        rs.getString("via"),
+                        rs.getString("rao")
+                );
+
+                escoles.add(e);
             }
-            return escoles;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo escoles disponibles", e);
         }
-        catch (SQLException e ){
-            System.out.println("Error ");
-            e.printStackTrace();
-            return null;
-        }
+
+        return escoles;
     }
     @Override
-    public List<EscolaDisponibleDTO> viesDisponibles(Escola es ) {
-        List<EscolaDisponibleDTO> vies = new ArrayList<>();
+    public List<Via> viesDisponibles(Escola es ) {
+        List<Via> vies = new ArrayList<>();
         final String SQL =
                 """
                 SELECT  v.*
@@ -269,8 +272,18 @@ public class EscolaMySQLDAO implements EscolaDAO {
             //ALMACENAR LOS VALORES EN LAS VARIABLES
             try(ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    EscolaDisponibleDTO DTO = new EscolaDisponibleDTO(es.getNom(),rs.getString("v.nom"));
-                    vies.add(DTO);
+                    Via via = new Via(
+                            rs.getInt("v.id_via"),
+                            rs.getInt("v.id_sector"),
+                            rs.getInt("v.id_tipus_via"),
+                            rs.getString("v.nom"),
+                            rs.getInt("v.llargada"),
+                            rs.getString("v.dificultat"),
+                            rs.getString("v.orientacio"),
+                            rs.getString("v.ancoratge"),
+                            rs.getString("v.troca")
+                    );
+                    vies.add(via);
                 }
                 return vies;
             }
