@@ -4,16 +4,17 @@ import java.util.*;
 import Inputs.Input;
 import View.MenusView.*;
 import controller.Menus.Admin.AdminMenu;
-
+//  ENLAZAR MENUS  IGUAL CON LOS SUBMENUS
+//EL MENU PRINCIPAL PRIMERO REGUNTARA EL TIPO DE USUARIO
+//USUARIO(SOLO CONSULTARA COSAS NO CREARA NI NADA) Y EL ADMIN(ES EL QUE ADMINISTRARA LOS USUARIOS ESCALADOR,ESCOLES...)
 public class MainMenu {
-    public Scanner sc = new Scanner(System.in);
     String opcio = "";
-   //OBJETOS MENUS DONDE DE AHI SACAMOS LOS METODOS
+   //OBJETOS MENUS DONDE DE AHI SACAMOS LOS METODOS LO HICE A OBJETO PORQUE A FUTURO SE PODRIA CONFIURARLO EN HACER COSAS
     AdminMenu Admin = new AdminMenu();
     public MainMenu() {
 
     }
-
+//IMRIMR MENU
     public void PrintMenuMain() {
         do {
             MainMenuView.PrintMainMenu();
