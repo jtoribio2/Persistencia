@@ -14,6 +14,8 @@ import  java.util.*;
 
 public class MainD {
     public static void main(String[] args) {
-
+        System.out.println("SE EJECUTA");
+        AppConfig.getViaController().viesPerEstatTancada();
+        AppConfig.getViaController().viesPerEstatApte();
     }
 }

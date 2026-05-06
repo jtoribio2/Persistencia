@@ -4,7 +4,7 @@ import model.entity.Sector;
 import model.entity.Via;
 import java.util.List;
 import model.entity.Escola;
-
+import model.dto.*;
 public interface ViaDAO extends Dao<Via,Integer>{
     // METODOS GENERICOS
     @Override
@@ -28,8 +28,8 @@ public interface ViaDAO extends Dao<Via,Integer>{
     List<ViaPerDifDTO>viesPerDificultat(String d);
 
 
-    List<Via> viesPerEstatApte();
-    List<Via> viesPerEstatTancat();
+    List<ViesPerEstatApteDTO> viesPerEstatApte();
+    List<ViesPerEstatTancatDTO> viesPerEstatTancat();
     List<Via> mostrarViesLlargues(int Escola);
     Sector buscarSector(Via via);
 

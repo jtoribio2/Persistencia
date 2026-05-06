@@ -7,7 +7,7 @@ import model.dto.ViaPerDifDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
-
+import model.dto.*;
 import java.util.List;
 import java.util.Scanner;
 
@@ -169,11 +169,11 @@ public class ViaService {
     }
 
 
-    public List<Via> viesPerEstatTancat(){
+    public List<ViesPerEstatTancatDTO> viesPerEstatTancat(){
         return viaDAO.viesPerEstatTancat();
     }
 
-    public List<Via> viesPerEstatApte(){
+    public List<ViesPerEstatApteDTO> viesPerEstatApte(){
         return viaDAO.viesPerEstatApte();
     }
 
