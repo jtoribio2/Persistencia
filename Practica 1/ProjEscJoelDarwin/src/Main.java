@@ -14,7 +14,7 @@ import  java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        AppConfig.getSectorController().sectorViesDisponibles(2);
+        AppConfig.getViaController().viesAptesRecent(350);
 
     }
 }

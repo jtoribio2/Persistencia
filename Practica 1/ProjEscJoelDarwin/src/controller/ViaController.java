@@ -1,6 +1,7 @@
 package controller;
 
 import model.dto.ViaPerDifDTO;
+import model.dto.ViesAptRecentDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
@@ -270,11 +271,16 @@ public class ViaController {
 /**
  * Retornar vies ates
  * **/
-    public void viesAptesRecent(){
+    public void viesAptesRecent(int dia){
         try {
-            List<Via> via = service.viesAptesRecent();
-            for(Via vias : via){
-                System.out.println(vias.getNom());
+            List<ViesAptRecentDTO> via = service.viesAptesRecent(dia);
+            if (via.isEmpty()){
+                System.out.println("No hi ha vies que hagin pasat a disponible en els derrers " + dia + " dies" );
+            }
+            else {
+                for (int i = 0; i < via.size(); i++) {
+                    System.out.println(via.get(i));
+                }
             }
         }
         catch (Exception e ){
