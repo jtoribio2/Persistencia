@@ -1,5 +1,6 @@
 package dao.interfaces;
 
+import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import java.util.List;
@@ -26,5 +27,5 @@ public interface SectorDAO extends Dao<Sector,Integer> {
 
     List<Sector> buscarPorEscola(int idEscola);
 
-    List<Sector> sectorViesDisponibles(int num);
+    List<SectorViaDispDTO> sectorViesDisponibles(int num);
 }

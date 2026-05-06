@@ -2,6 +2,7 @@ package dao.impl.mysql;
 
 import dao.interfaces.SectorDAO;
 import db.ConnectionProvider;
+import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 
@@ -258,10 +259,10 @@ public class SectorMySQLDAO implements SectorDAO {
     //BUSCAR SECTORES QUE TENGAN MAS DE X VIAS DISPONIBLES
 //REUTILIZE UNA CONSULTA QUE BUSCA LAS VIAS DISPONIBLES TENIENDO EN CUENTAS LAS RESTRICCIONES YA PASSADAS/CADUCADAS
     @Override
-    public List<Sector>  sectorViesDisponibles (int quantitatVies){
-        List<Sector> aptes = new ArrayList<>();
+    public List<SectorViaDispDTO>  sectorViesDisponibles (int quantitatVies){
+        List<SectorViaDispDTO> aptes = new ArrayList<>();
         String sql = """
-           SELECT  s.* , COUNT(*)  AS vies
+           SELECT  s.nom AS nom , COUNT(*)  AS count
            FROM sectors s
            INNER JOIN (
            SELECT *
@@ -277,7 +278,7 @@ public class SectorMySQLDAO implements SectorDAO {
            )
            ) vies_disponibles ON   vies_disponibles.id_sector = s.id_sector
            GROUP BY    vies_disponibles.id_sector
-           HAVING vies > ?;
+           HAVING count >= ?;
            """;
 
 
@@ -292,14 +293,9 @@ public class SectorMySQLDAO implements SectorDAO {
                 while (rs.next()) {
 
 
-                    Sector sector =   new Sector(
-                            rs.getInt("s.id_sector"),
-                            rs.getInt("s.id_escola"),
-                            rs.getString("s.nom"),
-                            rs.getFloat("s.latitut"),
-                            rs.getFloat("s.longitut"),
-                            rs.getString("s.aproximacio"),
-                            rs.getInt("s.popularitat")
+                    SectorViaDispDTO sector =   new SectorViaDispDTO(
+                            rs.getString("nom"),
+                            rs.getInt("count")
                     );
 
 

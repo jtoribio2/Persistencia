@@ -4,6 +4,7 @@ import config.AppConfig;
 import controller.SectorController;
 import dao.interfaces.ViaDAO;
 import model.dto.ViaPerDifDTO;
+import model.dto.ViesAptRecentDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
@@ -182,7 +183,7 @@ public class ViaService {
         return viaDAO.mostrarViesLlargues(escola);
     }
 
-    public List<Via> viesAptesRecent(){
-        return viaDAO.viasAptesRecent();
+    public List<ViesAptRecentDTO> viesAptesRecent(int dia){
+        return viaDAO.viasAptesRecent(dia);
     }
 }

@@ -1,5 +1,6 @@
 package controller;
 
+import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
 import service.SectorService;
@@ -83,13 +84,20 @@ public class SectorController {
         return  service.buscarEscola(idSector);
     }
 
-    public List<Sector> sectorViesDisponibles ( int quantitat) {
+    public void sectorViesDisponibles ( int quantitat) {
         try {
-            return service.sectorViesDisponibles(quantitat);
+            List<SectorViaDispDTO> lista = service.sectorViesDisponibles(quantitat);
+            if(lista.isEmpty()){
+                System.out.println("No hi han Sectors amb " +quantitat+ " vies disponibles");
+            }
+            else {
+                for (int i = 0; i < lista.size(); i++) {
+                    System.out.println(lista.get(i));
+                }
+            }
         }
         catch (Exception e ){
             System.out.println(e);
-            return null;
         }
     }
 

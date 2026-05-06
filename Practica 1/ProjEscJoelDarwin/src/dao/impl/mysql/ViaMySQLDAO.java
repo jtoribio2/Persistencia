@@ -3,6 +3,7 @@ package dao.impl.mysql;
 import dao.interfaces.ViaDAO;
 import db.ConnectionProvider;
 import model.dto.ViaPerDifDTO;
+import model.dto.ViesAptRecentDTO;
 import model.entity.*;
 import model.dto.*;
 import java.sql.*;
@@ -434,33 +435,44 @@ public class ViaMySQLDAO implements ViaDAO {
     }
 
     @Override
-   public  List<Via> viasAptesRecent(){
-        List<Via> viesRecent = new ArrayList<>();
-        //VIAS QUE HAN PASSAT A SER APTES RECIENTMENT
-        String SQL =
-                """
-                SELECT v.*
-                FROM vies v
-                INNER JOIN disponibilitats d ON d.id_via = v.id_via
-                WHERE DATEDIFF(NOW(), d.final) <= 7
-                AND d.final <= CURDATE()
-                ORDER BY d.final DESC;
-                """;
+    public List<ViesAptRecentDTO> viasAptesRecent(int dia) {
+
+        List<ViesAptRecentDTO> viesRecent = new ArrayList<>();
+
+        String SQL = """
+        SELECT 
+            v.nom AS nom, 
+            DATEDIFF(NOW(), d.final) AS dies
+        FROM vies v
+        INNER JOIN disponibilitats d ON d.id_via = v.id_via
+        WHERE DATEDIFF(NOW(), d.final) <= ?
+          AND d.final <= CURDATE()
+        ORDER BY dies ASC
+    """;
 
         try (Connection conn = provider.getConnection();
-             PreparedStatement ps = conn.prepareStatement(SQL);
-        ){
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, dia);
+
             try (ResultSet rs = ps.executeQuery()) {
+
                 while (rs.next()) {
-                    viesRecent.add(map(rs));
+
+                    ViesAptRecentDTO via = new ViesAptRecentDTO(
+                            rs.getString("nom"),
+                            rs.getInt("dies")
+                    );
+
+                    viesRecent.add(via);
                 }
             }
-            return viesRecent;
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo vias aptas recientes", e);
         }
-        catch (SQLException e ){
-            System.out.println("ERROR");
-            return null;
-        }
+
+        return viesRecent;
     }
 
 

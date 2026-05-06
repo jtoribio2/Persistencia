@@ -1,5 +1,6 @@
 package dao.interfaces;
 import model.dto.ViaPerDifDTO;
+import model.dto.ViesAptRecentDTO;
 import model.entity.Sector;
 import model.entity.Via;
 import java.util.List;
@@ -33,6 +34,6 @@ public interface ViaDAO extends Dao<Via,Integer>{
     List<Via> mostrarViesLlargues(int Escola);
     Sector buscarSector(Via via);
 
-    List<Via> viasAptesRecent();
+    List<ViesAptRecentDTO> viasAptesRecent(int dia);
     Escola buscarEscola(Via via);
 }
