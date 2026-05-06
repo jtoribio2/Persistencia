@@ -4,6 +4,7 @@ package dao.impl.mysql;
 import dao.interfaces.EscolaDAO;
 
 import db.ConnectionProvider;
+import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
@@ -247,8 +248,8 @@ public class EscolaMySQLDAO implements EscolaDAO {
         return escoles;
     }
     @Override
-    public List<Via> viesDisponibles(Escola es ) {
-        List<Via> vies = new ArrayList<>();
+    public List<EscolaDisponibleDTO> viesDisponibles(Escola es ) {
+        List<EscolaDisponibleDTO> vies = new ArrayList<>();
         final String SQL =
                 """
                 SELECT  v.*
@@ -272,18 +273,8 @@ public class EscolaMySQLDAO implements EscolaDAO {
             //ALMACENAR LOS VALORES EN LAS VARIABLES
             try(ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Via via = new Via(
-                            rs.getInt("v.id_via"),
-                            rs.getInt("v.id_sector"),
-                            rs.getInt("v.id_tipus_via"),
-                            rs.getString("v.nom"),
-                            rs.getInt("v.llargada"),
-                            rs.getString("v.dificultat"),
-                            rs.getString("v.orientacio"),
-                            rs.getString("v.ancoratge"),
-                            rs.getString("v.troca")
-                    );
-                    vies.add(via);
+                EscolaDisponibleDTO dto = new EscolaDisponibleDTO(es.getNom(),rs.getString("v.nom"));
+                    vies.add(dto);
                 }
                 return vies;
             }

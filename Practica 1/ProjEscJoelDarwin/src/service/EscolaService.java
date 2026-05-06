@@ -1,6 +1,7 @@
 package service;
 
 import dao.interfaces.EscolaDAO;
+import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
 import model.entity.Via;
@@ -98,9 +99,9 @@ public class EscolaService {
     }
 
 
-    public List<Via> viasDisponibles(Escola es) throws Exception{
+    public List<EscolaDisponibleDTO> viasDisponibles(Escola es) throws Exception{
         if(es == null) throw new Exception("ERROR");
-        List<Via> viaD = escoladao.viesDisponibles(es);
+        List<EscolaDisponibleDTO> viaD = escoladao.viesDisponibles(es);
 
         return viaD;
     }

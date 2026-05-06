@@ -1,9 +1,6 @@
 package controller;
 
-import model.dto.ViaPerDifDTO;
-import model.dto.ViesAptRecentDTO;
-import model.dto.ViesPerEstatApteDTO;
-import model.dto.ViesPerEstatTancatDTO;
+import model.dto.*;
 import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
@@ -260,9 +257,9 @@ public class ViaController {
  * **/
     public void mostrarViesLlargues(int escola){
         try{
-            List<Via> via = service.mostrarViesLlargues(escola);
-            for(Via v : via){
-                System.out.println(v.getNom());
+            List<ViesLlarguesDTO> via = service.mostrarViesLlargues(escola);
+            for(ViesLlarguesDTO v : via){
+                System.out.println(v);
             }
         }
         catch (Exception e ){

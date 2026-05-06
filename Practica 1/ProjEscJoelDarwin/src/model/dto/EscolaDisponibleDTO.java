@@ -9,8 +9,9 @@ String Escola,Via;
 
     @Override
     public String toString() {
-        return "────────" + Escola  +" Vies Disponibles"+"────────\n" +
-                "Via       : " + Via + "\n" +
+        return "───────────────────────────────────\n" +
+                "Escola     :" + Escola + "\n" +
+                "Via        : " + Via + "\n" +
                 "─────────────────────────────────";
     }
 }

@@ -394,8 +394,8 @@ public class ViaMySQLDAO implements ViaDAO {
 
 
     @Override
-    public List<Via> mostrarViesLlargues(int escola){
-        List<Via> llargues = new ArrayList<>();
+    public List<ViesLlarguesDTO> mostrarViesLlargues(int escola){
+        List<ViesLlarguesDTO> llargues = new ArrayList<>();
         String SQL = """
                SELECT v.*
                FROM vies v
@@ -412,18 +412,8 @@ public class ViaMySQLDAO implements ViaDAO {
             ps.setInt(1, escola);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Via vies = new Via(
-                            rs.getInt("v.id_via"),
-                            rs.getInt("v.id_sector"),
-                            rs.getInt("v.id_tipus_via"),
-                            rs.getString("v.nom"),
-                            rs.getInt("v.llargada"),
-                            rs.getString("v.dificultat"),
-                            rs.getString("v.orientacio"),
-                            rs.getString("v.ancoratge"),
-                            rs.getString("v.troca")
-                    );
-                    llargues.add(vies);
+                    ViesLlarguesDTO v  = new ViesLlarguesDTO(rs.getString("v.nom"),rs.getInt("v.llargada"));
+                    llargues.add(v);
                 }
             }
             return llargues;
