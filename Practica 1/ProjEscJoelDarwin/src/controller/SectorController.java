@@ -3,16 +3,25 @@ package controller;
 import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
+import model.entity.Via;
+import service.EscolaService;
 import service.SectorService;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class SectorController {
 
     private final SectorService service;
+    private final EscolaService escolaService;
+    private final Scanner sc = new Scanner(System.in);
 
-    public SectorController(SectorService service) {
+    public SectorController(
+            SectorService service,
+            EscolaService escolaService
+    ) {
         this.service = service;
+        this.escolaService = escolaService;
     }
 
     public Sector getSector(Integer id){
@@ -98,6 +107,96 @@ public class SectorController {
         }
         catch (Exception e ){
             System.out.println(e);
+        }
+    }
+
+    public void crearSectorConVia() {
+
+        try {
+
+            // MOSTRAR ESCOLAS
+            List<Escola> escolas = escolaService.obtenerTodos();
+
+            System.out.println("Elige una escola:");
+
+            for (Escola e : escolas) {
+                System.out.println(
+                        e.getId_escola() + " - " + e.getNom()
+                );
+            }
+
+            int idEscola = sc.nextInt();
+            sc.nextLine();
+
+            // DATOS SECTOR
+            System.out.println("Nombre sector:");
+            String nomSector = sc.nextLine();
+
+            System.out.println("Latitud:");
+            float lat = sc.nextFloat();
+
+            System.out.println("Longitud:");
+            float lon = sc.nextFloat();
+            sc.nextLine();
+
+            System.out.println("Aproximacio:");
+            String aprox = sc.nextLine();
+
+            System.out.println("Popularitat (1-3):");
+            int pop = sc.nextInt();
+            sc.nextLine();
+
+            Sector s = new Sector(
+                    0,
+                    idEscola,
+                    nomSector,
+                    lat,
+                    lon,
+                    aprox,
+                    pop
+            );
+
+            // PRIMERA VIA
+            System.out.println("Nom via:");
+            String nomVia = sc.nextLine();
+
+            System.out.println("Llargada:");
+            int llargada = sc.nextInt();
+
+            System.out.println("Tipus via:");
+            int tipus = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Dificultat:");
+            String dif = sc.nextLine();
+
+            System.out.println("Orientacio:");
+            String ori = sc.nextLine();
+
+            System.out.println("Ancoratge:");
+            String anc = sc.nextLine();
+
+            System.out.println("Troca:");
+            String troca = sc.nextLine();
+
+            Via v = new Via(
+                    0,
+                    tipus,
+                    nomVia,
+                    llargada,
+                    dif,
+                    ori,
+                    anc,
+                    troca
+            );
+
+            service.crearSectorConVia(s, v);
+
+            System.out.println("Sector y vía creados correctamente");
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
     }
 
