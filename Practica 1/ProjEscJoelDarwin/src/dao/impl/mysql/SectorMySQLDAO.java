@@ -23,9 +23,9 @@ public class SectorMySQLDAO implements SectorDAO {
     public void inserir(Sector s) {
 
         String sql = """
-        INSERT INTO sectors 
-        (id_escola, nom, latitut, longitut, aproximacio, popularitat)
-        VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO sectors 
+    (id_escola, nom, latitut, longitut, aproximacio, popularitat)
+    VALUES (?, ?, ?, ?, ?, ?)
     """;
 
         try (Connection conn = provider.getConnection();
@@ -310,6 +310,44 @@ public class SectorMySQLDAO implements SectorDAO {
 
             throw new RuntimeException("Error obteniendo escola del sector", e);
         }
+    }
+
+    @Override
+    public int inserirRetornantId(Sector s) {
+
+        String sql = """
+    INSERT INTO sectors 
+    (id_escola, nom, latitut, longitut, aproximacio, popularitat)
+    VALUES (?, ?, ?, ?, ?, ?)
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     sql,
+                     Statement.RETURN_GENERATED_KEYS
+             )) {
+
+            ps.setInt(1, s.getId_escoles());
+            ps.setString(2, s.getNom());
+            ps.setFloat(3, s.getLatitut());
+            ps.setFloat(4, s.getLongitut());
+            ps.setString(5, s.getAproximacio());
+            ps.setInt(6, s.getPopularitat());
+
+            ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error insertando sector", e);
+        }
+
+        throw new RuntimeException("No se pudo obtener el ID");
     }
 
 }

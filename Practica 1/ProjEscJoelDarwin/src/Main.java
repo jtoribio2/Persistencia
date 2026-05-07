@@ -15,7 +15,7 @@ import  java.util.*;
 public class Main {
     private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        AppConfig.getViaController().mostrarViesLlargues(15);
+        AppConfig.getSectorController().crearSectorConVia();
     }
 }
 

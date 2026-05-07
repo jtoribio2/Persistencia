@@ -1,21 +1,24 @@
 package service;
 
 import dao.interfaces.SectorDAO;
+import dao.interfaces.ViaDAO;
 import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
+import model.entity.Via;
 
 import java.util.List;
 
 public class SectorService {
 
     private final SectorDAO sectorDAO;
+    private final ViaDAO viaDAO;
 
-    public SectorService(SectorDAO sectorDAO) {
+    public SectorService(SectorDAO sectorDAO, ViaDAO viaDAO) {
         this.sectorDAO = sectorDAO;
+        this.viaDAO = viaDAO;
     }
 
-    // inserta un sector a la base de datos
     public void crearSector(Sector s) throws Exception {
 
         if (s == null) {
@@ -33,15 +36,43 @@ public class SectorService {
         if (s.getId_escoles() <= 0) {
             throw new RuntimeException("Debe indicar una escola válida");
         }
+
         sectorDAO.inserir(s);
     }
 
-    // devuelve una lista donde aparecen todos los sectores de la bd
+    public void crearSectorConVia(Sector s, Via v) throws Exception {
+
+        if (s == null) {
+            throw new RuntimeException("Sector null");
+        }
+
+        if (v == null) {
+            throw new RuntimeException("Via null");
+        }
+
+        int idSectorGenerado =
+                sectorDAO.inserirRetornantId(s);
+
+        try {
+
+            v.setId_sector(idSectorGenerado);
+
+            viaDAO.inserir(v);
+
+        } catch (Exception e) {
+
+            sectorDAO.eliminar(idSectorGenerado);
+
+            throw new RuntimeException(
+                    "No se pudo crear la vía. Sector eliminado."
+            );
+        }
+    }
+
     public List<Sector> obtenerTodos() {
         return sectorDAO.obtindreTots();
     }
 
-    // devuelve un sector a traves de su id
     public Sector obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
@@ -51,7 +82,6 @@ public class SectorService {
         return sectorDAO.obtenir(id);
     }
 
-    // elimina un sector a traves de un id
     public void eliminarSector(int id)throws Exception {
 
         if (id <= 0) {
@@ -61,7 +91,6 @@ public class SectorService {
         sectorDAO.eliminar(id);
     }
 
-    // modifica un sector y lo busca a traves de su id en el caso que no existe te dice que no ha podido modificarlo
     public void modificarSector(Sector s)throws Exception {
 
         if (s == null) {
@@ -120,9 +149,12 @@ public class SectorService {
         return lista;
     }
 
-    public List<SectorViaDispDTO> sectorViesDisponibles (int quantitat) throws Exception{
-        if(quantitat < 0 ) throw new Exception("INCORRECTE");
+    public List<SectorViaDispDTO> sectorViesDisponibles(int quantitat) throws Exception {
+
+        if (quantitat < 0) {
+            throw new Exception("INCORRECTE");
+        }
+
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
-
 }
