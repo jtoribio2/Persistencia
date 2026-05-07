@@ -37,17 +37,17 @@ public class Via {
 
     @Override
     public String toString() {
-        return "Via{" +
-                "id_via=" + id_via +
-                ", id_sector=" + id_sector +
-                ", id_tipus_via=" + id_tipus_via +
-                ", nom='" + nom + '\'' +
-                ", llargada=" + llargada +
-                ", dificultat='" + dificultat + '\'' +
-                ", orientacio='" + orientacio + '\'' +
-                ", ancoratge='" + ancoratge + '\'' +
-                ", troca='" + troca + '\'' +
-                '}';
+        return "──────────── VIA ────────────\n" +
+                "ID             : " + id_via + "\n" +
+                "Sector ID      : " + id_sector + "\n" +
+                "Tipo Via ID    : " + id_tipus_via + "\n" +
+                "Nombre         : " + nom + "\n" +
+                "Longitud       : " + llargada + "m\n" +
+                "Dificultad     : " + dificultat + "\n" +
+                "Orientación    : " + orientacio + "\n" +
+                "Ancoraje       : " + ancoratge + "\n" +
+                "Troca          : " + troca + "\n" +
+                "─────────────────────────────";
     }
 
     public int getId_via() {
