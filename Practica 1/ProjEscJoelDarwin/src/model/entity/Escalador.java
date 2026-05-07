@@ -56,4 +56,15 @@ public class Escalador {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    @Override
+    public String toString() {
+        return "────────── ESCALADOR ──────────\n" +
+                "ID          : " + id_escalador + "\n" +
+                "DNI         : " + dni + "\n" +
+                "Nombre      : " + nom + "\n" +
+                "Edad        : " + edat + "\n" +
+                "Estilo      : " + estil + "\n" +
+                "────────────────────────────────";
+    }
 }
