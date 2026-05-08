@@ -158,7 +158,7 @@ public class LlarMySQLDAO  implements LlarDAO {
 
 
     }
-
+/**@param rs Resulset @return Llar **/
     private Llar map(ResultSet rs) throws SQLException {
 
         Llar l = new Llar();

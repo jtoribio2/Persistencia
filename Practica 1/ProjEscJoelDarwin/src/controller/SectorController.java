@@ -23,7 +23,7 @@ public class SectorController {
         this.service = service;
         this.escolaService = escolaService;
     }
-
+    /**@param id Integer @return Sector obtindre un sector en especific**/
     public Sector getSector(Integer id) {
         try {
             return service.obtenerPorId(id);
@@ -33,7 +33,7 @@ public class SectorController {
         }
     }
 
-    // Añadir un sector
+    /**@param s Sector  crear sector**/
     public void crearSector(Sector s) {
         try {
             service.crearSector(s);
@@ -43,7 +43,7 @@ public class SectorController {
         }
 
     }
-
+/**Mostrara tots les vies **/
     // mostrar todos los sectores de la base de datos
     public void mostrarTots() {
         List<Sector> lista = service.obtenerTodos();
@@ -52,7 +52,7 @@ public class SectorController {
             System.out.println(s.getId_sector() + " - " + s.getNom());
         }
     }
-
+    /**@param s Sector  modificar sector **/
     // modificar un sector de la base de datos
     public void modificarSector(Sector s) {
         try {
@@ -62,7 +62,7 @@ public class SectorController {
             System.out.println(e);
         }
     }
-
+    /**@param id Int Elimnar sector especific **/
     // eliminar un sector de la base de datos
     public void eliminarSector(int id) {
         try {
@@ -73,7 +73,7 @@ public class SectorController {
         }
 
     }
-
+    /**@param nombre String buscar sector per controller **/
     //Busca por nombre un
     public void buscarPorNombre(String nombre) {
         List<Sector> lista = null;
@@ -84,11 +84,11 @@ public class SectorController {
             System.out.println(e.getMessage());
         }
     }
-
+    /**@param idSector int @return Escola **/
     public Escola mostrarEscola(int idSector) {
         return service.buscarEscola(idSector);
     }
-
+    /**@param quantitat int **/
     public void sectorViesDisponibles(int quantitat) {
         try {
             List<SectorViaDispDTO> lista = service.sectorViesDisponibles(quantitat);
@@ -103,7 +103,7 @@ public class SectorController {
             System.out.println(e);
         }
     }
-
+/**Crea el sector amb una via (Si un es crea i altre no s'elimnia**/
     public void crearSectorConVia() {
 
         try {

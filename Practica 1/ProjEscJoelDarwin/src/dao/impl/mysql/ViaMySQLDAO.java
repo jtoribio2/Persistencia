@@ -17,7 +17,7 @@ public class ViaMySQLDAO implements ViaDAO {
     public ViaMySQLDAO(ConnectionProvider provider) {
         this.provider = provider;
     }
-
+/**@param v Via **/
     // INSERT
     @Override
     public void inserir(Via v) {
@@ -46,7 +46,7 @@ public class ViaMySQLDAO implements ViaDAO {
             throw new RuntimeException("Error insertando via", e);
         }
     }
-
+/**@param v Via **/
     // UPDATE
     @Override
     public void modificar(Via v) {
@@ -81,7 +81,7 @@ public class ViaMySQLDAO implements ViaDAO {
             throw new RuntimeException("Error modificando via", e);
         }
     }
-
+/**@param id Integer **/
     //  DELETE
     @Override
     public void eliminar(Integer id) {
@@ -98,7 +98,7 @@ public class ViaMySQLDAO implements ViaDAO {
             throw new RuntimeException("Error eliminando via", e);
         }
     }
-
+/**@return list via **/
     //  FIND ALL
     @Override
     public List<Via> obtindreTots() {
@@ -121,7 +121,7 @@ public class ViaMySQLDAO implements ViaDAO {
 
         return lista;
     }
-
+/**@param id Via **/
     //  buscar por id
     @Override
     public Via obtenir(Integer id) {
@@ -145,7 +145,7 @@ public class ViaMySQLDAO implements ViaDAO {
 
         return null;
     }
-
+/**@param nombre String @return List via **/
     // Buscar por nombre
     @Override
     public List<Via> buscarPorNombre(String nombre) {
@@ -171,7 +171,7 @@ public class ViaMySQLDAO implements ViaDAO {
 
         return lista;
     }
-
+/**@param rs Resulset @return Via v **/
     // MAP
     private Via map(ResultSet rs) throws SQLException {
 
@@ -189,7 +189,7 @@ public class ViaMySQLDAO implements ViaDAO {
     }
 
 
-
+/**@param via Via @return **/
     @Override
     public Sector buscarSector(Via via) {
 
@@ -230,7 +230,7 @@ public class ViaMySQLDAO implements ViaDAO {
 
         return null;
     }
-
+/**@param via Via  @return Escola **/
     @Override
     public Escola buscarEscola(Via via) {
 
@@ -271,7 +271,7 @@ public class ViaMySQLDAO implements ViaDAO {
         return null;
     }
 
-
+/**@param dades String @return Lit via per dif DTO **/
     @Override
     public List<ViaPerDifDTO> viesPerDificultat(String dades)  {
 
@@ -320,7 +320,7 @@ public class ViaMySQLDAO implements ViaDAO {
         }
 
         return llista;
-    }
+    }/**@return ViesperEstatApteDto**/
     @Override
     public  List<ViesPerEstatApteDTO> viesPerEstatApte(){
         List<ViesPerEstatApteDTO> aptes = new ArrayList<>();
@@ -358,7 +358,7 @@ public class ViaMySQLDAO implements ViaDAO {
         }
 
 
-    }
+    }/**@return Vies per estat tancat dt o**/
     @Override
     public List<ViesPerEstatTancatDTO> viesPerEstatTancat(){
         List<ViesPerEstatTancatDTO> tancats = new ArrayList<>();
@@ -392,7 +392,7 @@ public class ViaMySQLDAO implements ViaDAO {
         }
     }
 
-
+/**@param escola int @return retirna les vies mes llargues de la escola  **/
     @Override
     public List<ViesLlarguesDTO> mostrarViesLlargues(int escola){
         List<ViesLlarguesDTO> llargues = new ArrayList<>();

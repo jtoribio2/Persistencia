@@ -1,3 +1,4 @@
+import View.MenusView.MainMenuView;
 import config.AppConfig;
 
 public class MainD {
@@ -12,6 +13,7 @@ public class MainD {
 
       //  menuPrincipal.PrintMenuMain();
 
-        AppConfig.getEscolaController().crearESV();
+      //  AppConfig.getEscolaController().crearESV();
+        MainMenuView.mostrarMenu();
     }
 }

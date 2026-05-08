@@ -134,7 +134,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         return llista;
     }
     /**
-     * @param id Intger introducimos un numero
+     * @param id Intger introduir un numero
      * **/
     @Override
     public Escola obtenir(Integer id) {
@@ -165,7 +165,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
 
 
     }
-
+/**@param o Escola  @return boolean  **/
     @Override
     public boolean isGel(Escola o ){
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
@@ -199,7 +199,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         }
 
         return false;
-    }
+    }/**@param rs Resulset @return Escola **/
     private Escola map(ResultSet rs) throws SQLException {
 
         Escola s = new Escola();
@@ -212,7 +212,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
 
         return s;
     }
-
+    /**@return List Escoles Restrict DTO**/
     @Override
     public List<EscolesRestricDTO> escolesDisponibles() {
 
@@ -247,7 +247,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         }
 
         return escoles;
-    }
+    }/**@param es Escola @return List EscolDisponibleDTO**/
     @Override
     public List<EscolaDisponibleDTO> viesDisponibles(Escola es ) {
         List<EscolaDisponibleDTO> vies = new ArrayList<>();
@@ -285,7 +285,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
             throw new RuntimeException("Error obteniendo vias", e);
         }
     }
-
+/**@param es Escola @return retorna el id  **/
     @Override
     public int inserirRetornantId(Escola es ){
         String sql = """
