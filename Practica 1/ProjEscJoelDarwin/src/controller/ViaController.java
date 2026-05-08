@@ -25,7 +25,7 @@ public class ViaController {
         this.escolaService = escolaService;
     }
 
-
+/**Listar les vies **/
     // LISTAR TODAS
     public void listar() {
         try {
@@ -39,7 +39,7 @@ public class ViaController {
 
     // BUSCAR POR NOMBRE
     /**
-     * @param nombre
+     * @param nombre String
      * **/
     public void buscarPorNombre(String nombre) {
         try {
@@ -137,7 +137,7 @@ public class ViaController {
     // eliminar
     /**
      * Metode que elimina amb id
-     * @param id
+     * @param id int
      * **/
     public void eliminar(int id) {
         try {
@@ -167,7 +167,7 @@ public class ViaController {
     // BUSCAR POR ID
     /**
      * Metode per obtindre per id
-     * @param id
+     * @param id int
      * **/
     public void obtenerPorId(int id) {
         try {
@@ -278,7 +278,7 @@ public class ViaController {
         }
     }
 /**
- * Retornar vies ates
+ * @param dia int Mostrar viasAptes recents depentn del dia
  * **/
     public void viesAptesRecent(int dia){
         try {

@@ -16,7 +16,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
     public EscaladorMySQLDAO(ConnectionProvider provider) {
         this.provider = provider;
     }
-
+    /**@param e Escalador **/
     @Override
     public void inserir(Escalador e) {
 
@@ -43,7 +43,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
     }
 
 
-
+/**@param e Escalador **/
     @Override
     public void modificar(Escalador e ) {
 
@@ -74,7 +74,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
             throw new RuntimeException("Error al modificar Esclador ", x);
         }
     }
-
+/**@param id Integer**/
     @Override
     public void eliminar(Integer id) {
 
@@ -90,7 +90,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
             throw new RuntimeException("Error eliminando sector", e);
         }
     }
-
+/**@return List Escalador **/
     @Override
     public List<Escalador> obtindreTots() {
 
@@ -112,7 +112,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
 
         return lista;
     }
-
+/**@param id Integer @return Escalador**/
     // implementacion de obtenir bector le pasas un id y te devuelve el objeto sector que le has pedido si no lo encuentra devuelve null
     @Override
     public Escalador obtenir(Integer id)  {
@@ -136,7 +136,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
 
         return null;
     }
-
+/**@param dni String **/
     @Override
     public void eliminarDni(String dni){
 
@@ -152,7 +152,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
             throw new RuntimeException("Error eliminando sector", e);
         }
     }
-
+/**@param dni String @return Escalador objecte**/
     @Override
     public Escalador obtenirPerDni(String dni){
         String sql = "SELECT * FROM escaladors WHERE dni = ?";
@@ -173,7 +173,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
         }
 
         return null;
-    }
+    }/**@param rs Resulset @return Escalador **/
     // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
     private Escalador map(ResultSet rs) throws SQLException {
 
@@ -186,7 +186,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
 
         return e;
     }
-
+/**@param dni String @return List Escalador NIVEL DTO **/
     @Override
     public List<EscaladorNivellDTO> buscarPorNivel(String dni) {
 

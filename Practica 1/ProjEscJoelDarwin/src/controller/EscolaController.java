@@ -21,9 +21,9 @@ private static Scanner sc = new Scanner(System.in);
         this.service = e;
         this.sectorService = s;
     }
-
+/**@param e Escola Objeto**/
     public   void addEscola(Escola e ) {
-       // if(e == null) throw new Exception("ERROR DADES BUIDES");
+
         try{
            service.crearEscola(e);
         }
@@ -31,9 +31,9 @@ private static Scanner sc = new Scanner(System.in);
             System.out.println(err);
         }
     }
-
+/**@param e Escola objeto**/
     public  void SetEscola(Escola e )  {
-       // if(e == null) throw new Exception("ERROR DADES BUIDES");
+
         try {
             service.modificarSector(e);
         }
@@ -41,7 +41,7 @@ private static Scanner sc = new Scanner(System.in);
             System.out.println(err);
         }
     }
-
+/**@param id IAnteger**/
     public  void removeEscola(Integer id  ) {
        try {
            service.eliminarSector(id);
@@ -50,13 +50,13 @@ private static Scanner sc = new Scanner(System.in);
            System.out.println(err);
        }
     }
-
+/**@return Retorna una llista de Escola**/
     public  List<Escola> getList(){
        //Hacer comprovaciones o algo
         List<Escola> e = service.obtenerTodos();
         return e ;
     }
-
+/**@param id Integer @return Escola(Obj)**/
     public  Escola getEscola(Integer id ) {
         try {
             return service.obtenerPorId(id);
@@ -65,7 +65,7 @@ private static Scanner sc = new Scanner(System.in);
         }
         return null;
     }
-
+/**@param o Escola @return Retorna un boolea si es gel**/
 public boolean isGel(Escola o ) {
 try {
     return service.isGel(o);
@@ -76,7 +76,7 @@ catch (Exception e ){
 }
 
 }
-
+/**Mostra les escoles disponibles**/
 public void escolesDisponibles(){
         List<EscolesRestricDTO> llista = service.escolesDisponibles();
         if (llista.isEmpty()){
@@ -89,7 +89,7 @@ public void escolesDisponibles(){
         }
 }
 
-
+/**@param es Escola Mostrar vies de esocla especifica**/
     public void viaDisponibles(Escola es  ){
         try {
             List<EscolaDisponibleDTO> via = service.viasDisponibles(es);
@@ -101,7 +101,7 @@ public void escolesDisponibles(){
             System.out.println(e);
         }
     }
-    //ESCOLA
+    /**Crear Escola **/
     public void crearESV(){
         try {
             //Escola
