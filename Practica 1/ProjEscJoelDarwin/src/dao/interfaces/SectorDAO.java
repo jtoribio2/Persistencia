@@ -8,7 +8,7 @@ import java.util.List;
 public interface SectorDAO extends Dao<Sector,Integer> {
    //METODOS GENERICOS
     @Override
-    void inserir(Sector  o);
+    void inserir(Sector o);
 
     @Override
     void modificar(Sector o);
@@ -28,4 +28,6 @@ public interface SectorDAO extends Dao<Sector,Integer> {
     List<Sector> buscarPorEscola(int idEscola);
 
     List<SectorViaDispDTO> sectorViesDisponibles(int num);
+
+    int inserirRetornantId(Sector s);
 }

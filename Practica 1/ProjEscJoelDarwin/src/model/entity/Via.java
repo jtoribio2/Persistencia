@@ -24,7 +24,7 @@ public class Via {
     }
 
     public Via( int id_sector, int id_tipus_via, String nom, int llargada, String dificultat, String orientacio, String ancoratge, String troca) {
-        this.id_via = 10;
+        this.id_via = 0;
         this.id_sector = id_sector;
         this.id_tipus_via = id_tipus_via;
         this.nom = nom;
@@ -37,17 +37,17 @@ public class Via {
 
     @Override
     public String toString() {
-        return "Via{" +
-                "id_via=" + id_via +
-                ", id_sector=" + id_sector +
-                ", id_tipus_via=" + id_tipus_via +
-                ", nom='" + nom + '\'' +
-                ", llargada=" + llargada +
-                ", dificultat='" + dificultat + '\'' +
-                ", orientacio='" + orientacio + '\'' +
-                ", ancoratge='" + ancoratge + '\'' +
-                ", troca='" + troca + '\'' +
-                '}';
+        return "──────────── VIA ────────────\n" +
+                "ID             : " + id_via + "\n" +
+                "Sector ID      : " + id_sector + "\n" +
+                "Tipo Via ID    : " + id_tipus_via + "\n" +
+                "Nombre         : " + nom + "\n" +
+                "Longitud       : " + llargada + "m\n" +
+                "Dificultad     : " + dificultat + "\n" +
+                "Orientación    : " + orientacio + "\n" +
+                "Ancoraje       : " + ancoratge + "\n" +
+                "Troca          : " + troca + "\n" +
+                "─────────────────────────────";
     }
 
     public int getId_via() {

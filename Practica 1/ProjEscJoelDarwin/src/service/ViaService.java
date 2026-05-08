@@ -165,7 +165,7 @@ public class ViaService {
     }
 
     public List<ViaPerDifDTO> viesPerDificultat(String dades) throws  Exception{
-        if(dades.isBlank())throw new Exception("ERROR DADES NO INTROUIDES");
+        if(dades.isBlank())throw new Exception("Has deixat en blanc el camp");
       return   viaDAO.viesPerDificultat(dades);
     }
 
@@ -183,7 +183,8 @@ public class ViaService {
         return viaDAO.mostrarViesLlargues(escola);
     }
 
-    public List<ViesAptRecentDTO> viesAptesRecent(int dia){
+    public List<ViesAptRecentDTO> viesAptesRecent(int dia) throws Exception{
+        if (dia<=0) throw new Exception("EL TERMINI MINIM PER MIRAR VIES DISPONIBLES RECENTMENT HAN DE SER MES GRANS QUE 0");
         return viaDAO.viasAptesRecent(dia);
     }
 }

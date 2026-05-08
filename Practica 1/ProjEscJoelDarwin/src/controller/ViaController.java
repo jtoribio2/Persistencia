@@ -63,59 +63,66 @@ public class ViaController {
         for (Escola e : escolas) {
             System.out.println(e.getId_escola() + " - " + e.getNom());
         }
-
-        int idEscola = sc.nextInt();
-
-        // enseñamos los sectores de la escola de arriba, y el usuario elige uno
-        List<Sector> sectores = sectorService.buscarPorEscola(idEscola);
-
-        System.out.println("Elige un sector:");
-
-        for (Sector s : sectores) {
-            System.out.println(s.getId_sector() + " - " + s.getNom());
-        }
-
-        int idSector = sc.nextInt();
-
-        sc.nextLine();
-
-        // datos de la via
-        System.out.println("Nombre:");
-        String nom = sc.nextLine();
-
-        System.out.println("Llargada:");
-        int llargada = sc.nextInt();
-
-        System.out.println("tipus de via (1 Clasica, 2 Esportiva, 3 Gel:");
-        int tipus_via = sc.nextInt();
-
-        System.out.println("Dificultat (ex: 6a ):");
-        String dificultat = sc.nextLine();
-
-        System.out.println("Oreienciacio (ex: N)");
-        String orientacio = sc.nextLine();
-
-        System.out.println("Ancoratge:");
-        String ancoratge = sc.nextLine();
-
-        System.out.println("Tipus roca");
-        String troca = sc.nextLine();
-
-        // creamos la via
-        Via v = new Via(
-                idSector,
-                tipus_via,
-                nom,
-                llargada,
-                dificultat,
-                orientacio,
-                ancoratge,
-                troca
-        );
-
-        //  llamamos al service para introducir la via con su sector elegido
         try {
-            service.crear(v);
+            int idEscola = sc.nextInt();
+
+
+            // enseñamos los sectores de la escola de arriba, y el usuario elige uno
+            List<Sector> sectores = sectorService.buscarPorEscola(idEscola);
+
+            System.out.println("Elige un sector:");
+
+            for (Sector s : sectores) {
+                System.out.println(s.getId_sector() + " - " + s.getNom());
+            }
+
+            int idSector = sc.nextInt();
+
+            sc.nextLine();
+
+            // datos de la via
+            System.out.println("Nombre:");
+            String nom = sc.nextLine();
+
+            System.out.println("Llargada:");
+            int llargada = sc.nextInt();
+
+            System.out.println("tipus de via (1 Clasica, 2 Esportiva, 3 Gel:");
+            int tipus_via = sc.nextInt();
+
+            System.out.println("Dificultat (ex: 6a ):");
+            String dificultat = sc.nextLine();
+
+            System.out.println("Oreienciacio (ex: N)");
+            String orientacio = sc.nextLine();
+
+            System.out.println("Ancoratge:");
+            String ancoratge = sc.nextLine();
+
+            System.out.println("Tipus roca");
+            String troca = sc.nextLine();
+
+            // creamos la via
+            Via v = new Via(
+                    idSector,
+                    tipus_via,
+                    nom,
+                    llargada,
+                    dificultat,
+                    orientacio,
+                    ancoratge,
+                    troca
+            );
+
+            //  llamamos al service para introducir la via con su sector elegido
+
+            try {
+                service.crear(v);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -124,6 +131,8 @@ public class ViaController {
 
         System.out.println("Vía creada correctamente");
     }
+
+
 
     // eliminar
     /**
@@ -258,6 +267,7 @@ public class ViaController {
     public void mostrarViesLlargues(int escola){
         try{
             List<ViesLlarguesDTO> via = service.mostrarViesLlargues(escola);
+            if(via.isEmpty()) System.out.println("No existeix la escola triada");
             for(ViesLlarguesDTO v : via){
                 System.out.println(v);
             }

@@ -54,4 +54,15 @@ private String nom,lloc,aproximacio;
     public void setAproximacio(String aproximacio) {
         this.aproximacio = aproximacio;
     }
+
+    @Override
+    public String toString() {
+        return "────────── ESCOLA ──────────\n" +
+                "ID           : " + id_escola + "\n" +
+                "Nombre       : " + nom + "\n" +
+                "Lugar        : " + lloc + "\n" +
+                "Aproximación : " + aproximacio + "\n" +
+                "Popularidad  : " + popularitat + "\n" +
+                "────────────────────────────";
+    }
 }

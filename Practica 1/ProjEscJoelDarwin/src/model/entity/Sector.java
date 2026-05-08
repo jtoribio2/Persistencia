@@ -81,14 +81,14 @@ public class Sector {
 
     @Override
     public String toString() {
-        return "Sector{" +
-                "id=" + id_sector +
-                ", escola=" + id_escoles +
-                ", nom='" + nom + '\'' +
-                ", lat=" + latitut +
-                ", lon=" + longitut +
-                ", aprox='" + aproximacio + '\'' +
-                ", popularitat=" + popularitat +
-                '}';
+        return "────────── SECTOR ──────────\n" +
+                "ID           : " + id_sector + "\n" +
+                "Escola ID    : " + id_escoles + "\n" +
+                "Nombre       : " + nom + "\n" +
+                "Latitud      : " + latitut + "\n" +
+                "Longitud     : " + longitut + "\n" +
+                "Aproximación : " + aproximacio + "\n" +
+                "Popularidad  : " + popularitat + "\n" +
+                "────────────────────────────";
     }
 }

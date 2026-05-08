@@ -13,9 +13,9 @@ import model.entity.*;
 import  java.util.*;
 
 public class Main {
+    private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        AppConfig.getEscaladorController().buscarPorNivel("11111111A");
-
+        AppConfig.getSectorController().crearSectorConVia();
     }
 }
 

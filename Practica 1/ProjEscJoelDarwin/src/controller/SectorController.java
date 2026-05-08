@@ -3,34 +3,42 @@ package controller;
 import model.dto.SectorViaDispDTO;
 import model.entity.Escola;
 import model.entity.Sector;
+import model.entity.Via;
+import service.EscolaService;
 import service.SectorService;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class SectorController {
 
     private final SectorService service;
+    private final EscolaService escolaService;
+    private final Scanner sc = new Scanner(System.in);
 
-    public SectorController(SectorService service) {
+    public SectorController(
+            SectorService service,
+            EscolaService escolaService
+    ) {
         this.service = service;
+        this.escolaService = escolaService;
     }
 
-    public Sector getSector(Integer id){
+    public Sector getSector(Integer id) {
         try {
             return service.obtenerPorId(id);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
     }
+
     // Añadir un sector
     public void crearSector(Sector s) {
         try {
             service.crearSector(s);
             System.out.println("Sector creado correctamente");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -50,8 +58,7 @@ public class SectorController {
         try {
             service.modificarSector(s);
             System.out.println("Sector modificado correctamente");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -61,8 +68,7 @@ public class SectorController {
         try {
             service.eliminarSector(id);
             System.out.println("Sector eliminado correctamente");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -70,34 +76,124 @@ public class SectorController {
 
     //Busca por nombre un
     public void buscarPorNombre(String nombre) {
-        List<Sector> lista=null;
+        List<Sector> lista = null;
         try {
             lista = service.buscarPorNombre(nombre);
             lista.forEach(s -> System.out.println(s));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
     public Escola mostrarEscola(int idSector) {
-        return  service.buscarEscola(idSector);
+        return service.buscarEscola(idSector);
     }
 
-    public void sectorViesDisponibles ( int quantitat) {
+    public void sectorViesDisponibles(int quantitat) {
         try {
             List<SectorViaDispDTO> lista = service.sectorViesDisponibles(quantitat);
-            if(lista.isEmpty()){
-                System.out.println("No hi han Sectors amb " +quantitat+ " vies disponibles");
-            }
-            else {
+            if (lista.isEmpty()) {
+                System.out.println("No hi han Sectors amb " + quantitat + " vies disponibles");
+            } else {
                 for (int i = 0; i < lista.size(); i++) {
                     System.out.println(lista.get(i));
                 }
             }
-        }
-        catch (Exception e ){
+        } catch (Exception e) {
             System.out.println(e);
+        }
+    }
+
+    public void crearSectorConVia() {
+
+        try {
+
+            // enseñamos la escola que queremos elegir para el sector
+            List<Escola> escolas = escolaService.obtenerTodos();
+
+            System.out.println("Elige una escola:");
+
+            for (Escola e : escolas) {
+                System.out.println(
+                        e.getId_escola() + " - " + e.getNom()
+                );
+            }
+
+            int idEscola = sc.nextInt();
+            sc.nextLine();
+
+            // introducimos los datos del sector
+            System.out.println("Nombre sector:");
+            String nomSector = sc.nextLine();
+
+            System.out.println("Latitud:");
+            float lat = sc.nextFloat();
+
+            System.out.println("Longitud:");
+            float lon = sc.nextFloat();
+            sc.nextLine();
+
+            System.out.println("Aproximacio:");
+            String aprox = sc.nextLine();
+
+            System.out.println("Popularitat (1-3):");
+            int pop = sc.nextInt();
+            sc.nextLine();
+
+            Sector s = new Sector(
+                    0,
+                    idEscola,
+                    nomSector,
+                    lat,
+                    lon,
+                    aprox,
+                    pop
+            );
+
+            // creamos la via
+            System.out.println("Nom via:");
+            String nomVia = sc.nextLine();
+
+            System.out.println("Llargada:");
+            int llargada = sc.nextInt();
+
+            System.out.println("Tipus via:");
+            int tipus = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("Dificultat:");
+            String dif = sc.nextLine();
+
+            System.out.println("Orientacio:");
+            String ori = sc.nextLine();
+
+            System.out.println("Ancoratge:");
+            String anc = sc.nextLine();
+
+            System.out.println("Troca:");
+            String troca = sc.nextLine();
+
+            Via v = new Via(
+                    0,
+                    tipus,
+                    nomVia,
+                    llargada,
+                    dif,
+                    ori,
+                    anc,
+                    troca
+            );
+            try {
+                service.crearSectorConVia(s, v);
+
+                System.out.println("Sector y vía creados correctamente");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
     }
 
