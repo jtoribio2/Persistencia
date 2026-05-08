@@ -7,6 +7,7 @@ import db.ConnectionProvider;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 
 import java.sql.*;
@@ -284,6 +285,43 @@ public class EscolaMySQLDAO implements EscolaDAO {
             throw new RuntimeException("Error obteniendo vias", e);
         }
     }
+
+    @Override
+    public int inserirRetornantId(Escola es ){
+        String sql = """
+    INSERT INTO escoles  
+    ( nom, lloc,  aproximacio, popularitat)
+    VALUES (?, ?, ?, ?)
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     sql,
+                     Statement.RETURN_GENERATED_KEYS
+             )) {
+
+            ps.setString(1, es.getNom());
+            ps.setString(2, es.getLloc());
+            ps.setString(3, es.getAproximacio());
+            ps.setInt(4, es.getPopularitat());
+
+            ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error insertando sector", e);
+        }
+
+        throw new RuntimeException("No se pudo obtener el ID");
+    }
+
 }
+
 
 

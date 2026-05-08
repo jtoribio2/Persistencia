@@ -37,7 +37,7 @@ public class AppConfig {
 
 
     private static final EscolaService escolaService =
-            new EscolaService(escolaDAO); // le decimos al service que sus metodos usaran este dao
+            new EscolaService(escolaDAO,sectorDAO); // le decimos al service que sus metodos usaran este dao
 
     private static final EscaladorService Escaladorservice =
             new EscaladorService(escaladorDAO); // le decimos al service que sus metodos usaran este dao
@@ -60,7 +60,7 @@ public class AppConfig {
     }
 
     private static final EscolaController escolaController =
-            new EscolaController(escolaService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
+            new EscolaController(escolaService,sectorService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
 
     public static EscolaController getEscolaController() {
         return escolaController;

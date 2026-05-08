@@ -1,9 +1,11 @@
 package service;
 
 import dao.interfaces.EscolaDAO;
+import dao.interfaces.SectorDAO;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 
 import java.util.List;
@@ -13,15 +15,16 @@ import java.util.List;
 public class EscolaService {
 
 
-
     private final EscolaDAO escoladao;
+    private final SectorDAO sectordao;
 
-    public EscolaService(EscolaDAO edao) {
+    public EscolaService(EscolaDAO edao, SectorDAO sd) {
         this.escoladao = edao;
+        this.sectordao = sd;
     }
 
     // inserta un sector a la base de datos
-    public void crearEscola(Escola e )  throws  Exception{
+    public void crearEscola(Escola e) throws Exception {
 
         if (e == null) {
             throw new Exception("El sector no puede ser null");
@@ -52,7 +55,7 @@ public class EscolaService {
     }
 
     // devuelve un sector a traves de su id
-    public Escola  obtenerPorId (int id) throws  Exception{
+    public Escola obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
             throw new Exception("ID inválido");
@@ -62,7 +65,7 @@ public class EscolaService {
     }
 
     // elimina un sector a traves de un id
-    public void eliminarSector(int id) throws  Exception{
+    public void eliminarSector(int id) throws Exception {
 
         if (id <= 0) {
             throw new Exception("ID inválido");
@@ -72,7 +75,7 @@ public class EscolaService {
     }
 
     // modifica un sector y lo busca a traves de su id en el caso que no existe te dice que no ha podido modificarlo
-    public void modificarSector(Escola e) throws Exception{
+    public void modificarSector(Escola e) throws Exception {
 
         if (e == null) {
             throw new Exception("Sector no puede ser null");
@@ -86,24 +89,52 @@ public class EscolaService {
     }
 
 
-    public boolean isGel(Escola o ) throws  Exception{
+    public boolean isGel(Escola o) throws Exception {
 
         if (o == null) throw new Exception("Escola no puede ser null");
 
-        return   escoladao.isGel(o);
+        return escoladao.isGel(o);
     }
 
-    public List<EscolesRestricDTO> escolesDisponibles(){
+    public List<EscolesRestricDTO> escolesDisponibles() {
         List<EscolesRestricDTO> escoles = escoladao.escolesDisponibles();
         return escoles;
     }
 
 
-    public List<EscolaDisponibleDTO> viasDisponibles(Escola es) throws Exception{
-        if(es == null) throw new Exception("ERROR");
+    public List<EscolaDisponibleDTO> viasDisponibles(Escola es) throws Exception {
+        if (es == null) throw new Exception("ERROR");
         List<EscolaDisponibleDTO> viaD = escoladao.viesDisponibles(es);
 
         return viaD;
+    }
+
+    public int retornaId(Escola es) throws Exception {
+        if (es == null) throw new RuntimeException("Escoal null");
+        int id = escoladao.inserirRetornantId(es);
+        return id;
+    }
+
+    public void  crearEscolaId(Escola  es   ) throws Exception {
+
+        if (es == null) {
+            throw new RuntimeException("Sector null");
+        }
+
+        int idEscota = escoladao.inserirRetornantId(es);
+
+
+        try {
+            es.setId_escola(idEscota);
+
+        } catch (Exception e) {
+
+          escoladao.eliminar(es.getId_escola());
+
+            throw new RuntimeException(
+                    "No se pudo crear la vía. Sector eliminado."
+            );
+        }
     }
 }
 

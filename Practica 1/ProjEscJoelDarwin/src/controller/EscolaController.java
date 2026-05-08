@@ -1,24 +1,31 @@
 package controller;
 
+import com.mysql.cj.util.EscapeTokenizer;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 import service.EscolaService;
+import service.SectorService;
 
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import java.util.Scanner;
 
 public class EscolaController {
-
-    private   final EscolaService service2;
-    public EscolaController(EscolaService e ){this.service2= e;}
+private static Scanner sc = new Scanner(System.in);
+    private   final EscolaService service;
+    private final SectorService sectorService;
+    public EscolaController(EscolaService e , SectorService s ){
+        this.service = e;
+        this.sectorService = s;
+    }
 
     public   void addEscola(Escola e ) {
        // if(e == null) throw new Exception("ERROR DADES BUIDES");
         try{
-           service2.crearEscola(e);
+           service.crearEscola(e);
         }
         catch (Exception err ){
             System.out.println(err);
@@ -28,7 +35,7 @@ public class EscolaController {
     public  void SetEscola(Escola e )  {
        // if(e == null) throw new Exception("ERROR DADES BUIDES");
         try {
-            service2.modificarSector(e);
+            service.modificarSector(e);
         }
         catch(Exception err){
             System.out.println(err);
@@ -37,7 +44,7 @@ public class EscolaController {
 
     public  void removeEscola(Integer id  ) {
        try {
-           service2.eliminarSector(id);
+           service.eliminarSector(id);
        }
        catch (Exception err){
            System.out.println(err);
@@ -46,13 +53,13 @@ public class EscolaController {
 
     public  List<Escola> getList(){
        //Hacer comprovaciones o algo
-        List<Escola> e = service2.obtenerTodos();
+        List<Escola> e = service.obtenerTodos();
         return e ;
     }
 
     public  Escola getEscola(Integer id ) {
         try {
-            return service2.obtenerPorId(id);
+            return service.obtenerPorId(id);
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -61,7 +68,7 @@ public class EscolaController {
 
 public boolean isGel(Escola o ) {
 try {
-    return service2.isGel(o);
+    return service.isGel(o);
 }
 catch (Exception e ){
     System.out.println(e);
@@ -71,7 +78,7 @@ catch (Exception e ){
 }
 
 public void escolesDisponibles(){
-        List<EscolesRestricDTO> llista = service2.escolesDisponibles();
+        List<EscolesRestricDTO> llista = service.escolesDisponibles();
         if (llista.isEmpty()){
             System.out.println("No hi han Escoles amb restriccions disponimbles actualment");
         }
@@ -85,13 +92,107 @@ public void escolesDisponibles(){
 
     public void viaDisponibles(Escola es  ){
         try {
-            List<EscolaDisponibleDTO> via = service2.viasDisponibles(es);
+            List<EscolaDisponibleDTO> via = service.viasDisponibles(es);
             for(EscolaDisponibleDTO v : via){
                 System.out.println(v);
             }
         }
         catch (Exception e ){
             System.out.println(e);
+        }
+    }
+    //ESCOLA
+    public void crearESV(){
+        try {
+            //Escola
+            System.out.println("NOM ESCOLA");
+            String nomEscola = sc.nextLine();
+
+            System.out.println("LLOC");
+            String Escolalloc = sc.nextLine();
+
+            System.out.println("APROXIMACIO");
+            String Escolaprox = sc.nextLine();
+
+            System.out.println("POPULARITAT 1-3");
+            int  popularitatEscola = sc.nextInt();
+            sc.nextLine();
+            Escola es = new Escola(0,nomEscola,Escolalloc,Escolaprox,popularitatEscola);
+
+
+
+            //Sectors
+            System.out.println("Nom Sectors");
+            String Nomsector = sc.nextLine();
+
+            System.out.println("Latitut");
+            float latitutsector = sc.nextFloat();
+            sc.nextLine();
+            System.out.println("Longitut");
+            float longitutsector = sc.nextFloat();
+            sc.nextLine();
+            System.out.println("APROXIMACIO");
+            String aproximacioSector = sc.nextLine();
+
+            System.out.println("POPULARITAT 1-3");
+            int  popularitatSector = sc.nextInt();
+            sc.nextLine();
+
+
+            //Via
+            System.out.println("Tipus de vies\n1.Esportiva\n2.Classica\3.Gel");
+            int tipusVia = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println("NOM VIA");
+            String nomVia = sc.nextLine();
+
+            System.out.println("Llargada");
+            int llargadavia = sc.nextInt();
+
+            sc.nextLine();
+
+            System.out.println("Dificultat");
+            String dificultatvia  = sc.nextLine();
+
+            System.out.println("Orientacio");
+            String orientaciovia = sc.nextLine();
+
+            System.out.println("Ancoratge");
+            String ancoratgevia = sc.nextLine();
+
+            System.out.println("Tipus de roca");
+            String troca = sc.nextLine();
+
+
+            Sector s = null;
+            Via v = null;
+
+            try {
+                service.crearEscolaId(es);
+                //Aqui porque en mi metodo modifico el id Escola y inserto a la bd
+                 s = new Sector(0,es.getId_escola(),Nomsector,latitutsector,longitutsector,aproximacioSector,popularitatSector);
+                v = new Via(s.getId_sector(),tipusVia,nomVia,llargadavia,dificultatvia,orientaciovia,ancoratgevia,troca);
+
+                sectorService.crearSectorConVia(s, v);
+
+
+                System.out.println("Escola y Sector, vía creados correctamente");
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+
+                try {
+
+                        service.eliminarSector(es.getId_escola()); // deshacer escola
+
+                } catch (Exception rollbackEx) {
+                    System.out.println("Error en rollback: " + rollbackEx.getMessage());
+                }
+            }
+
+        }catch (Exception e ){
+            System.out.println(e.getMessage());
         }
     }
 }

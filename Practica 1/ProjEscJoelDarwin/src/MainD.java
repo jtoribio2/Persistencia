@@ -1,3 +1,5 @@
+import config.AppConfig;
+
 public class MainD {
     public static void main(String[] args) {
         System.out.println("SE EJECUTA");
@@ -6,8 +8,10 @@ public class MainD {
         AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
         AppConfig.getViaController().mostrarViesLlargues(1);*/
 
-        MainMenu menuPrincipal = new MainMenu();
+       // MainMenu menuPrincipal = new MainMenu();
 
-        menuPrincipal.PrintMenuMain();
+      //  menuPrincipal.PrintMenuMain();
+
+        AppConfig.getEscolaController().crearESV();
     }
 }
