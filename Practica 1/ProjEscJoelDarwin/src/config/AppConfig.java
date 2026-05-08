@@ -62,13 +62,11 @@ public class AppConfig {
     private static final EscolaController escolaController =
             new EscolaController(escolaService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
 
-    private static final ViaController viaController =
-            new ViaController(viaService, sectorService, escolaService);
-
-    public static ViaController getViaController() {
-        return viaController;
+    public static EscolaController getEscolaController() {
+        return escolaController;
     }
-    private static final EscaladorController escalorController =
+
+    private static final EscaladorController escaladorController =
             new EscaladorController(Escaladorservice); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
 
     public static EscaladorController getEscaladorController() {
@@ -78,10 +76,10 @@ public class AppConfig {
 
 
     private static final LlarController llarController =
-            new LlarController(llarService); // creamos el controller que podra usar los metodos de su entidad y sabra que tecnologia usar
+            new LlarController(Llarservice); // creamos el controller que podra usar los metodos de su entidad y sabra que tecnologia usar
 
     public static LlarController getLlarController() {
-        return llarControlador;
+        return llarController;
     }
 
     private static final ViaController viaController =
