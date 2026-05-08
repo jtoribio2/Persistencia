@@ -1,15 +1,32 @@
 package View.MenusView;
 
 public class MainMenuView {
-    public static void PrintMainMenu(){
-                System.out.println("=== MENU D'ACCES  ===");
-                System.out.println("1. ADMIN");
-                System.out.println("2. USUARI");
-                System.out.println("3. Exit");
-    }
 
-    public static void print(String txt ){
-        System.out.println(txt);
-    }
+    private static final String MENU_PRINCIPAL = """
+            
+            ╔══════════════════════════════════════════════╗
+            ║                                              ║
+            ║                 APP ESCALADA                 ║
+            ║                                              ║
+            ║            Creat per Joel i Darwin           ║
+            ║                                              ║
+            ╠══════════════════════════════════════════════╣
+            ║                                              ║
+            ║   1. Crear                                   ║
+            ║   2. Buscar                                  ║
+            ║   3. Llistar                                 ║
+            ║   4. Consultes                               ║
+            ║   5. Modificar                               ║
+            ║   6. Eliminar                                ║
+            ║                                              ║
+            ║   0. Sortir                                  ║
+            ║                                              ║
+            ╚══════════════════════════════════════════════╝
+            
+            Selecciona una opció:
+            """;
 
+    public static void mostrarMenu() {
+        System.out.println(MENU_PRINCIPAL);
+    }
 }
