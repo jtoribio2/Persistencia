@@ -170,7 +170,7 @@ public void escolesDisponibles(){
 
             try {
                 service.crearEscolaId(es);
-                //Aqui porque en mi metodo modifico y inserto a la bd
+                //Aqui porque en mi metodo modifico el id Escola y inserto a la bd
                  s = new Sector(0,es.getId_escola(),Nomsector,latitutsector,longitutsector,aproximacioSector,popularitatSector);
                 v = new Via(s.getId_sector(),tipusVia,nomVia,llargadavia,dificultatvia,orientaciovia,ancoratgevia,troca);
 
