@@ -159,5 +159,57 @@ public class EscolaService {
 
         return lista;
     }
+
+    public void modificarEscola(Escola e)
+            throws Exception {
+
+        if (e == null) {
+
+            throw new Exception(
+                    "Error introduint dades"
+            );
+        }
+
+        if (e.getId_escola() <= 0) {
+
+            throw new Exception(
+                    "ID inválid"
+            );
+        }
+
+        if (e.getNom() == null
+                || e.getNom().isBlank()) {
+
+            throw new Exception(
+                    "Nom incorrecte"
+            );
+        }
+
+        if (e.getLloc() == null
+                || e.getLloc().isBlank()) {
+
+            throw new Exception(
+                    "Lloc incorrecte"
+            );
+        }
+
+        if (e.getAproximacio() == null
+                || e.getAproximacio().isBlank()) {
+
+            throw new Exception(
+                    "Aproximacio incorrecta"
+            );
+        }
+
+        if (e.getPopularitat() < 1
+                || e.getPopularitat() > 3) {
+
+            throw new Exception(
+                    "Popularitat incorrecta"
+            );
+        }
+
+        escoladao.modificar(e);
+    }
 }
 

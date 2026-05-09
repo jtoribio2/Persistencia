@@ -224,4 +224,75 @@ public void escolesDisponibles(){
             System.out.println(e.getMessage());
         }
     }
+
+    public void modificar() {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+
+            mostrarTots();
+
+            System.out.println(
+                    "Introdueix ID escola a modificar:"
+            );
+
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            Escola actual =
+                    service.obtenerPorId(id);
+
+            if (actual == null) {
+
+                System.out.println(
+                        "No existeix aquesta escola"
+                );
+
+                return;
+            }
+
+            System.out.println("\nESCOLA ACTUAL:");
+            System.out.println(actual);
+
+            System.out.println("\nNou nom:");
+            String nom = sc.nextLine();
+
+            System.out.println("Nou lloc:");
+            String lloc = sc.nextLine();
+
+            System.out.println("Nova aproximacio:");
+            String aproximacio = sc.nextLine();
+
+            System.out.println("""
+
+        Nova popularitat:
+        1. Baixa
+        2. Mitjana
+        3. Alta
+        """);
+
+            int popularitat = sc.nextInt();
+
+            Escola modificada =
+                    new Escola(
+
+                            id,
+                            nom,
+                            lloc,
+                            aproximacio,
+                            popularitat
+                    );
+
+            service.modificarEscola(modificada);
+
+            System.out.println(
+                    "Escola modificada correctament"
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
 }

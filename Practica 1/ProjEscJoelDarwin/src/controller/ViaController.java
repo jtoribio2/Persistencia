@@ -156,18 +156,92 @@ public class ViaController {
     }
 
     // MODIFICAR
-    /**
-     * Metode que modifica vies
-     * @param v
-     * **/
-    public void modificar(Via v) {
+    public void modificar() {
+
+        Scanner sc = new Scanner(System.in);
+
         try {
-            service.modificar(v);
-            System.out.println("Vía modificada correctamente");
-        }catch (Exception e){
+
+            mostrarTots();
+
+            System.out.println(
+                    "Introdueix ID via a modificar:"
+            );
+
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            Via actual =
+                    service.obtenerPorId(id);
+
+            if (actual == null) {
+
+                System.out.println(
+                        "No existeix aquesta via"
+                );
+
+                return;
+            }
+
+            System.out.println("\nVIA ACTUAL:");
+            System.out.println(actual);
+
+            System.out.println("\nNou nom:");
+            String nom = sc.nextLine();
+
+            System.out.println("Nova llargada:");
+            int llargada = sc.nextInt();
+            sc.nextLine();
+
+            System.out.println(
+                    "Nova dificultat:"
+            );
+
+            String dificultat = sc.nextLine();
+
+            System.out.println(
+                    "Nova orientacio:"
+            );
+
+            String orientacio = sc.nextLine();
+
+            System.out.println(
+                    "Nou ancoratge:"
+            );
+
+            String ancoratge = sc.nextLine();
+
+            System.out.println(
+                    "Nou tipus roca:"
+            );
+
+            String troca = sc.nextLine();
+
+            Via modificada =
+                    new Via(
+
+                            id,
+                            actual.getId_sector(),
+                            actual.getId_tipus_via(),
+
+                            nom,
+                            llargada,
+                            dificultat,
+                            orientacio,
+                            ancoratge,
+                            troca
+                    );
+
+            service.modificar(modificada);
+
+            System.out.println(
+                    "Via modificada correctament"
+            );
+
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
         }
-
     }
 
     // BUSCAR POR ID
