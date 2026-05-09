@@ -162,4 +162,27 @@ public EscaladorController(EscaladorService s){this.service = s;}
            }
     }
 
+    public void buscarPerDni(String dni) {
+
+        try {
+
+            Escalador e = service.obtenerPorDni(dni);
+
+            if (e == null) {
+
+                System.out.println(
+                        "No existeix cap escalador amb aquest DNI"
+                );
+
+            } else {
+
+                System.out.println(e);
+            }
+
+        } catch (Exception ex) {
+
+            System.out.println(ex.getMessage());
+        }
+    }
+
 }

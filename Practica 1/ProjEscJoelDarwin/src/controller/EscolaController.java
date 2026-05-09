@@ -195,4 +195,22 @@ public void escolesDisponibles(){
             System.out.println(e.getMessage());
         }
     }
+
+    public void buscarPorNombre(String nombre) {
+
+        try {
+
+            List<Escola> lista =
+                    service.buscarPorNombre(nombre);
+
+            for (Escola e : lista) {
+
+                System.out.println(e);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
 }
