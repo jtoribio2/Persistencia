@@ -184,4 +184,72 @@ public EscaladorController(EscaladorService s){this.service = s;}
         }
     }
 
+    public void modificar() {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+
+            mostrarTots();
+
+            System.out.println(
+                    "Introdueix ID escalador a modificar:"
+            );
+
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            Escalador actual =
+                    service.obtenerPorId(id);
+
+            if (actual == null) {
+
+                System.out.println(
+                        "No existeix aquest escalador"
+                );
+
+                return;
+            }
+
+            System.out.println("\nESCALADOR ACTUAL:");
+            System.out.println(actual);
+
+            System.out.println("\nNou nom:");
+            String nom = sc.nextLine();
+
+            System.out.println("Nova edat:");
+            int edat = sc.nextInt();
+
+            System.out.println("""
+
+        Nou estil:
+        1. Esportiva
+        2. Classica
+        3. Gel
+        """);
+
+            int estil = sc.nextInt();
+
+            Escalador modificat =
+                    new Escalador(
+
+                            id,
+                            actual.getDni(),
+                            nom,
+                            edat,
+                            estil
+                    );
+
+            service.modificarEscalador(modificat);
+
+            System.out.println(
+                    "Escalador modificat correctament"
+            );
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

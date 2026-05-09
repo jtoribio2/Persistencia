@@ -60,14 +60,80 @@ public class SectorController {
             System.out.println(e.getMessage());
         }
     }
-    /**@param s Sector  modificar sector **/
-    // modificar un sector de la base de datos
-    public void modificarSector(Sector s) {
+    public void modificar() {
+
+        Scanner sc = new Scanner(System.in);
+
         try {
-            service.modificarSector(s);
-            System.out.println("Sector modificado correctamente");
+
+            mostrarTots();
+
+            System.out.println(
+                    "Introdueix ID sector a modificar:"
+            );
+
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            Sector actual =
+                    service.obtenerPorId(id);
+
+            if (actual == null) {
+
+                System.out.println(
+                        "No existeix aquest sector"
+                );
+
+                return;
+            }
+
+            System.out.println("\nSECTOR ACTUAL:");
+            System.out.println(actual);
+
+            System.out.println("\nNou nom:");
+            String nom = sc.nextLine();
+
+            System.out.println("Nova latitut:");
+            float latitut = sc.nextFloat();
+
+            System.out.println("Nova longitut:");
+            float longitut = sc.nextFloat();
+            sc.nextLine();
+
+            System.out.println("Nova aproximacio:");
+            String aproximacio = sc.nextLine();
+
+            System.out.println("""
+
+        Nova popularitat:
+        1. Baixa
+        2. Mitjana
+        3. Alta
+        """);
+
+            int popularitat = sc.nextInt();
+
+            Sector modificat =
+                    new Sector(
+
+                            id,
+                            actual.getId_escoles(),
+                            nom,
+                            latitut,
+                            longitut,
+                            aproximacio,
+                            popularitat
+                    );
+
+            service.modificarSector(modificat);
+
+            System.out.println(
+                    "Sector modificat correctament"
+            );
+
         } catch (Exception e) {
-            System.out.println(e);
+
+            System.out.println(e.getMessage());
         }
     }
     /**@param id Int Elimnar sector especific **/
