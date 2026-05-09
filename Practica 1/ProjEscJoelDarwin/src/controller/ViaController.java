@@ -99,7 +99,7 @@ public class ViaController {
             System.out.println("Ancoratge:");
             String ancoratge = sc.nextLine();
 
-            System.out.println("Tipus roca");
+            System.out.println("Tipus de roca:  [conglomerat, granit, calcaria, arenisca, altres]");
             String troca = sc.nextLine();
 
             // creamos la via

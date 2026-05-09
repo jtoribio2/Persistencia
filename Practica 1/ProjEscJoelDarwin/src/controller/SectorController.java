@@ -126,17 +126,17 @@ public class SectorController {
             System.out.println("Nombre sector:");
             String nomSector = sc.nextLine();
 
-            System.out.println("Latitud:");
+            System.out.println("Latitud (x,x...):");
             float lat = sc.nextFloat();
 
-            System.out.println("Longitud:");
+            System.out.println("Longitud(x,x...):");
             float lon = sc.nextFloat();
             sc.nextLine();
 
-            System.out.println("Aproximacio:");
+            System.out.println("Aproximacio(x min...):");
             String aprox = sc.nextLine();
 
-            System.out.println("Popularitat (1-3):");
+            System.out.println("Popularitat (1-3)\n1.Baixa\n2.Mitjana\n3.Alta:");
             int pop = sc.nextInt();
             sc.nextLine();
 
@@ -154,23 +154,23 @@ public class SectorController {
             System.out.println("Nom via:");
             String nomVia = sc.nextLine();
 
-            System.out.println("Llargada:");
+            System.out.println("Llargada(x metres ):");
             int llargada = sc.nextInt();
 
-            System.out.println("Tipus via:");
+            System.out.println("Tipus via\n1.Baixa\n2.Mitjana\n3.Alta:");
             int tipus = sc.nextInt();
             sc.nextLine();
 
-            System.out.println("Dificultat:");
+            System.out.println("Dificultat:\n Nivell: 4,4+,5,5+,6a,6a+,6b,6b+,6c,6c+,7a,7a+,7b,7b+,7c,7c+,8a,8a+,8b");
             String dif = sc.nextLine();
 
-            System.out.println("Orientacio:");
+            System.out.println("Orientacio(N,S,W,E): ");
             String ori = sc.nextLine();
 
             System.out.println("Ancoratge:");
             String anc = sc.nextLine();
 
-            System.out.println("Troca:");
+            System.out.println("Troca:  [conglomerat, granit, calcaria, arenisca, altres]");
             String troca = sc.nextLine();
 
             Via v = new Via(
