@@ -6,8 +6,6 @@ public class MainD {
         AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
         AppConfig.getViaController().mostrarViesLlargues(1);*/
 
-        MainMenu menuPrincipal = new MainMenu();
 
-        menuPrincipal.PrintMenuMain();
     }
 }
