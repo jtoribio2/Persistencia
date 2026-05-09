@@ -197,4 +197,7 @@ public class SectorController {
         }
     }
 
+    public void eliminarViasdelSector(){
+
+    }
 }
