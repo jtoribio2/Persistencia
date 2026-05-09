@@ -1,5 +1,6 @@
 import config.AppConfig;
 import config.DAOFactory;
+import controller.Menus.MainMenu;
 import controller.SectorController;
 import dao.impl.mysql.SectorMySQLDAO;
 import dao.interfaces.SectorDAO;
@@ -15,7 +16,8 @@ import  java.util.*;
 public class Main {
     private static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        AppConfig.getSectorController().crearSectorConVia();
+        MainMenu menu = new MainMenu();
+        menu.iniciar();
     }
 }
 
