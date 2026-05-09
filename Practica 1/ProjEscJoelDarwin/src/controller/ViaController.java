@@ -25,16 +25,22 @@ public class ViaController {
         this.escolaService = escolaService;
     }
 
-/**Listar les vies **/
-    // LISTAR TODAS
-    public void listar() {
+    public void mostrarTots() {
+
         try {
-            List<Via> lista = service.obtenerTodos();
-            lista.forEach(System.out::println);
-        }catch (Exception e){
+
+            List<Via> lista =
+                    service.obtenerTodos();
+
+            for (Via v : lista) {
+
+                System.out.println(v);
+            }
+
+        } catch (Exception e) {
+
             System.out.println(e.getMessage());
         }
-
     }
 
     // BUSCAR POR NOMBRE

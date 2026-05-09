@@ -43,13 +43,21 @@ public class SectorController {
         }
 
     }
-/**Mostrara tots les vies **/
-    // mostrar todos los sectores de la base de datos
     public void mostrarTots() {
-        List<Sector> lista = service.obtenerTodos();
 
-        for (Sector s : lista) {
-            System.out.println(s.getId_sector() + " - " + s.getNom());
+        try {
+
+            List<Sector> lista =
+                    service.obtenerTodos();
+
+            for (Sector s : lista) {
+
+                System.out.println(s);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
     }
     /**@param s Sector  modificar sector **/
