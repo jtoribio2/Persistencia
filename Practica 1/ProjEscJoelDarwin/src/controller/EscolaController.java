@@ -50,11 +50,22 @@ private static Scanner sc = new Scanner(System.in);
            System.out.println(err);
        }
     }
-/**@return Retorna una llista de Escola**/
-    public  List<Escola> getList(){
-       //Hacer comprovaciones o algo
-        List<Escola> e = service.obtenerTodos();
-        return e ;
+    public void mostrarTots() {
+
+        try {
+
+            List<Escola> lista =
+                    service.obtenerTodos();
+
+            for (Escola e : lista) {
+
+                System.out.println(e);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
     }
 /**@param id Integer @return Escola(Obj)**/
     public  Escola getEscola(Integer id ) {
