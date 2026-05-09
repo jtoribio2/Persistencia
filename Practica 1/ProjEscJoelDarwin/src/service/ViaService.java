@@ -20,7 +20,7 @@ public class ViaService {
     public ViaService(ViaDAO viaDAO) {
         this.viaDAO = viaDAO;
     }
-
+/**@param v Via **/
     // inserta una via
     public void crear(Via v) throws Exception {
 
@@ -68,7 +68,9 @@ public class ViaService {
 
         viaDAO.inserir(v);
     }
-
+/**Obtindre totes les vies
+ * @return List Via
+ * **/
     // Lista todas la vias
     public List<Via> obtenerTodos() throws Exception  {
         List<Via> lista = viaDAO.obtindreTots();
@@ -77,7 +79,10 @@ public class ViaService {
         }
         return lista;
     }
-
+/**
+ * @param id int
+ * @return via
+ * **/
     // busca una via por id
     public Via obtenerPorId(int id) throws Exception {
 
@@ -93,7 +98,7 @@ public class ViaService {
 
         return via;
     }
-
+/**@param id INT**/
     // Borra una via per id
     public void eliminar(int id) throws Exception {
 
@@ -106,7 +111,7 @@ public class ViaService {
 
         viaDAO.eliminar(id);
     }
-
+/**@param v Via **/
     // Modifica una via
     public void modificar(Via v) throws Exception {
 
@@ -124,7 +129,9 @@ public class ViaService {
 
         viaDAO.modificar(v);
     }
-
+/**@param nombre String
+ * @return  List via
+ * **/
     // Busca por nombre y devuelve una lista con todas las vias que se llamana asi
     public List<Via> buscarPorNombre(String nombre) throws Exception  {
 
@@ -140,11 +147,10 @@ public class ViaService {
 
         return lista;
     }
-/*
-    public String viesDisponibles(Escola e ) throws Exception{
-        return viaDAO.viesDisponibles(e);
-    }*/
 
+/**@param via Via
+ * @return Sector
+ * **/
     public Sector buscarSector(Via via) {
 
         Sector sector = viaDAO.buscarSector(via);
@@ -155,7 +161,10 @@ public class ViaService {
 
         return sector;
     }
-
+/**
+ * @param via Via
+ * @return Escola
+ * **/
     public Escola buscarEscola(Via via) {
 
         Escola escola = viaDAO.buscarEscola(via);
@@ -166,31 +175,44 @@ public class ViaService {
 
         return escola;
     }
-
+/**
+ * @param dades String
+ * @return List ViaOerDificultatDTO
+ *
+ * **/
     public List<ViaPerDifDTO> viesPerDificultat(String dades) throws  Exception{
         if(dades.isBlank())throw new Exception("Has deixat en blanc el camp");
       return   viaDAO.viesPerDificultat(dades);
     }
 
-
+/**
+ * @return List VeisPerEstatTancatDTO
+ * **/
     public List<ViesPerEstatTancatDTO> viesPerEstatTancat(){
         return viaDAO.viesPerEstatTancat();
     }
-
+/**@return Vies per estat apte List**/
     public List<ViesPerEstatApteDTO> viesPerEstatApte(){
         return viaDAO.viesPerEstatApte();
     }
-
+/**
+ * @param escola int
+ * @return List Via llargues DTO
+ *
+ * **/
     public List<ViesLlarguesDTO> mostrarViesLlargues(int escola) throws Exception{
         if(escola < 0) throw new Exception("ID INCORRECTE");
         return viaDAO.mostrarViesLlargues(escola);
     }
-
+/**
+ * @param dia int
+ * @return List viesAPtesrecentDto
+ * **/
     public List<ViesAptRecentDTO> viesAptesRecent(int dia) throws Exception{
         if (dia<=0) throw new Exception("EL TERMINI MINIM PER MIRAR VIES DISPONIBLES RECENTMENT HAN DE SER MES GRANS QUE 0");
         return viaDAO.viasAptesRecent(dia);
     }
-
+/**@param sector int **/
     public void ElimnarViasPorSector(int sector ) throws  Exception{
         if(sector < 0) throw  new Exception("Error");
         viaDAO.EliminarViasPorSector(sector);

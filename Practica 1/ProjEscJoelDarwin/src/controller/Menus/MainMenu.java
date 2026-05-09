@@ -1,7 +1,6 @@
 package controller.Menus;
 
 import View.MenusView.MainMenuView;
-import View.MenusView.MenuEliminarView;
 
 import java.util.Scanner;
 
@@ -45,7 +44,7 @@ public class MainMenu {
 
                 case 4:
                     System.out.println("MENU CONSULTES");
-                    new ConultarMenu()
+                    new ConsultarMenu()
                             .iniciar();
                     break;
 

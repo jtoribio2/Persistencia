@@ -47,7 +47,7 @@ private static Scanner sc = new Scanner(System.in);
            List<Escola> es = service.obtenerTodos();
            System.out.println("Selecciona una escola per esborrar");
            for(int i = 0; i < es.size(); i++){
-               System.out.println((i+1) + " " + es.get(i).getNom());
+               System.out.println(es.get(i).getId_escola() + " " + es.get(i).getNom());
            }
            int id = sc.nextInt();
            sc.nextLine();
@@ -225,7 +225,7 @@ public void escolesDisponibles(){
             System.out.println(e.getMessage());
         }
     }
-
+/**@param nombre String **/
     public void buscarPorNombre(String nombre) {
 
         try {
@@ -243,7 +243,7 @@ public void escolesDisponibles(){
             System.out.println(e.getMessage());
         }
     }
-
+/**Modificar**/
     public void modificar() {
 
         Scanner sc = new Scanner(System.in);

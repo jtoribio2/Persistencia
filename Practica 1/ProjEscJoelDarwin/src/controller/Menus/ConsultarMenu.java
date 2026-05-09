@@ -1,12 +1,11 @@
 package controller.Menus;
 
 import View.MenusView.MenuConsultesView;
-import View.MenusView.MenuCrearView;
 import config.AppConfig;
 
 import java.util.Scanner;
 
-public class ConultarMenu {
+public class ConsultarMenu {
 
     private final Scanner sc = new Scanner(System.in);
 

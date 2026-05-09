@@ -20,7 +20,7 @@ public class EscolaService {
         this.escoladao = edao;
         this.sectordao = sd;
     }
-
+/**@param e Escola **/
     // inserta un sector a la base de datos
     public void crearEscola(Escola e) throws Exception {
 
@@ -46,12 +46,12 @@ public class EscolaService {
         }
         escoladao.inserir(e);
     }
-
+/**Obtindre Escola**/
     // devuelve una lista donde aparecen todos los sectores de la bd
     public List<Escola> obtenerTodos() {
         return escoladao.obtindreTots();
     }
-
+/**@param id Int @return Retornar Escola**/
     // devuelve un sector a traves de su id
     public Escola obtenerPorId(int id) throws Exception {
 
@@ -61,7 +61,7 @@ public class EscolaService {
 
         return escoladao.obtenir(id);
     }
-
+/**@param id Int  eliminar Escola **/
     // elimina un sector a traves de un id
     public void eliminarEscola(int id) throws Exception {
 
@@ -86,33 +86,34 @@ public class EscolaService {
         escoladao.modificar(e);
     }
 
-
+/**@param o Escola
+ * @return Boolean**/
     public boolean isGel(Escola o) throws Exception {
 
         if (o == null) throw new Exception("Escola no puede ser null");
 
         return escoladao.isGel(o);
     }
-
+/**@return EscolesRestrictDto**/
     public List<EscolesRestricDTO> escolesDisponibles() {
         List<EscolesRestricDTO> escoles = escoladao.escolesDisponibles();
         return escoles;
     }
 
-
+/**@param es Escola **/
     public List<EscolaDisponibleDTO> viasDisponibles(Escola es) throws Exception {
         if (es == null) throw new Exception("ERROR");
         List<EscolaDisponibleDTO> viaD = escoladao.viesDisponibles(es);
 
         return viaD;
     }
-
+/**@param es Escola @return Retornar id **/
     public int retornaId(Escola es) throws Exception {
         if (es == null) throw new RuntimeException("Escoal null");
         int id = escoladao.inserirRetornantId(es);
         return id;
     }
-
+/**@param es Escola**/
     public void  crearEscolaId(Escola  es   ) throws Exception {
 
         if (es == null) {
@@ -134,7 +135,7 @@ public class EscolaService {
             );
         }
     }
-
+/**@param nombre String **/
     public List<Escola> buscarPorNombre(String nombre)
             throws Exception {
 
@@ -157,7 +158,7 @@ public class EscolaService {
 
         return lista;
     }
-
+/**@param e Escola **/
     public void modificarEscola(Escola e)
             throws Exception {
 

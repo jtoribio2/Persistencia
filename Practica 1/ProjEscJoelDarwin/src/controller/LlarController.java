@@ -31,7 +31,8 @@ public class LlarController {
         List<Llar> e = service2.obtenirTot();
         return e ;
     }
-
+/**@param id Int
+ * @return Llar**/
     public  Llar getLlar(Integer id ) {
 
         return   service2.obtenerLlar(id);

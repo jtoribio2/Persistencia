@@ -43,6 +43,7 @@ public class SectorController {
         }
 
     }
+    /**Mostrar Tots sectors**/
     public void mostrarTots() {
 
         try {
@@ -60,6 +61,7 @@ public class SectorController {
             System.out.println(e.getMessage());
         }
     }
+    /**Modificar Sector **/
     public void modificar() {
 
         Scanner sc = new Scanner(System.in);
