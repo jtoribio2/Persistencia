@@ -114,7 +114,7 @@ public void escolesDisponibles(){
             System.out.println("APROXIMACIO");
             String Escolaprox = sc.nextLine();
 
-            System.out.println("POPULARITAT 1-3");
+            System.out.println("POPULARITAT 1-3\n1.Baixa\n2.Mitjana\n3.Alta");
             int  popularitatEscola = sc.nextInt();
             sc.nextLine();
             Escola es = new Escola(0,nomEscola,Escolalloc,Escolaprox,popularitatEscola);
@@ -125,13 +125,13 @@ public void escolesDisponibles(){
             System.out.println("Nom Sectors");
             String Nomsector = sc.nextLine();
 
-            System.out.println("Latitut");
+            System.out.println("Latitud (x,x...):");
             float latitutsector = sc.nextFloat();
             sc.nextLine();
-            System.out.println("Longitut");
+            System.out.println("Longitud(x,x...):");
             float longitutsector = sc.nextFloat();
             sc.nextLine();
-            System.out.println("APROXIMACIO");
+            System.out.println("Aproximacio(x min...):");
             String aproximacioSector = sc.nextLine();
 
             System.out.println("POPULARITAT 1-3\n1.Baixa\n2.Mitjana\n3.Alta" );
@@ -147,21 +147,21 @@ public void escolesDisponibles(){
             System.out.println("NOM VIA");
             String nomVia = sc.nextLine();
 
-            System.out.println("Llargada");
+            System.out.println("Llargada(x metres ):");
             int llargadavia = sc.nextInt();
 
             sc.nextLine();
 
-            System.out.println("Dificultat");
+            System.out.println("Dificultat:\n Nivell: 4,4+,5,5+,6a,6a+,6b,6b+,6c,6c+,7a,7a+,7b,7b+,7c,7c+,8a,8a+,8b");
             String dificultatvia  = sc.nextLine();
 
-            System.out.println("Orientacio");
+            System.out.println("Orientacio(N,S,W,E): ");
             String orientaciovia = sc.nextLine();
 
             System.out.println("Ancoratge");
             String ancoratgevia = sc.nextLine();
 
-            System.out.println("Tipus de roca");
+            System.out.println("Troca:  [conglomerat, granit, calcaria, arenisca, altres]");
             String troca = sc.nextLine();
 
 

@@ -33,8 +33,8 @@ public class CrearMenu {
                     break;
 
                 case 2:
-                    //todo cuando pide la popularitat poner entre parentesis que es el 1 2 3 entre parentesis al lado
-                    //todo cuando te pide el tipo de via el tipo gel sale un cuadro en vez de 3
+                    //todo cuando pide la popularitat poner entre parentesis que es el 1 2 3 entre parentesis al lado (X)
+                    //todo cuando te pide el tipo de via el tipo gel sale un cuadro en vez de 3 (X)
                     AppConfig.getEscolaController().crearESV();
                     break;
                 case 3:
