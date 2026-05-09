@@ -6,18 +6,61 @@ import model.entity.Escalador;
 
 
 import java.util.List;
+import java.util.Scanner;
 
 public class EscaladorController {
-
-   private  EscaladorService dao ;
+    private static Scanner sc = new Scanner(System.in);
+   private  EscaladorService service;
 /**
  * @param s Service
  * **/
-public EscaladorController(EscaladorService s){this.dao = s;}
+public EscaladorController(EscaladorService s){this.service = s;}
+
+    public void crear() {
+        try {
+
+            System.out.println("DNI:");
+            String dni = sc.nextLine();
+
+            System.out.println("Nom:");
+            String nom = sc.nextLine();
+
+            System.out.println("Edat:");
+            int edat = sc.nextInt();
+            sc.nextLine();
+            System.out.println("""
+                
+        Estil:
+        1. Esportiva
+        2. Classica
+        3. Gel
+        """);
+
+            int estil = sc.nextInt();
+            sc.nextLine();
+
+            Escalador e = new Escalador(
+                    0,
+                    dni,
+                    nom,
+                    edat,
+                    estil
+            );
+
+            service.crearEscalador(e);
+
+            System.out.println("Escalador creat correctament");
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+    }
+
     public  void addEscalador(Escalador e ) {
 
     try{
-        dao.crearEscalador(e);
+        service.crearEscalador(e);
     }
     catch (Exception e2 ) {
         System.out.println(e2);
@@ -28,7 +71,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
      **/
     public   void SetEscalador( Escalador e ) {
       try{
-        dao.modificarEscalador(e);
+        service.modificarEscalador(e);
       }
       catch (Exception e2  ){
           System.out.println(e2);
@@ -39,7 +82,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
  * **/
     public  void removeEscalador(Integer id ) {
         try {
-            dao.eliminarEscalador(id);
+            service.eliminarEscalador(id);
             System.out.println("ESCALADOR ELIMINADO");
         }
         catch (Exception e ){
@@ -52,7 +95,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
  * **/
     public Escalador getEscaldorDni(String dni){
         try {
-            Escalador es = dao.obtenerPorDni(dni);
+            Escalador es = service.obtenerPorDni(dni);
             System.out.println("ESCALADOR ELIMINAT");
             return es;
         }
@@ -66,7 +109,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
      * **/
     public  void removedni(String dni){
        try {
-           dao.eliminarPerDni(dni);
+           service.eliminarPerDni(dni);
        }
        catch (Exception e ){
            System.out.println(e);
@@ -79,7 +122,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
 
 
         try {
-            List<Escalador> e = dao.obtenerTodos();
+            List<Escalador> e = service.obtenerTodos();
 
             return e;
         }
@@ -96,7 +139,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
  * **/
     public  Escalador getEscalador(Integer id  ) {
     try {
-        return dao.obtenerPorId(id);
+        return service.obtenerPorId(id);
     }
     catch(Exception e ){
         return null;
@@ -106,7 +149,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
 /**@param dni String**/
     public void buscarPorNivel(String dni){
            try {
-               List<EscaladorNivellDTO> llista = dao.buscarPorNivell(dni);
+               List<EscaladorNivellDTO> llista = service.buscarPorNivell(dni);
                if (llista.isEmpty()) {
                    System.out.println("No hi han escaladors amb el mateix nivell que tu asolit o superior");
                } else {

@@ -34,14 +34,14 @@ public class EscaladorService  {
             throw new Exception("Falta el nom");
         }
 
-        if (e.getDni() == null || e.getDni().isEmpty() || e.getDni().matches("^[0-9]{8}[A-Z]$")) {
+        if (e.getDni() == null || e.getDni().isEmpty() || !e.getDni().matches("^[0-9]{8}[A-Z]$")) {
             throw new Exception( "El DNI es INCORRECTE ");
         }
 
         if(e.getEdat() < 0 || e.getEdat() > 100) throw new Exception("Error edad");
 
 
-        if (e.getEstil() > 0 && e.getEstil() <= 3) {throw new Exception("Debe indicar una estilo válida");}
+        if (e.getEstil() < 1 || e.getEstil() > 3) {throw new Exception("Debe indicar una estilo válida");}
 
         escaladorDao.inserir(e);
     }

@@ -1,6 +1,6 @@
 package View.MenusView;
 
-public class MenuConsultes {
+public class MenuConsultesView {
 
     private static final String MENU_CONSULTES = """
 

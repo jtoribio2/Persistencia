@@ -1,19 +1,19 @@
 package View.MenusView;
 
-public class MenuCrear {
+public class MenuModificarView {
 
-    private static final String MENU_BUSCAR ="""
+    private static final String MENU_MODIFICAR = """
 
         ╔══════════════════════════════════════════════╗
         ║                                              ║
-        ║                 BUSCAR DADES                 ║
+        ║               MODIFICAR DADES                ║
         ║                                              ║
         ╠══════════════════════════════════════════════╣
         ║                                              ║
-        ║   1. Buscar Escalador                        ║
-        ║   2. Buscar Escola                           ║
-        ║   3. Buscar Sector                           ║
-        ║   4. Buscar Via                              ║
+        ║   1. Modificar Escalador                     ║
+        ║   2. Modificar Escola                        ║
+        ║   3. Modificar Sector                        ║
+        ║   4. Modificar Via                           ║
         ║                                              ║
         ║   0. Tornar                                  ║
         ║                                              ║
@@ -23,6 +23,6 @@ public class MenuCrear {
         """;
 
     public static void mostrarMenu() {
-        System.out.println(MENU_BUSCAR);
+        System.out.println(MENU_MODIFICAR);
     }
 }
