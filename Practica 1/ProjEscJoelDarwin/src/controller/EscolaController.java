@@ -134,13 +134,13 @@ public void escolesDisponibles(){
             System.out.println("APROXIMACIO");
             String aproximacioSector = sc.nextLine();
 
-            System.out.println("POPULARITAT 1-3");
+            System.out.println("POPULARITAT 1-3\n1.Baixa\n2.Mitjana\n3.Alta" );
             int  popularitatSector = sc.nextInt();
             sc.nextLine();
 
 
             //Via
-            System.out.println("Tipus de vies\n1.Esportiva\n2.Classica\3.Gel");
+            System.out.println("Tipus de vies\n1.Esportiva\n2.Classica\n 3.Gel");
             int tipusVia = sc.nextInt();
             sc.nextLine();
 
