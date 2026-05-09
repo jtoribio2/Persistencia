@@ -1,5 +1,6 @@
 package controller;
 
+import com.mysql.cj.util.EscapeTokenizer;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
@@ -40,29 +41,31 @@ private static Scanner sc = new Scanner(System.in);
             System.out.println(err);
         }
     }
-/**Eliminar Escola**/
-    public  void removeEscola( ) {
+/**@param id IAnteger**/
+    public  void removeEscola(Integer id  ) {
        try {
-           getList();
-           int idEscola = sc.nextInt();
-
-        //   service.eliminarEscola(id);
+           service.eliminarSector(id);
        }
        catch (Exception err){
            System.out.println(err);
        }
     }
-/**@return Retorna una llista de Escola**/
-    public  void getList(){
+    public void mostrarTots() {
+
         try {
-            List<Escola> es = service.obtenerTodos();
-            for(int i = 0; i < es.size(); i++){
-                System.out.println((i + 1) + " " + es.get(i));
+
+            List<Escola> lista =
+                    service.obtenerTodos();
+
+            for (Escola e : lista) {
+
+                System.out.println(e);
             }
-        }catch (Exception e){
-            System.out.println(e);
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
-        ;
     }
 /**@param id Integer @return Escola(Obj)**/
     public  Escola getEscola(Integer id ) {
@@ -192,7 +195,7 @@ public void escolesDisponibles(){
 
                 try {
 
-                        service.eliminarEscola(es.getId_escola()); // deshacer escola
+                        service.eliminarSector(es.getId_escola()); // deshacer escola
 
                 } catch (Exception rollbackEx) {
                     System.out.println("Error en rollback: " + rollbackEx.getMessage());

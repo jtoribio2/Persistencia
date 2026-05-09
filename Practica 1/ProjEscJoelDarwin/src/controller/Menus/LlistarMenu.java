@@ -1,10 +1,11 @@
 package controller.Menus;
 
-import View.MenusView.MainMenuView;
+import View.MenusView.MenuLlistarView;
+import config.AppConfig;
 
 import java.util.Scanner;
 
-public class MainMenu {
+public class LlistarMenu {
 
     private final Scanner sc = new Scanner(System.in);
 
@@ -14,7 +15,7 @@ public class MainMenu {
 
         do {
 
-            MainMenuView.mostrarMenu();
+            MenuLlistarView.mostrarMenu();
 
             while (!sc.hasNextInt()) {
 
@@ -28,37 +29,44 @@ public class MainMenu {
             switch (opcio) {
 
                 case 1:
-                    new CrearMenu()
-                            .iniciar();
+
+                    AppConfig
+                            .getEscaladorController()
+                            .mostrarTots();
+
                     break;
 
                 case 2:
-                    new BuscarMenu()
-                            .iniciar();
+
+                    AppConfig
+                            .getEscolaController()
+                            .mostrarTots();
+
                     break;
 
                 case 3:
-                    new LlistarMenu()
-                            .iniciar();
+
+                    AppConfig
+                            .getSectorController()
+                            .mostrarTots();
+
                     break;
 
                 case 4:
-                    System.out.println("MENU CONSULTES");
-                    break;
 
-                case 5:
-                    System.out.println("MENU MODIFICAR");
-                    break;
+                    AppConfig
+                            .getViaController()
+                            .mostrarTots();
 
-                case 6:
-                    System.out.println("MENU ELIMINAR");
                     break;
 
                 case 0:
-                    System.out.println("Sortint...");
+
+                    System.out.println("Tornant...");
                     break;
 
                 default:
+
                     System.out.println("Opció incorrecta");
             }
 

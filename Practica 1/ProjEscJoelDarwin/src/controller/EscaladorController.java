@@ -117,23 +117,22 @@ public EscaladorController(EscaladorService s){this.service = s;}
            System.out.println(e);
        }
     }
-    /**
-     * @return List<Escalador> Un arrayList que devuelve Escaldores
-     * **/
-    public  List<Escalador> getList(){
-
+    public void mostrarTots() {
 
         try {
-            List<Escalador> e = service.obtenerTodos();
 
-            return e;
+            List<Escalador> lista =
+                    service.obtenerTodos();
+
+            for (Escalador e : lista) {
+
+                System.out.println(e);
+            }
+
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
         }
-        catch (Exception e2 ){
-            System.out.println(e2);
-            return null;
-        }
-
-
     }
 /**
  * @param id Integer
