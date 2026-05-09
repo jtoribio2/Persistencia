@@ -1,11 +1,12 @@
 package controller.Menus;
 
-import View.MenusView.MainMenuView;
-import View.MenusView.MenuEliminarView;
+import View.MenusView.MenuConsultesView;
+import View.MenusView.MenuCrearView;
+import config.AppConfig;
 
 import java.util.Scanner;
 
-public class MainMenu {
+public class ConultarMenu {
 
     private final Scanner sc = new Scanner(System.in);
 
@@ -15,7 +16,7 @@ public class MainMenu {
 
         do {
 
-            MainMenuView.mostrarMenu();
+            MenuConsultesView.mostrarMenu();
 
             while (!sc.hasNextInt()) {
 
@@ -29,39 +30,33 @@ public class MainMenu {
             switch (opcio) {
 
                 case 1:
-                    new CrearMenu()
-                            .iniciar();
+                    AppConfig.getEscolaController().viaDisponibles();
                     break;
 
                 case 2:
-                    new BuscarMenu()
-                            .iniciar();
-                    break;
+                    AppConfig.getViaController().viesPerDificultat();
 
+                    break;
                 case 3:
-                    new LlistarMenu()
-                            .iniciar();
+                     new  PerEstatMenu()
+                             .iniciar();
                     break;
-
                 case 4:
-                    System.out.println("MENU CONSULTES");
-                    new ConultarMenu()
-                            .iniciar();
+                    AppConfig.getEscolaController().escolesDisponibles();
                     break;
-
                 case 5:
-                    new ModificarMenu()
-                            .iniciar();
+                    AppConfig.getSectorController().sectorViesDisponibles();
                     break;
 
                 case 6:
-                    System.out.println("MENU ELIMINAR");
-                    new EliminarMenu()
-                            .iniciar();
+                    AppConfig.getEscaladorController().buscarPorNivel();
                     break;
 
-                case 0:
-                    System.out.println("Sortint...");
+                case 7 :
+                    AppConfig.getViaController().viesAptesRecent();
+                    break;
+                case 8:
+                    AppConfig.getViaController().mostrarViesLlargues();
                     break;
 
                 default:
