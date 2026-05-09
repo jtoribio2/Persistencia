@@ -100,6 +100,9 @@ public class ViaService {
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
         }
+        viaDAO.EliminarViaLlars(id);
+        viaDAO.ElimnarViaDisponibilitat(id);
+        viaDAO.ElimnarViaEscaladors(id);
 
         viaDAO.eliminar(id);
     }
@@ -186,5 +189,10 @@ public class ViaService {
     public List<ViesAptRecentDTO> viesAptesRecent(int dia) throws Exception{
         if (dia<=0) throw new Exception("EL TERMINI MINIM PER MIRAR VIES DISPONIBLES RECENTMENT HAN DE SER MES GRANS QUE 0");
         return viaDAO.viasAptesRecent(dia);
+    }
+
+    public void ElimnarViasPorSector(int sector ) throws  Exception{
+        if(sector < 0) throw  new Exception("Error");
+        viaDAO.EliminarViasPorSector(sector);
     }
 }

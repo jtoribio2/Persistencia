@@ -26,4 +26,6 @@ public interface EscaladorDAO extends Dao<Escalador,Integer> {
     Escalador obtenirPerDni (String dni);
 
     List<EscaladorNivellDTO> buscarPorNivel(String dni);
+
+    void EliminarEscalador_vies(int Escalador);
 }

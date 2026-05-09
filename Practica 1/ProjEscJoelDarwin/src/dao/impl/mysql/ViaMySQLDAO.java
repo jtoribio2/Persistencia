@@ -465,5 +465,102 @@ public class ViaMySQLDAO implements ViaDAO {
         return viesRecent;
     }
 
+    @Override
+    public void EliminarViasPorSector(int id_sector) {
+
+        String sql = "DELETE FROM vies WHERE id_sector = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id_sector);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando vias del sector: " + id_sector, e);
+        }
+
+    }
+
+    @Override
+    public  void ElimnarViaDisponibilitat(int via  ){
+        String SQL = "DELETE FROM disponibilitats WHERE id_via = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, via);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
+    @Override
+    public List<Via> buscarViesPorSector(int sector ){
+        List<Via> l = new ArrayList<>();
+
+        String sql = "SELECT * FROM vies WHERE id_sector = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, sector );
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    l.add(map(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error obteniendo sectores por escola", e);
+        }
+
+        return  l;
+
+
+    }
+    @Override
+    public void ElimnarViaEscaladors(int via ){
+        String SQL = "DELETE FROM escaladors_vies WHERE id_via = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, via);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
+    @Override
+    public void EliminarViaLlars(int via ){
+        String SQL = "DELETE FROM llars  WHERE id_via = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, via);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
 
 }

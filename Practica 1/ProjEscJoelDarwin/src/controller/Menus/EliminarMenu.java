@@ -1,12 +1,11 @@
 package controller.Menus;
 
-import View.MenusView.MainMenuView;
 import View.MenusView.MenuEliminarView;
+import config.AppConfig;
 
 import java.util.Scanner;
 
-public class MainMenu {
-
+public class EliminarMenu {
     private final Scanner sc = new Scanner(System.in);
 
     public void iniciar() {
@@ -15,7 +14,7 @@ public class MainMenu {
 
         do {
 
-            MainMenuView.mostrarMenu();
+            MenuEliminarView.mostrarMenu();
 
             while (!sc.hasNextInt()) {
 
@@ -29,37 +28,21 @@ public class MainMenu {
             switch (opcio) {
 
                 case 1:
-                    new CrearMenu()
-                            .iniciar();
+                    AppConfig.getEscaladorController().removedni();
                     break;
 
                 case 2:
-                    new BuscarMenu()
-                            .iniciar();
+                    AppConfig.getEscolaController().removeEscola();
                     break;
-
                 case 3:
-                    new LlistarMenu()
-                            .iniciar();
+                    AppConfig.getSectorController().eliminarSector();
                     break;
-
                 case 4:
-                    System.out.println("MENU CONSULTES");
-                    break;
-
-                case 5:
-                    new ModificarMenu()
-                            .iniciar();
-                    break;
-
-                case 6:
-                    System.out.println("MENU ELIMINAR");
-                    new EliminarMenu()
-                            .iniciar();
+                    AppConfig.getViaController().eliminar();
                     break;
 
                 case 0:
-                    System.out.println("Sortint...");
+                    System.out.println("Tornant...");
                     break;
 
                 default:
@@ -68,4 +51,5 @@ public class MainMenu {
 
         } while (opcio != 0);
     }
+
 }

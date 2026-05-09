@@ -105,10 +105,12 @@ public EscaladorController(EscaladorService s){this.service = s;}
         }
     }
     /**
-     * @param dni String
+     * Elimina escalador per dni
      * **/
-    public  void removedni(String dni){
+    public  void removedni(){
        try {
+           System.out.println("Inroduir DNI");
+           String dni = sc.nextLine();
            service.eliminarPerDni(dni);
        }
        catch (Exception e ){

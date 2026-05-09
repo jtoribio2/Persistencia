@@ -36,4 +36,11 @@ public interface ViaDAO extends Dao<Via,Integer>{
 
     List<ViesAptRecentDTO> viasAptesRecent(int dia);
     Escola buscarEscola(Via via);
+    void EliminarViasPorSector(int id_sector);
+    void ElimnarViaDisponibilitat(int Via);
+    void ElimnarViaEscaladors(int via );
+    void EliminarViaLlars(int via );
+    List<Via> buscarViesPorSector(int sector );
+
+
 }

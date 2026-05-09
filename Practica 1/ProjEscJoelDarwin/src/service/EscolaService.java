@@ -5,8 +5,6 @@ import dao.interfaces.SectorDAO;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
-import model.entity.Sector;
-import model.entity.Via;
 
 import java.util.List;
 
@@ -65,7 +63,7 @@ public class EscolaService {
     }
 
     // elimina un sector a traves de un id
-    public void eliminarSector(int id) throws Exception {
+    public void eliminarEscola(int id) throws Exception {
 
         if (id <= 0) {
             throw new Exception("ID inválido");

@@ -8,6 +8,7 @@ import service.EscolaService;
 import service.SectorService;
 import service.ViaService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -143,10 +144,20 @@ public class ViaController {
     // eliminar
     /**
      * Metode que elimina amb id
-     * @param id int
+     *
      * **/
-    public void eliminar(int id) {
+    public void eliminar() {
         try {
+            System.out.println("Introduir numero via  ");
+            List<Via> vias = service.obtenerTodos();
+
+            for(Via v : vias){
+                Sector s = sectorService.obtenerPorId(v.getId_sector());
+                System.out.println(v.getId_via()+".:" + " " + v.getNom() + "  Sector: " +  s.getNom());
+
+            }
+          int id = sc.nextInt();
+            sc.nextLine();
             service.eliminar(id);
             System.out.println("Vía eliminada correctamente");
         }catch (Exception e){

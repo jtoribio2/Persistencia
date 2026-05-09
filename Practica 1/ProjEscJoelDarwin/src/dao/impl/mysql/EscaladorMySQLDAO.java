@@ -252,7 +252,20 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
 
         return lista;
     }
+@Override
+public void EliminarEscalador_vies(int Escalador){
 
+    String sql = "DELETE FROM escaladors_vies  WHERE id_escalador= ?";
 
+    try (Connection conn = provider.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setInt(1, Escalador);
+        ps.executeUpdate();
+
+    } catch (SQLException e) {
+        throw new RuntimeException("Error eliminando Escalador", e);
+    }
+    }
 
 }
