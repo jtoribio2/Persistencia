@@ -304,11 +304,13 @@ public class ViaController {
     // rango (6a 9a)
     /**
     Parametre EX:  rango (6a 9a) *
-     @param format String
+
 
      * **/
-    public void viesPerDificultat(String format){
+    public void viesPerDificultat(){
         try{
+            System.out.println("VIAS PER DIFICULTAT Ex(6a 9c)");
+            String format =sc.nextLine();
             List<ViaPerDifDTO> viesperdif = service.viesPerDificultat(format);
             for (int i = 0 ; i < viesperdif.size(); i++){
                 System.out.println(viesperdif.get(i));
@@ -353,10 +355,16 @@ public class ViaController {
 
 /**
  * Mostrar vias llargues
- * @param escola INT id
  * **/
-    public void mostrarViesLlargues(int escola){
+    public void mostrarViesLlargues(){
         try{
+            System.out.println("Selecciona una escola especifica(Mostrara una de le vies mes llargues)");
+       List<Escola> es =      escolaService.obtenerTodos();
+       for(Escola ea : es){
+           System.out.println(ea.getId_escola() + " " + ea.getNom());
+       }
+            int escola  = sc.nextInt();
+            sc.nextLine();
             List<ViesLlarguesDTO> via = service.mostrarViesLlargues(escola);
             if(via.isEmpty()) System.out.println("No existeix la escola triada");
             for(ViesLlarguesDTO v : via){
@@ -369,10 +377,13 @@ public class ViaController {
         }
     }
 /**
- * @param dia int Mostrar viasAptes recents depentn del dia
+ *  Mostrar viasAptes recents depentn del dia
  * **/
-    public void viesAptesRecent(int dia){
+    public void viesAptesRecent(){
         try {
+            System.out.println("Quants dies vols saber de vies passsats a aptes?");
+            int dia = sc.nextInt();
+            sc.nextLine();
             List<ViesAptRecentDTO> via = service.viesAptesRecent(dia);
             if (via.isEmpty()){
                 System.out.println("No hi ha vies que hagin pasat a disponible en els derrers " + dia + " dies" );

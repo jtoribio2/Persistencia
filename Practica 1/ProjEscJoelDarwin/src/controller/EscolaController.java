@@ -111,10 +111,18 @@ public void escolesDisponibles(){
         }
 }
 
-/**@param es Escola Mostrar vies de esocla especifica**/
-    public void viaDisponibles(Escola es  ){
+/**Escola Mostrar vies de esocla especifica**/
+    public void viaDisponibles(  ){
         try {
-            List<EscolaDisponibleDTO> via = service.viasDisponibles(es);
+            List<Escola> esc = service.obtenerTodos();
+            System.out.println("Selecciona la escola");
+            for(Escola es : esc){
+                System.out.println(es.getId_escola() + " " + es.getNom());
+            }
+            int id = sc.nextInt();
+            sc.nextLine();
+            Escola obtEscola = service.obtenerPorId(id);
+            List<EscolaDisponibleDTO> via = service.viasDisponibles(obtEscola);
             for(EscolaDisponibleDTO v : via){
                 System.out.println(v);
             }

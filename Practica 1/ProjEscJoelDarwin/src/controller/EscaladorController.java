@@ -147,9 +147,11 @@ public EscaladorController(EscaladorService s){this.service = s;}
     }
 
     }
-/**@param dni String**/
-    public void buscarPorNivel(String dni){
+/**Bucar per nivell**/
+    public void buscarPorNivel(){
            try {
+               System.out.println("Introduir Dni del escalador(Les lletres en Majuscules) ");
+               String dni = sc.nextLine();
                List<EscaladorNivellDTO> llista = service.buscarPorNivell(dni);
                if (llista.isEmpty()) {
                    System.out.println("No hi han escaladors amb el mateix nivell que tu asolit o superior");

@@ -170,12 +170,16 @@ public class SectorController {
     public Escola mostrarEscola(int idSector) {
         return service.buscarEscola(idSector);
     }
-    /**@param quantitat int **/
-    public void sectorViesDisponibles(int quantitat) {
+    /**Sectors amb mes vies llargues int **/
+    public void sectorViesDisponibles() {
         try {
-            List<SectorViaDispDTO> lista = service.sectorViesDisponibles(quantitat);
+            System.out.println("Quantes vies Disponibles ha de tindre el sector");
+            int id = sc.nextInt();
+            sc.nextLine();
+
+            List<SectorViaDispDTO> lista = service.sectorViesDisponibles(id);
             if (lista.isEmpty()) {
-                System.out.println("No hi han Sectors amb " + quantitat + " vies disponibles");
+                System.out.println("No hi han Sectors amb " + id + " vies disponibles");
             } else {
                 for (int i = 0; i < lista.size(); i++) {
                     System.out.println(lista.get(i));
