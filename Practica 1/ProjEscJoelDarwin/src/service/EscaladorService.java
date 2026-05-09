@@ -92,11 +92,13 @@ public class EscaladorService  {
     public void eliminarPerDni(String dni) throws Exception{
 
         if(dni.isBlank()){throw new Exception("DNI NO INTRODUIT");}
-        if (!dni.matches("^[0-9]{8}][A-Z]$") ) {
+        if (!dni.matches("^[0-9]{8}[A-Z]$") ) {
             throw new Exception("DNI INCORRECTE");
         }
-
-        escaladorDao.eliminarDni(dni);
+       Escalador E =  escaladorDao.obtenirPerDni(dni);
+        //Para eliminar de la tabla ESCLADORS CLIENTS
+        escaladorDao.EliminarEscalador_vies(E.getId_escalador());
+        escaladorDao.eliminarDni(E.getDni());
     }
     // elimina un sector a traves de un id
     /***

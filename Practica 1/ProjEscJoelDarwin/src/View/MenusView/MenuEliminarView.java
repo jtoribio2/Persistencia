@@ -1,6 +1,6 @@
 package View.MenusView;
 
-public class MenuEliminar {
+public class MenuEliminarView {
 
     private static final String MENU_DEL ="""
 

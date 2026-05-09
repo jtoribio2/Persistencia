@@ -466,44 +466,101 @@ public class ViaMySQLDAO implements ViaDAO {
     }
 
     @Override
-    public void  EliminarViasPorSector(int id_sector) {
+    public void EliminarViasPorSector(int id_sector) {
 
-        String sql = "DELETE FROM vies WHERE id_sector=? AND id_via > 0";
+        String sql = "DELETE FROM vies WHERE id_sector = ?";
 
         try (Connection conn = provider.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, id_sector );
+            ps.setInt(1, id_sector);
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error eliminando vias", e);
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando vias del sector: " + id_sector, e);
         }
-    }/*
+
+    }
+
     @Override
-    public void EliminarViasPorSector(int id_sector) {
-        // Primero apagamos el modo seguro, luego borramos, y luego lo encendemos
-        String sqlDesactivar = "SET SQL_SAFE_UPDATES = 0";
-        String sqlDelete = "DELETE FROM vies WHERE id_sector = ?";
-        String sqlActivar = "SET SQL_SAFE_UPDATES = 1";
+    public  void ElimnarViaDisponibilitat(int via  ){
+        String SQL = "DELETE FROM disponibilitats WHERE id_via = ?";
 
-        try (Connection conn = provider.getConnection()) {
-            // Ejecutamos en orden
-            try (Statement st = conn.createStatement()) {
-                st.execute(sqlDesactivar);
-            }
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
 
-            try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
-                ps.setInt(1, id_sector);
-                ps.executeUpdate();
-            }
+            ps.setInt(1, via);
+            ps.executeUpdate();
 
-            try (Statement st = conn.createStatement()) {
-                st.execute(sqlActivar);
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
+    @Override
+    public List<Via> buscarViesPorSector(int sector ){
+        List<Via> l = new ArrayList<>();
+
+        String sql = "SELECT * FROM vies WHERE id_sector = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, sector );
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    l.add(map(rs));
+                }
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Error eliminando vias", e);
+            throw new RuntimeException("Error obteniendo sectores por escola", e);
         }
-    }*/
+
+        return  l;
+
+
+    }
+    @Override
+    public void ElimnarViaEscaladors(int via ){
+        String SQL = "DELETE FROM escaladors_vies WHERE id_via = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, via);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
+    @Override
+    public void EliminarViaLlars(int via ){
+        String SQL = "DELETE FROM llars  WHERE id_via = ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(SQL)) {
+
+            ps.setInt(1, via);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("Error SQL: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("ErrorCode: " + e.getErrorCode());
+            throw new RuntimeException("Error eliminando via Dispoonibilitat", e);
+        }
+    }
+
 }

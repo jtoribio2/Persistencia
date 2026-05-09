@@ -1,7 +1,6 @@
 package controller.Menus;
 
-import View.MenusView.MenuCrearView;
-import View.MenusView.MenuEliminar;
+import View.MenusView.MenuEliminarView;
 import config.AppConfig;
 
 import java.util.Scanner;
@@ -15,7 +14,7 @@ public class EliminarMenu {
 
         do {
 
-            MenuEliminar.mostrarMenu();
+            MenuEliminarView.mostrarMenu();
 
             while (!sc.hasNextInt()) {
 
@@ -33,18 +32,13 @@ public class EliminarMenu {
                     break;
 
                 case 2:
-                   // AppConfig.getEscolaController().rem
+                    AppConfig.getEscolaController().removeEscola();
                     break;
                 case 3:
-                    //todo cuando pregunta la popularitat hay que poner que es cada numero 1 2 3
-                    //todo poner entre parentesis ejemplos de lo que deberia ponerse
-                    //todo permite meter una via de hielo en una escola esportiva o clasica y al reves (Jou)
-                    AppConfig.getSectorController().crearSectorConVia();
+                    AppConfig.getSectorController().eliminarSector();
                     break;
                 case 4:
-                    //todo cuando pide el tipo de via falta un parentesis al final
-                    //todo deja crear vias de hielo en vias clasicas y al reves (Jou)
-                    AppConfig.getViaController().crear();
+                    AppConfig.getViaController().eliminar();
                     break;
 
                 case 0:

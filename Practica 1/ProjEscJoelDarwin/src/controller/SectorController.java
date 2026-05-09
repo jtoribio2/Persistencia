@@ -136,11 +136,19 @@ public class SectorController {
             System.out.println(e.getMessage());
         }
     }
-    /**@param id Int Elimnar sector especific **/
+    /** Elimnar sector especific **/
     // eliminar un sector de la base de datos
-    public void eliminarSector(int id) {
+    public void eliminarSector() {
         try {
-            service.eliminarSector(id);
+            System.out.println("Elija el sector a elminar");
+          List<Sector>  s =  service.obtenerTodos();
+          for(Sector S : s ){
+              System.out.println(S.getId_sector() + " " + S.getNom());
+          }
+            int id =   sc.nextInt();
+          sc.nextLine();
+           service.eliminarSector(id);
+
             System.out.println("Sector eliminado correctamente");
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -271,7 +279,4 @@ public class SectorController {
         }
     }
 
-    public void eliminarViasdelSector(){
-
-    }
 }

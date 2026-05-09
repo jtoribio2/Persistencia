@@ -1,6 +1,7 @@
 package controller.Menus;
 
 import View.MenusView.MainMenuView;
+import View.MenusView.MenuEliminarView;
 
 import java.util.Scanner;
 
@@ -53,6 +54,8 @@ public class MainMenu {
 
                 case 6:
                     System.out.println("MENU ELIMINAR");
+                    new EliminarMenu()
+                            .iniciar();
                     break;
 
                 case 0:

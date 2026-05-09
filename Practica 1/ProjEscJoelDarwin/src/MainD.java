@@ -9,6 +9,10 @@ public class MainD {
         AppConfig.getEscolaController().viaDisponibles(AppConfig.getEscolaController().getEscola(1));
         AppConfig.getViaController().mostrarViesLlargues(1);*/
 
-        AppConfig.getEscolaController().removeEscola();
+       // AppConfig.getEscolaController().removeEscola();
+
+        //AppConfig.getSectorController().eliminarSector();
+
+        AppConfig.getViaController().eliminar();
     }
 }

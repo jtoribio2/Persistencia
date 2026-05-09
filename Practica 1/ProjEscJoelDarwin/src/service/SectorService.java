@@ -7,6 +7,7 @@ import model.entity.Escola;
 import model.entity.Sector;
 import model.entity.Via;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SectorService {
@@ -81,13 +82,20 @@ public class SectorService {
 
         return sectorDAO.obtenir(id);
     }
-
+    /**@param id Sector**/
     public void eliminarSector(int id)throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
         }
 
+      List<Via> vias = viaDAO.buscarViesPorSector(id);
+        for(Via v : vias) {
+            viaDAO.ElimnarViaEscaladors(v.getId_via());
+            viaDAO.ElimnarViaDisponibilitat(v.getId_via());
+            viaDAO.EliminarViaLlars(v.getId_via());
+        }
+        viaDAO.EliminarViasPorSector(id);
         sectorDAO.eliminar(id);
     }
 
@@ -158,12 +166,28 @@ public class SectorService {
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
     /**Eliminar sector con vias dpeendinedo de la escola **/
-    public void  ElimnarSVC(int Escola) throws Exception{
-        if(Escola < 0 ) throw  new Exception("Error no se pudo eliminar tneto los sectore con sus vias");
-        List<Sector> sl = sectorDAO.buscarPorEscola(Escola);
-        for(int i = 0; i < sl.size(); i++){
-            viaDAO.EliminarViasPorSector(sl.get(i).getId_sector()); //Elimanr vias
-            sectorDAO.eliminar(sl.get(i).getId_sector()); //Eliminr sector
+
+    public void ElimnarSVC(int escola) throws Exception {
+        if (escola < 0) throw new Exception("Error: id de escola no válido");
+
+        List<Sector> sectores = sectorDAO.buscarPorEscola(escola);
+
+        for (Sector sector : sectores) {
+            int id_sector = sector.getId_sector();
+            List<Via> vies = viaDAO.buscarViesPorSector(id_sector);
+
+            // Para cada via del sector, borrar sus dependencias
+            for (Via via : vies) {
+                int id_via = via.getId_via();
+                viaDAO.EliminarViaLlars(id_via);
+                viaDAO.ElimnarViaEscaladors(id_via);
+                viaDAO.ElimnarViaDisponibilitat(id_via);
+            }
+
+            // Una vez borradas las dependencias, borrar las vias y el sector
+            viaDAO.EliminarViasPorSector(id_sector);
+            sectorDAO.eliminar(id_sector);
         }
     }
+
 }

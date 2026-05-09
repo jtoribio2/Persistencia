@@ -100,6 +100,9 @@ public class ViaService {
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
         }
+        viaDAO.EliminarViaLlars(id);
+        viaDAO.ElimnarViaDisponibilitat(id);
+        viaDAO.ElimnarViaEscaladors(id);
 
         viaDAO.eliminar(id);
     }
