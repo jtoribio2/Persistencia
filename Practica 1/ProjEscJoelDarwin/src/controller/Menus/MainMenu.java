@@ -33,7 +33,8 @@ public class MainMenu {
                     break;
 
                 case 2:
-                    System.out.println("MENU BUSCAR");
+                    new BuscarMenu()
+                            .iniciar();
                     break;
 
                 case 3:

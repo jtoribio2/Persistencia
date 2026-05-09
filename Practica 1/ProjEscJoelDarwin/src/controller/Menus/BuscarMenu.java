@@ -32,12 +32,12 @@ public class BuscarMenu {
 
                     System.out.println("Introdueix ID Escalador:");
 
-                    int idEscalador = sc.nextInt();
+                    String dni = sc.nextLine();
                     sc.nextLine();
 
                     AppConfig
                             .getEscaladorController()
-                            .;
+                            .buscarPerDni(dni);
 
                     break;
 
@@ -50,7 +50,6 @@ public class BuscarMenu {
                     AppConfig
                             .getEscolaController()
                             .buscarPorNombre(nomEscola);
-
                     break;
 
                 case 3:
@@ -66,7 +65,7 @@ public class BuscarMenu {
                     break;
 
                 case 4:
-
+                    //todo si buscas ua via que se llama exactamente igual que otra pero con mas caracteres salen las dos (ej:via1,via10)
                     System.out.println("Introdueix nom Via:");
 
                     String nomVia = sc.nextLine();

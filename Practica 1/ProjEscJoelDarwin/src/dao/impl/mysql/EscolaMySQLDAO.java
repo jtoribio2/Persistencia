@@ -321,6 +321,37 @@ public class EscolaMySQLDAO implements EscolaDAO {
         throw new RuntimeException("No se pudo obtener el ID");
     }
 
+    @Override
+    public List<Escola> buscarPorNombre(String nombre) {
+
+        List<Escola> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM escoles WHERE nom LIKE ?";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    lista.add(map(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+
+            throw new RuntimeException(
+                    "Error buscando escoles por nombre",
+                    e
+            );
+        }
+
+        return lista;
+    }
+
 }
 
 

@@ -32,4 +32,6 @@ public interface EscolaDAO extends Dao<Escola,Integer> {
     List<EscolaDisponibleDTO> viesDisponibles(Escola es);
 
     int inserirRetornantId(Escola id);
+
+    List<Escola> buscarPorNombre(String nombre);
 }

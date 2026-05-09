@@ -136,5 +136,28 @@ public class EscolaService {
             );
         }
     }
+
+    public List<Escola> buscarPorNombre(String nombre)
+            throws Exception {
+
+        if (nombre == null || nombre.isBlank()) {
+
+            throw new Exception(
+                    "Nom no introduit"
+            );
+        }
+
+        List<Escola> lista =
+                escoladao.buscarPorNombre(nombre);
+
+        if (lista.isEmpty()) {
+
+            throw new Exception(
+                    "No s'han trobat escoles"
+            );
+        }
+
+        return lista;
+    }
 }
 
