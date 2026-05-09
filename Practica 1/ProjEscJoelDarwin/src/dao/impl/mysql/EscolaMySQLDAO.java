@@ -7,6 +7,7 @@ import db.ConnectionProvider;
 import model.dto.EscolaDisponibleDTO;
 import model.dto.EscolesRestricDTO;
 import model.entity.Escola;
+import model.entity.Sector;
 import model.entity.Via;
 
 import java.sql.*;
@@ -133,7 +134,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         return llista;
     }
     /**
-     * @param id Intger introducimos un numero
+     * @param id Intger introduir un numero
      * **/
     @Override
     public Escola obtenir(Integer id) {
@@ -164,7 +165,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
 
 
     }
-
+/**@param o Escola  @return boolean  **/
     @Override
     public boolean isGel(Escola o ){
         //MODIFICAREMOS TODAS LAS PROPIEDADES MENOS LA ID
@@ -198,7 +199,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         }
 
         return false;
-    }
+    }/**@param rs Resulset @return Escola **/
     private Escola map(ResultSet rs) throws SQLException {
 
         Escola s = new Escola();
@@ -211,7 +212,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
 
         return s;
     }
-
+    /**@return List Escoles Restrict DTO**/
     @Override
     public List<EscolesRestricDTO> escolesDisponibles() {
 
@@ -246,7 +247,7 @@ public class EscolaMySQLDAO implements EscolaDAO {
         }
 
         return escoles;
-    }
+    }/**@param es Escola @return List EscolDisponibleDTO**/
     @Override
     public List<EscolaDisponibleDTO> viesDisponibles(Escola es ) {
         List<EscolaDisponibleDTO> vies = new ArrayList<>();
@@ -284,6 +285,43 @@ public class EscolaMySQLDAO implements EscolaDAO {
             throw new RuntimeException("Error obteniendo vias", e);
         }
     }
+/**@param es Escola @return retorna el id  **/
+    @Override
+    public int inserirRetornantId(Escola es ){
+        String sql = """
+    INSERT INTO escoles  
+    ( nom, lloc,  aproximacio, popularitat)
+    VALUES (?, ?, ?, ?)
+    """;
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(
+                     sql,
+                     Statement.RETURN_GENERATED_KEYS
+             )) {
+
+            ps.setString(1, es.getNom());
+            ps.setString(2, es.getLloc());
+            ps.setString(3, es.getAproximacio());
+            ps.setInt(4, es.getPopularitat());
+
+            ps.executeUpdate();
+
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error insertando sector", e);
+        }
+
+        throw new RuntimeException("No se pudo obtener el ID");
+    }
+
 }
+
 
 

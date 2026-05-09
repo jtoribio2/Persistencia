@@ -103,7 +103,7 @@ public EscaladorController(EscaladorService s){this.dao = s;}
     }
 
     }
-
+/**@param dni String**/
     public void buscarPorNivel(String dni){
            try {
                List<EscaladorNivellDTO> llista = dao.buscarPorNivell(dni);

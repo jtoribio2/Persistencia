@@ -17,7 +17,7 @@ public class SectorMySQLDAO implements SectorDAO {
     public SectorMySQLDAO(ConnectionProvider provider) {
         this.provider = provider;
     }
-
+    /**@param s Sector **/
     // inserta un Objeto sector a la base de datos
     @Override
     public void inserir(Sector s) {
@@ -44,7 +44,7 @@ public class SectorMySQLDAO implements SectorDAO {
             throw new RuntimeException("Error insertando sector", e);
         }
     }
-
+    /**@param s Sector **/
     // le pasamos un sector con los campos modificado lo encuentra atraves de su id y lo devuelve a la base de datos cambiado, si no lo encuientra informa de que no se ha modificado
     @Override
     public void modificar(Sector s) {
@@ -82,7 +82,7 @@ public class SectorMySQLDAO implements SectorDAO {
             throw new RuntimeException("Error al modificar sector", e);
         }
     }
-
+/**@param id Integer**/
     // Elimina de la bd un vetor a traves de su id
     @Override
     public void eliminar(Integer id) {
@@ -100,7 +100,7 @@ public class SectorMySQLDAO implements SectorDAO {
         }
     }
 
-    // decuelve una lista con todos los objetos que hay en la tabla sector
+    /** decuelve una lista con todos los objetos que hay en la tabla sector**/
     @Override
     public List<Sector> obtindreTots() {
 
@@ -122,7 +122,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return lista;
     }
-
+    /**@param id Integer**/
     // implementacion de obtenir bector le pasas un id y te devuelve el objeto sector que le has pedido si no lo encuentra devuelve null
     @Override
     public Sector obtenir(Integer id) {
@@ -146,7 +146,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return null;
     }
-
+    /**@param nombre String **/
     @Override
     public List<Sector> buscarPorNombre(String nombre) {
 
@@ -171,7 +171,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return lista;
     }
-
+    /**@param rs Resulset  @return Sector **/
     // metodo para cojer una fila de nuestra tabla y transformarlo en la clase sector
     private Sector map(ResultSet rs) throws SQLException {
 
@@ -183,7 +183,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return s;
     }
-
+    /**@param idSector int **/
     @Override
     public Escola buscarEscola(int idSector) {
 
@@ -218,7 +218,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return null;
     }
-
+/**@param idEscola INT **/
     @Override
     public List<Sector> buscarPorEscola(int idEscola) {
 
@@ -255,7 +255,7 @@ public class SectorMySQLDAO implements SectorDAO {
 
         return lista;
     }
-
+/**@param quantitatVies int **/
     //BUSCAR SECTORES QUE TENGAN MAS DE X VIAS DISPONIBLES
 //REUTILIZE UNA CONSULTA QUE BUSCA LAS VIAS DISPONIBLES TENIENDO EN CUENTAS LAS RESTRICCIONES YA PASSADAS/CADUCADAS
     @Override
@@ -311,7 +311,7 @@ public class SectorMySQLDAO implements SectorDAO {
             throw new RuntimeException("Error obteniendo escola del sector", e);
         }
     }
-
+/**@param s Sector **/
     @Override
     public int inserirRetornantId(Sector s) {
 
