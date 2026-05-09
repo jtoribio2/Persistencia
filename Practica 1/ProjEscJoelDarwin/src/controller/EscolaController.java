@@ -41,10 +41,21 @@ private static Scanner sc = new Scanner(System.in);
             System.out.println(err);
         }
     }
-/**@param id IAnteger**/
-    public  void removeEscola(Integer id  ) {
+/**Eliminar**/
+    public  void removeEscola( ) {
        try {
-           service.eliminarSector(id);
+           List<Escola> es = service.obtenerTodos();
+           System.out.println("Selecciona una escola per esborrar");
+           for(int i = 0; i < es.size(); i++){
+               System.out.println((i+1) + " " + es.get(i).getNom());
+           }
+           int id = sc.nextInt();
+           sc.nextLine();
+            //Primero elimnar vias y sector
+           sectorService.ElimnarSVC(id);
+           //Despues escola
+           service.eliminarEscola(id);
+
        }
        catch (Exception err){
            System.out.println(err);
@@ -195,7 +206,7 @@ public void escolesDisponibles(){
 
                 try {
 
-                        service.eliminarSector(es.getId_escola()); // deshacer escola
+                        service.eliminarEscola(es.getId_escola()); // deshacer escola
 
                 } catch (Exception rollbackEx) {
                     System.out.println("Error en rollback: " + rollbackEx.getMessage());

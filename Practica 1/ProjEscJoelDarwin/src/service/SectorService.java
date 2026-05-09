@@ -157,4 +157,13 @@ public class SectorService {
 
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
+    /**Eliminar sector con vias dpeendinedo de la escola **/
+    public void  ElimnarSVC(int Escola) throws Exception{
+        if(Escola < 0 ) throw  new Exception("Error no se pudo eliminar tneto los sectore con sus vias");
+        List<Sector> sl = sectorDAO.buscarPorEscola(Escola);
+        for(int i = 0; i < sl.size(); i++){
+            viaDAO.EliminarViasPorSector(sl.get(i).getId_sector()); //Elimanr vias
+            sectorDAO.eliminar(sl.get(i).getId_sector()); //Eliminr sector
+        }
+    }
 }

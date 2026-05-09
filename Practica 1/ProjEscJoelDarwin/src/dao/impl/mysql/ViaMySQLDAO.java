@@ -465,5 +465,45 @@ public class ViaMySQLDAO implements ViaDAO {
         return viesRecent;
     }
 
+    @Override
+    public void  EliminarViasPorSector(int id_sector) {
 
+        String sql = "DELETE FROM vies WHERE id_sector=? AND id_via > 0";
+
+        try (Connection conn = provider.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, id_sector );
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error eliminando vias", e);
+        }
+    }/*
+    @Override
+    public void EliminarViasPorSector(int id_sector) {
+        // Primero apagamos el modo seguro, luego borramos, y luego lo encendemos
+        String sqlDesactivar = "SET SQL_SAFE_UPDATES = 0";
+        String sqlDelete = "DELETE FROM vies WHERE id_sector = ?";
+        String sqlActivar = "SET SQL_SAFE_UPDATES = 1";
+
+        try (Connection conn = provider.getConnection()) {
+            // Ejecutamos en orden
+            try (Statement st = conn.createStatement()) {
+                st.execute(sqlDesactivar);
+            }
+
+            try (PreparedStatement ps = conn.prepareStatement(sqlDelete)) {
+                ps.setInt(1, id_sector);
+                ps.executeUpdate();
+            }
+
+            try (Statement st = conn.createStatement()) {
+                st.execute(sqlActivar);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error eliminando vias", e);
+        }
+    }*/
 }
