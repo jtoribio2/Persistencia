@@ -34,14 +34,20 @@ public class EscaladorService  {
             throw new Exception("Falta el nom");
         }
 
-        if (e.getDni() == null || e.getDni().isEmpty() || !e.getDni().matches("^[0-9]{8}[A-Z]$")) {
-            throw new Exception( "El DNI es INCORRECTE ");
+        if (e.getDni() == null
+                || e.getDni().isEmpty()
+                || !e.getDni().matches("^[0-9]{8}[A-Z]$")) {
+
+            throw new Exception("El DNI es INCORRECTE");
         }
 
         if(e.getEdat() < 0 || e.getEdat() > 100) throw new Exception("Error edad");
 
 
-        if (e.getEstil() < 1 || e.getEstil() > 3) {throw new Exception("Debe indicar una estilo válida");}
+        if (e.getEstil() < 1 || e.getEstil() > 3) {
+
+            throw new Exception("Debe indicar una estilo válida");
+        }
 
         escaladorDao.inserir(e);
     }
@@ -112,34 +118,55 @@ public class EscaladorService  {
     }
 
     // modifica un sector y lo busca a traves de su id en el caso que no existe te dice que no ha podido modificarlo
-    /**
-     * @param e Escalador
-     * **/
-    public void modificarEscalador(Escalador  e) throws Exception {
+    public void modificarEscalador(Escalador e)
+            throws Exception {
 
         if (e == null) {
-            throw new Exception("Error introduir dades ");
+
+            throw new Exception(
+                    "Error introduir dades "
+            );
         }
 
         if (e.getId_escalador() <= 0) {
-            throw new Exception("ID inválid ");
+
+            throw new Exception(
+                    "ID inválid "
+            );
         }
 
+        if (e.getNom() == null
+                || e.getNom().isEmpty()) {
 
-        if (e.getNom() == null || e.getNom().isEmpty())   {
-            throw new Exception("Falta el nom");
+            throw new Exception(
+                    "Falta el nom"
+            );
         }
 
-        if (e.getDni() == null || e.getDni().isEmpty() || e.getDni().matches("^[0-9]{8}[A-Z]$")) {
-            throw new Exception( "El DNI es INCORRECTE ");
+        if (e.getDni() == null
+                || e.getDni().isEmpty()
+                || !e.getDni().matches(
+                "^[0-9]{8}[A-Z]$")) {
+
+            throw new Exception(
+                    "El DNI es INCORRECTE"
+            );
         }
 
-        if(e.getEdat() < 0) throw new Exception("Error edad");
+        if (e.getEdat() < 0) {
 
+            throw new Exception(
+                    "Error edad"
+            );
+        }
 
-        if (e.getEstil() > 0 && e.getEstil() <= 3) {throw new Exception("Debe indicar una estilo válida");}
+        if (e.getEstil() < 1
+                || e.getEstil() > 3) {
 
-
+            throw new Exception(
+                    "Debe indicar una estilo válida"
+            );
+        }
 
         escaladorDao.modificar(e);
     }

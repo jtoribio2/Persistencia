@@ -60,7 +60,7 @@ public class EscaladorMySQLDAO implements EscaladorDAO  {
             ps.setString(2, e.getNom());
             ps.setInt(3, e.getEdat());
             ps.setInt(4, e.getEstil());
-            ps.setInt(5, e.getEstil());
+            ps.setInt(5, e.getId_escalador());
 
 
             int filas = ps.executeUpdate(); // si devuelve 0 filas quiere decir que no lo ha encontrado
