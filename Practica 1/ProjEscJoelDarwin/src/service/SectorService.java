@@ -19,7 +19,7 @@ public class SectorService {
         this.sectorDAO = sectorDAO;
         this.viaDAO = viaDAO;
     }
-
+/**@param s Sector **/
     public void crearSector(Sector s) throws Exception {
 
         if (s == null) {
@@ -40,7 +40,8 @@ public class SectorService {
 
         sectorDAO.inserir(s);
     }
-
+/**@param s Sector
+ * @param v Via **/
     public void crearSectorConVia(Sector s, Via v) throws Exception {
 
         if (s == null) {
@@ -69,11 +70,12 @@ public class SectorService {
             );
         }
     }
-
+/**@return List Sector **/
     public List<Sector> obtenerTodos() {
         return sectorDAO.obtindreTots();
     }
-
+/**@param id INT
+ * @return Sector **/
     public Sector obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
@@ -111,7 +113,8 @@ public class SectorService {
 
         sectorDAO.modificar(s);
     }
-
+/**@param nombre String
+ * @return Lit sector **/
     public List<Sector> buscarPorNombre(String nombre)throws Exception {
 
         List<Sector> lista = sectorDAO.buscarPorNombre(nombre);
@@ -126,7 +129,10 @@ public class SectorService {
 
         return lista;
     }
-
+/**
+ * @param idSector int
+ * @return Escola
+ * **/
     public Escola buscarEscola(int idSector) {
 
         if (idSector <= 0) {
@@ -141,7 +147,7 @@ public class SectorService {
 
         return escola;
     }
-
+/**@param idEscola int **/
     public List<Sector> buscarPorEscola(int idEscola) {
 
         if (idEscola <= 0) {
@@ -156,7 +162,8 @@ public class SectorService {
 
         return lista;
     }
-
+/**@param quantitat int
+ *  @return List Sector Via DispDto **/
     public List<SectorViaDispDTO> sectorViesDisponibles(int quantitat) throws Exception {
 
         if (quantitat < 0) {
@@ -165,7 +172,9 @@ public class SectorService {
 
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
-    /**Eliminar sector con vias dpeendinedo de la escola **/
+    /**Eliminar sector con vias dpeendinedo de la escola
+     * @param escola int
+     * */
 
     public void ElimnarSVC(int escola) throws Exception {
         if (escola < 0) throw new Exception("Error: id de escola no válido");

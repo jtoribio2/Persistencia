@@ -164,7 +164,7 @@ public EscaladorController(EscaladorService s){this.service = s;}
                System.out.println(e);
            }
     }
-
+/**@param dni String**/
     public void buscarPerDni(String dni) {
 
         try {
@@ -187,7 +187,7 @@ public EscaladorController(EscaladorService s){this.service = s;}
             System.out.println(ex.getMessage());
         }
     }
-
+/**MOdificar **/
     public void modificar() {
 
         Scanner sc = new Scanner(System.in);

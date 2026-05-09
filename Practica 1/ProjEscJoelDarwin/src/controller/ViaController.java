@@ -25,7 +25,7 @@ public class ViaController {
         this.sectorService = sectorService;
         this.escolaService = escolaService;
     }
-
+/**Mostrar tots les Vies **/
     public void mostrarTots() {
 
         try {
@@ -272,19 +272,7 @@ public class ViaController {
 
     }
 
-    //LISTAR VIAS DISPONIBLES
-    /*
-    public String viesDisponibles(Escola e ){
-        try {
-            String missatge = service.viesDisponibles(e);
-            return missatge;
-        }
-        catch (Exception err ){
-            System.out.println(err);
-            return null;
-        }
-    }
-*/
+
   /**
    * @param via Via
    * @return Retornar sector
@@ -304,8 +292,6 @@ public class ViaController {
     // rango (6a 9a)
     /**
     Parametre EX:  rango (6a 9a) *
-
-
      * **/
     public void viesPerDificultat(){
         try{
