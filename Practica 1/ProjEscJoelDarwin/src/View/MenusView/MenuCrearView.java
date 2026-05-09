@@ -1,19 +1,19 @@
 package View.MenusView;
 
-public class MenuLlistar {
+public class MenuCrearView {
 
-    private static final String MENU_LLISTAR = """
+    private static final String MENU_CREAR ="""
 
         ╔══════════════════════════════════════════════╗
         ║                                              ║
-        ║                LLISTAR DADES                 ║
+        ║                 CREAR DADES                  ║
         ║                                              ║
         ╠══════════════════════════════════════════════╣
         ║                                              ║
-        ║   1. Llistar Escaladors                      ║
-        ║   2. Llistar Escoles                         ║
-        ║   3. Llistar Sectors                         ║
-        ║   4. Llistar Vies                            ║
+        ║   1. Crear Escalador                         ║
+        ║   2. Crear Escola                            ║
+        ║   3. Crear Sector                            ║
+        ║   4. Crear Via                               ║
         ║                                              ║
         ║   0. Tornar                                  ║
         ║                                              ║
@@ -23,6 +23,6 @@ public class MenuLlistar {
         """;
 
     public static void mostrarMenu() {
-        System.out.println(MENU_LLISTAR);
+        System.out.println(MENU_CREAR);
     }
 }

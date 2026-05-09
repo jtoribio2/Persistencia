@@ -28,7 +28,8 @@ public class MainMenu {
             switch (opcio) {
 
                 case 1:
-                    System.out.println("MENU CREAR");
+                    new CrearMenu()
+                            .iniciar();
                     break;
 
                 case 2:

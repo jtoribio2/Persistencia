@@ -1,6 +1,6 @@
 package View.MenusView;
 
-public class MenuBuscar {
+public class MenuBuscarView {
 
     private static final String MENU_BUSCAR ="""
 
