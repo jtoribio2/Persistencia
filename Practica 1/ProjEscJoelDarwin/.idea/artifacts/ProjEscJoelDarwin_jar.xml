@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjEscJoelDarwin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjEscJoelDarwin_jar</output-path>
+    <root id="archive" name="ProjEscJoelDarwin.jar">
+      <element id="module-output" name="ProjEscJoelDarwin" />
+      <element id="library" level="project" name="mysql-connector-j-9.6.0" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/mysql-connector-j-9.6.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
