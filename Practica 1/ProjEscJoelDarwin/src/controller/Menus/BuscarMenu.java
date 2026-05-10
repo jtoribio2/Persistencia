@@ -65,7 +65,6 @@ public class BuscarMenu {
                     break;
 
                 case 4:
-                    //todo si buscas ua via que se llama exactamente igual que otra pero con mas caracteres salen las dos (ej:via1,via10)
                     System.out.println("Introdueix nom Via:");
 
                     String nomVia = sc.nextLine();

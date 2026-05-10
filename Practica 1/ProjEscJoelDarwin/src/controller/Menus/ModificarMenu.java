@@ -37,7 +37,6 @@ public class ModificarMenu {
                     break;
 
                 case 2:
-                    //todo hay que borrar el mensaje que envia de se ha modificado la base de datos
                     AppConfig
                             .getEscolaController()
                             .modificar();

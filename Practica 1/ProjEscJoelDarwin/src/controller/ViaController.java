@@ -57,10 +57,6 @@ public class ViaController {
         }
     }
 
-    // CREAR
-    /**
-     * Funcio que permet crear Via controller
-     * **/
     public void crear() {
         // enseñamos las escolas y el usuario elije una para meter la via
         List<Escola> escolas = escolaService.obtenerTodos();
@@ -93,10 +89,11 @@ public class ViaController {
 
             System.out.println("Llargada:");
             int llargada = sc.nextInt();
+            sc.nextLine();
 
-            System.out.println("tipus de via (1 Clasica, 2 Esportiva, 3 Gel:");
+            System.out.println("tipus de via (1 Clasica, 2 Esportiva, 3 Gel):");
             int tipus_via = sc.nextInt();
-
+            sc.nextLine();
             System.out.println("Dificultat (ex: 6a ):");
             String dificultat = sc.nextLine();
 
@@ -125,23 +122,20 @@ public class ViaController {
 
             try {
                 service.crear(v);
+
             }
             catch (Exception e){
                 System.out.println(e.getMessage());
             }
-
+            System.out.println("Vía creada correctamente");
         }
         catch (Exception e){
             System.out.println(e.getMessage());
         }
 
 
-        System.out.println("Vía creada correctamente");
+
     }
-
-
-
-    // eliminar
     /**
      * Metode que elimina amb id
      *
@@ -166,7 +160,6 @@ public class ViaController {
 
     }
 
-    // MODIFICAR
     public void modificar() {
 
         Scanner sc = new Scanner(System.in);
@@ -255,7 +248,6 @@ public class ViaController {
         }
     }
 
-    // BUSCAR POR ID
     /**
      * Metode per obtindre per id
      * @param id int
@@ -289,7 +281,6 @@ public class ViaController {
         Escola e = service.buscarEscola(via);
         return e;
     }
-    // rango (6a 9a)
     /**
     Parametre EX:  rango (6a 9a) *
      * **/

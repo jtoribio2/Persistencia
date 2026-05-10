@@ -57,53 +57,6 @@ public EscaladorController(EscaladorService s){this.service = s;}
         }
     }
 
-    public  void addEscalador(Escalador e ) {
-
-    try{
-        service.crearEscalador(e);
-    }
-    catch (Exception e2 ) {
-        System.out.println(e2);
-    }
-}
-    /**
-     @param e Escalador *
-     **/
-    public   void SetEscalador( Escalador e ) {
-      try{
-        service.modificarEscalador(e);
-      }
-      catch (Exception e2  ){
-          System.out.println(e2);
-      }
-    }
-/**
- * @param id Integer
- * **/
-    public  void removeEscalador(Integer id ) {
-        try {
-            service.eliminarEscalador(id);
-            System.out.println("ESCALADOR ELIMINADO");
-        }
-        catch (Exception e ){
-            System.out.println(id);
-        }
-    }
-/**
- * @param dni String
- * @return Escalador
- * **/
-    public Escalador getEscaldorDni(String dni){
-        try {
-            Escalador es = service.obtenerPorDni(dni);
-            System.out.println("ESCALADOR ELIMINAT");
-            return es;
-        }
-        catch (Exception e ){
-        System.out.println(e);
-        return null;
-        }
-    }
     /**
      * Elimina escalador per dni
      * **/
@@ -117,6 +70,7 @@ public EscaladorController(EscaladorService s){this.service = s;}
            System.out.println(e);
        }
     }
+
     public void mostrarTots() {
 
         try {
@@ -134,19 +88,7 @@ public EscaladorController(EscaladorService s){this.service = s;}
             System.out.println(e.getMessage());
         }
     }
-/**
- * @param id Integer
- * @return Escalador
- * **/
-    public  Escalador getEscalador(Integer id  ) {
-    try {
-        return service.obtenerPorId(id);
-    }
-    catch(Exception e ){
-        return null;
-    }
 
-    }
 /**Bucar per nivell**/
     public void buscarPorNivel(){
            try {
@@ -164,7 +106,8 @@ public EscaladorController(EscaladorService s){this.service = s;}
                System.out.println(e);
            }
     }
-/**@param dni String**/
+
+    /**@param dni String**/
     public void buscarPerDni(String dni) {
 
         try {
@@ -187,7 +130,8 @@ public EscaladorController(EscaladorService s){this.service = s;}
             System.out.println(ex.getMessage());
         }
     }
-/**MOdificar **/
+
+    /**MOdificar **/
     public void modificar() {
 
         Scanner sc = new Scanner(System.in);
