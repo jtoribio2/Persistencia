@@ -43,7 +43,6 @@ public class MainMenu {
                     break;
 
                 case 4:
-                    System.out.println("MENU CONSULTES");
                     new ConsultarMenu()
                             .iniciar();
                     break;
@@ -54,7 +53,6 @@ public class MainMenu {
                     break;
 
                 case 6:
-                    System.out.println("MENU ELIMINAR");
                     new EliminarMenu()
                             .iniciar();
                     break;

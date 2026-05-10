@@ -31,13 +31,23 @@ public class AppConfig {
             DAOFactory.getViaDAO(dbType, provider);
 
     //  SERVICE
+    private static final ViaService viaService =
+            new ViaService(
+                    viaDAO,
+                    sectorDAO,
+                    escolaDAO
+            );
 
     private static final SectorService sectorService =
-            new SectorService(sectorDAO, viaDAO); // le decimos al service que sus metodos usaran este dao
+            new SectorService(
+                    sectorDAO,
+                    viaDAO,
+                    viaService
+            ); // le decimos al service que sus metodos usaran este dao
 
 
     private static final EscolaService escolaService =
-            new EscolaService(escolaDAO,sectorDAO); // le decimos al service que sus metodos usaran este dao
+            new EscolaService(escolaDAO, sectorDAO); // le decimos al service que sus metodos usaran este dao
 
     private static final EscaladorService Escaladorservice =
             new EscaladorService(escaladorDAO); // le decimos al service que sus metodos usaran este dao
@@ -45,8 +55,6 @@ public class AppConfig {
     private static final LlarService Llarservice =
             new LlarService(llarDAO); // le decimos al service que sus metodos usaran este dao
 
-    private static final ViaService viaService =
-            new ViaService(viaDAO);
 
     //CONTROLLERS
     private static final SectorController sectorController =
@@ -60,7 +68,7 @@ public class AppConfig {
     }
 
     private static final EscolaController escolaController =
-            new EscolaController(escolaService,sectorService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
+            new EscolaController(escolaService, sectorService); // creamos el controler que podra usar los metodos de su entidad y sabra que tecnologia y donde ir a buscar la informacion
 
     public static EscolaController getEscolaController() {
         return escolaController;
@@ -72,7 +80,6 @@ public class AppConfig {
     public static EscaladorController getEscaladorController() {
         return escaladorController;
     }
-
 
 
     private static final LlarController llarController =

@@ -23,26 +23,6 @@ public class SectorController {
         this.service = service;
         this.escolaService = escolaService;
     }
-    /**@param id Integer @return Sector obtindre un sector en especific**/
-    public Sector getSector(Integer id) {
-        try {
-            return service.obtenerPorId(id);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-    /**@param s Sector  crear sector**/
-    public void crearSector(Sector s) {
-        try {
-            service.crearSector(s);
-            System.out.println("Sector creado correctamente");
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
-    }
     /**Mostrar Tots sectors**/
     public void mostrarTots() {
 
@@ -244,8 +224,9 @@ public class SectorController {
 
             System.out.println("Llargada(x metres ):");
             int llargada = sc.nextInt();
+            sc.nextLine();
 
-            System.out.println("Tipus via\n1.Baixa\n2.Mitjana\n3.Alta:");
+            System.out.println("Tipus via\n1.Clasica\n2.Esportiva\n3.Gel:");
             int tipus = sc.nextInt();
             sc.nextLine();
 

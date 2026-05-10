@@ -14,12 +14,22 @@ public class SectorService {
 
     private final SectorDAO sectorDAO;
     private final ViaDAO viaDAO;
+    private final ViaService viaService;
 
-    public SectorService(SectorDAO sectorDAO, ViaDAO viaDAO) {
+    public SectorService(
+            SectorDAO sectorDAO,
+            ViaDAO viaDAO,
+            ViaService viaService
+    ) {
+
         this.sectorDAO = sectorDAO;
         this.viaDAO = viaDAO;
+        this.viaService = viaService;
     }
-/**@param s Sector **/
+
+    /**
+     * @param s Sector
+     **/
     public void crearSector(Sector s) throws Exception {
 
         if (s == null) {
@@ -40,8 +50,11 @@ public class SectorService {
 
         sectorDAO.inserir(s);
     }
-/**@param s Sector
- * @param v Via **/
+
+    /**
+     * @param s Sector
+     * @param v Via
+     **/
     public void crearSectorConVia(Sector s, Via v) throws Exception {
 
         if (s == null) {
@@ -59,23 +72,29 @@ public class SectorService {
 
             v.setId_sector(idSectorGenerado);
 
-            viaDAO.inserir(v);
+            viaService.crear(v);
 
         } catch (Exception e) {
 
             sectorDAO.eliminar(idSectorGenerado);
 
             throw new RuntimeException(
-                    "No se pudo crear la vía. Sector eliminado."
+                    e.getMessage()
             );
         }
     }
-/**@return List Sector **/
+
+    /**
+     * @return List Sector
+     **/
     public List<Sector> obtenerTodos() {
         return sectorDAO.obtindreTots();
     }
-/**@param id INT
- * @return Sector **/
+
+    /**
+     * @param id INT
+     * @return Sector
+     **/
     public Sector obtenerPorId(int id) throws Exception {
 
         if (id <= 0) {
@@ -84,15 +103,18 @@ public class SectorService {
 
         return sectorDAO.obtenir(id);
     }
-    /**@param id Sector**/
-    public void eliminarSector(int id)throws Exception {
+
+    /**
+     * @param id Sector
+     **/
+    public void eliminarSector(int id) throws Exception {
 
         if (id <= 0) {
             throw new RuntimeException("ID inválido");
         }
 
-      List<Via> vias = viaDAO.buscarViesPorSector(id);
-        for(Via v : vias) {
+        List<Via> vias = viaDAO.buscarViesPorSector(id);
+        for (Via v : vias) {
             viaDAO.ElimnarViaEscaladors(v.getId_via());
             viaDAO.ElimnarViaDisponibilitat(v.getId_via());
             viaDAO.EliminarViaLlars(v.getId_via());
@@ -101,7 +123,7 @@ public class SectorService {
         sectorDAO.eliminar(id);
     }
 
-    public void modificarSector(Sector s)throws Exception {
+    public void modificarSector(Sector s) throws Exception {
 
         if (s == null) {
             throw new RuntimeException("Sector no puede ser null");
@@ -113,9 +135,12 @@ public class SectorService {
 
         sectorDAO.modificar(s);
     }
-/**@param nombre String
- * @return Lit sector **/
-    public List<Sector> buscarPorNombre(String nombre)throws Exception {
+
+    /**
+     * @param nombre String
+     * @return Lit sector
+     **/
+    public List<Sector> buscarPorNombre(String nombre) throws Exception {
 
         List<Sector> lista = sectorDAO.buscarPorNombre(nombre);
 
@@ -129,10 +154,12 @@ public class SectorService {
 
         return lista;
     }
-/**
- * @param idSector int
- * @return Escola
- * **/
+
+    /**
+     * @param idSector int
+     * @return Escola
+     *
+     **/
     public Escola buscarEscola(int idSector) {
 
         if (idSector <= 0) {
@@ -147,7 +174,10 @@ public class SectorService {
 
         return escola;
     }
-/**@param idEscola int **/
+
+    /**
+     * @param idEscola int
+     **/
     public List<Sector> buscarPorEscola(int idEscola) {
 
         if (idEscola <= 0) {
@@ -162,8 +192,11 @@ public class SectorService {
 
         return lista;
     }
-/**@param quantitat int
- *  @return List Sector Via DispDto **/
+
+    /**
+     * @param quantitat int
+     * @return List Sector Via DispDto
+     **/
     public List<SectorViaDispDTO> sectorViesDisponibles(int quantitat) throws Exception {
 
         if (quantitat < 0) {
@@ -172,10 +205,13 @@ public class SectorService {
 
         return sectorDAO.sectorViesDisponibles(quantitat);
     }
-    /**Eliminar sector con vias dpeendinedo de la escola
-     * @param escola int
-     * */
 
+    /**
+     * Eliminar sector con vias dpeendinedo de la escola
+     *
+     * @param escola int
+     *
+     */
     public void ElimnarSVC(int escola) throws Exception {
         if (escola < 0) throw new Exception("Error: id de escola no válido");
 

@@ -41,7 +41,8 @@ public class EscolaService {
         }
 
 
-        if (e.getPopularitat() > 0 && e.getPopularitat() <= 3) {
+        if (e.getPopularitat() < 1
+                || e.getPopularitat() > 3) {
             throw new Exception("Debe indicar una escola válida");
         }
         escoladao.inserir(e);
@@ -114,27 +115,53 @@ public class EscolaService {
         return id;
     }
 /**@param es Escola**/
-    public void  crearEscolaId(Escola  es   ) throws Exception {
+public void crearEscolaId(Escola es)
+        throws Exception {
 
-        if (es == null) {
-            throw new RuntimeException("Sector null");
-        }
+    if (es == null) {
 
-        int idEscota = escoladao.inserirRetornantId(es);
-
-
-        try {
-            es.setId_escola(idEscota);
-
-        } catch (Exception e) {
-
-          escoladao.eliminar(es.getId_escola());
-
-            throw new RuntimeException(
-                    "No se pudo crear la vía. Sector eliminado."
-            );
-        }
+        throw new RuntimeException(
+                "Escola null"
+        );
     }
+
+    if (es.getNom() == null
+            || es.getNom().isBlank()) {
+
+        throw new RuntimeException(
+                "Nom obligatori"
+        );
+    }
+
+    if (es.getLloc() == null
+            || es.getLloc().isBlank()) {
+
+        throw new RuntimeException(
+                "Lloc obligatori"
+        );
+    }
+
+    if (es.getAproximacio() == null
+            || es.getAproximacio().isBlank()) {
+
+        throw new RuntimeException(
+                "Aproximacio obligatoria"
+        );
+    }
+
+    if (es.getPopularitat() < 1
+            || es.getPopularitat() > 3) {
+
+        throw new RuntimeException(
+                "Popularitat incorrecta"
+        );
+    }
+
+    int idEscola =
+            escoladao.inserirRetornantId(es);
+
+    es.setId_escola(idEscola);
+}
 /**@param nombre String **/
     public List<Escola> buscarPorNombre(String nombre)
             throws Exception {

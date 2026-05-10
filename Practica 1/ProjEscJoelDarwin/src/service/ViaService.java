@@ -1,5 +1,7 @@
 package service;
 
+import dao.interfaces.SectorDAO;
+import dao.interfaces.EscolaDAO;
 import config.AppConfig;
 import controller.SectorController;
 import dao.interfaces.ViaDAO;
@@ -15,59 +17,91 @@ import java.util.Scanner;
 public class ViaService {
     private static Scanner scan = new Scanner(System.in);
     private final ViaDAO viaDAO;
+    private final SectorDAO sectorDAO;
+    private final EscolaDAO escolaDAO;
 
 
-    public ViaService(ViaDAO viaDAO) {
+    public ViaService(
+            ViaDAO viaDAO,
+            SectorDAO sectorDAO,
+            EscolaDAO escolaDAO
+    ) {
+
         this.viaDAO = viaDAO;
+        this.sectorDAO = sectorDAO;
+        this.escolaDAO = escolaDAO;
     }
 /**@param v Via **/
     // inserta una via
-    public void crear(Via v) throws Exception {
+public void crear(Via v) throws Exception {
 
-        if (v == null) {
-            throw new RuntimeException("La vía no puede ser null");
-        }
-
-        Escola escola = AppConfig.getSectorController().mostrarEscola(v.getId_sector());
-        //excepcion de añadir una via de en escolas de gel
-        if (AppConfig.getEscolaController().isGel(escola)){
-            int tipus = v.getId_tipus_via();
-            if (tipus == 1 || tipus == 2){
-                throw  new RuntimeException("no pots inserir una via clasica o esportiva en una escola de gel");
-            }
-        }
-
-
-        if (!AppConfig.getEscolaController().isGel(escola)){
-            int tipus = v.getId_tipus_via();
-            if (tipus == 3){
-                throw  new RuntimeException("no pots inserir una via de gel en una escola de vies clasiques y esportives");
-            }
-        }
-
-        if (escola == null) {
-            throw new RuntimeException("No se pudo determinar la escola de la vía");
-        }
-
-
-        if (v.getNom() == null || v.getNom().isEmpty()) {
-            throw new RuntimeException("El nombre de la vía es obligatorio");
-        }
-
-        if (v.getId_sector() <= 0) {
-            throw new RuntimeException("El sector es obligatorio");
-        }
-
-        if (v.getId_tipus_via() <= 0) {
-            throw new RuntimeException("El tipo de vía es obligatorio");
-        }
-
-        if (v.getLlargada() <= 0) {
-            throw new RuntimeException("La longitud debe ser mayor que 0");
-        }
-
-        viaDAO.inserir(v);
+    if (v == null) {
+        throw new RuntimeException("La vía no puede ser null");
     }
+
+    Escola escola =
+            sectorDAO.buscarEscola(
+                    v.getId_sector()
+            );
+
+    if (escola == null) {
+
+        throw new RuntimeException(
+                "No se encontró escola"
+        );
+    }
+
+    boolean escolaGel =
+            escolaDAO.isGel(escola);
+
+    List<Via> viesSector =
+            viaDAO.buscarViesPorSector(
+                    v.getId_sector()
+            );
+
+    boolean primeraVia =
+            viesSector.isEmpty();
+
+    if (!primeraVia) {
+
+        if (escolaGel) {
+
+            if (v.getId_tipus_via() != 3) {
+
+                throw new RuntimeException(
+                        "No pots inserir vies classiques/esportives en escola GEL"
+                );
+            }
+
+        } else {
+
+            if (v.getId_tipus_via() == 3) {
+
+                throw new RuntimeException(
+                        "No pots inserir vies GEL en escola classica/esportiva"
+                );
+            }
+        }
+    }
+
+    if (v.getNom() == null || v.getNom().isEmpty()) {
+        throw new RuntimeException("El nombre de la vía es obligatorio");
+    }
+
+    if (v.getId_sector() <= 0) {
+        throw new RuntimeException("El sector es obligatorio");
+    }
+
+    if (v.getId_tipus_via() <= 0) {
+        throw new RuntimeException("El tipo de vía es obligatorio");
+    }
+
+    if (v.getLlargada() <= 0) {
+        throw new RuntimeException("La longitud debe ser mayor que 0");
+    }
+
+    viaDAO.inserir(v);
+}
 /**Obtindre totes les vies
  * @return List Via
  * **/
