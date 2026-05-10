@@ -1,75 +1,36 @@
-# Projecte Escalada — Joel & Darwin
+#  Estructura del repositori
 
-Aplicació de gestió d'escalada desenvolupada en Java. Permet administrar escoles, sectors i vies, incloent la gestió de disponibilitats i escaladors.
-
----
-
-##  Estructura del Projecte
-
-```
+```text
 /
-├── DIA/                  # Diagrama Entitat-Relació de la base de dades
-├── ProjEscJoelDarwin/    # Aplicació Java principal
-└── SQL_BD/             # Scripts SQL (estructura i dades de la BD)
+├── DIA/
+├── ProjEscJoelDarwin/
+├── SQL_BD/
+└── readme.md
 ```
 
 ---
 
-##  Base de Dades
+## DIA/
 
-Els scripts de la carpeta `SQL_BD/` contenen:
-
-- **Estructura**: Creació de taules, claus primàries i forànies.
-- **Dades**: Inserció de dades de prova.
-
-### Taules principals
-
-| Taula | Descripció |
-|---|---|
-| `escoles` | Escoles d'escalada |
-| `sectors` | Sectors pertanyents a una escola |
-| `vies` | Vies pertanyents a un sector |
-| `escaladors` | Escaladors registrats |
-| `disponibilitats` | Disponibilitat dels escaladors a les vies |
-
-### Relacions clau
-
-- Una **escola** té múltiples **sectors**
-- Un **sector** té múltiples **vies**
-- Una **via** pot tenir **restriccions**
-
-> El diagrama entitat-relació complet es troba a la carpeta `DIA/`.
+Conté els diagrames del projecte.  
+Inclou els fitxers `.dia` amb els diagrames de classes, entitats i relacions utilitzats per dissenyar l'aplicació.
 
 ---
 
-##  Aplicació Java
+## ProjEscJoelDarwin/
 
-Ubicada a `ProjEscJoelDarwin/`, és una aplicació de prova que implementa el patró **DAO** per a la gestió de la base de dades.
-
-### Tecnologies
-
-- Java
-- MySQL
-- JDBC (connexió a la BD mitjançant `PreparedStatement`)
-
-### Funcionalitats principals
-
-- Cercar sectors per escola
-- Cercar vies per sector
-- Eliminar vies i les seves dependències (disponibilitats, escaladors) per sector
-- Eliminar sectors amb totes les seves vies associades
-... 
----
-
-## Configuració
-
-1. Executa els scripts de `SQL_BD/` al teu servidor MySQL per crear la base de dades i carregar les dades.
-2. Configura la connexió al projecte Java (host, usuari, contrasenya, nom de la BD).
-3. Executa l'aplicació des de `ProjEscJoelDarwin/`.
+Conté el projecte Java principal.  
+Inclou tot el codi font de l'aplicació organitzat per capes: `controller`, `service`, `dao`, `model`, `dto`, `view`, `config` i `db`.
 
 ---
 
-## Autors
+## SQL_BD/
 
-- Joel
-- Darwin
+Conté els scripts SQL de la base de dades.  
+Inclou la creació de taules, relacions, constraints, vistes i dades inicials necessàries per executar el projecte.
+
+---
+
+## readme.md
+
+Documentació general del projecte.
