@@ -130,6 +130,229 @@ Cada capa tiene responsabilidades separadas para mantener una arquitectura limpi
 
 ---
 
+# Gestión de conexiones JDBC
+
+La aplicación trabaja utilizando JDBC puro para conectarse directamente a MySQL.
+
+Cada operación realizada contra la base de datos abre su propia conexión independiente.
+
+El flujo general queda planteado de la siguiente manera:
+
+```text
+Controller
+   ↓
+Service
+   ↓
+DAO
+   ↓
+Connection
+   ↓
+MySQL
+```
+
+---
+
+# Apertura de conexiones
+
+Cada método DAO obtiene una nueva conexión utilizando:
+
+```java
+Connection conn = provider.getConnection();
+```
+
+Esto significa que:
+
+* Cada operación trabaja con su propia conexión.
+* Las conexiones no se reutilizan manualmente.
+* Cada consulta es independiente de las demás.
+
+Ejemplo simplificado:
+
+```java
+try (
+    Connection conn = provider.getConnection();
+    PreparedStatement ps = conn.prepareStatement(sql)
+) {
+
+    ps.executeUpdate();
+
+}
+```
+
+---
+
+# Uso de try-with-resources
+
+El proyecto utiliza `try-with-resources`, una funcionalidad de Java que permite cerrar automáticamente los recursos utilizados.
+
+Esto evita problemas típicos como:
+
+* Conexiones abiertas
+* Memory leaks
+* PreparedStatements sin cerrar
+* ResultSets abiertos
+
+Cuando el bloque `try` termina:
+
+```java
+try (
+    Connection conn = provider.getConnection();
+)
+```
+
+Java ejecuta automáticamente:
+
+```java
+conn.close();
+```
+
+aunque ocurra una excepción.
+
+Esto hace que la gestión de recursos sea mucho más segura y limpia.
+
+---
+
+# PreparedStatement
+
+Todas las consultas SQL se realizan mediante `PreparedStatement`.
+
+Ejemplo:
+
+```java
+String sql = "SELECT * FROM vies WHERE id_sector = ?";
+
+PreparedStatement ps = conn.prepareStatement(sql);
+
+ps.setInt(1, idSector);
+```
+
+Esto permite:
+
+* Evitar SQL Injection
+* Reutilizar consultas
+* Insertar parámetros dinámicamente
+* Mejorar legibilidad
+
+---
+
+# Gestión de errores SQL
+
+Los errores SQL se capturan mediante bloques `catch`.
+
+Ejemplo:
+
+```java
+catch (SQLException e) {
+    throw new RuntimeException(
+        "Error insertando via"
+    );
+}
+```
+
+Esto evita propagar excepciones SQL directamente hacia capas superiores.
+
+---
+
+# Soporte para múltiples tecnologías de base de datos
+
+El proyecto fue preparado para poder cambiar de tecnología de base de datos sin modificar la lógica de negocio de la aplicación.
+
+Actualmente utiliza MySQL, pero la arquitectura permite adaptar DAOs y conexiones para trabajar con otros motores como:
+
+* PostgreSQL
+* MariaDB
+* SQLite
+
+La separación entre:
+
+```text
+DAO
+ConnectionProvider
+AppConfig
+```
+
+permite desacoplar el acceso a datos del resto de la aplicación.
+
+---
+
+# Cambio de tecnología de base de datos
+
+Para cambiar el proyecto a otra tecnología sería necesario:
+
+## 1. Añadir el driver JDBC correspondiente
+
+Ejemplo PostgreSQL:
+
+```text
+postgresql-xx.x.x.jar
+```
+
+---
+
+## 2. Crear una nueva implementación de conexión
+
+Ejemplo:
+
+```text
+PostgresConnection.java
+```
+
+Implementando la interfaz:
+
+```text
+ConnectionProvider
+```
+
+---
+
+## 3. Añadir nuevas credenciales en db.properties
+
+Ejemplo:
+
+```properties
+db.url=
+db.user=
+db.password=
+db.driver=
+```
+
+---
+
+## 4. Modificar AppConfig
+
+Cambiar el proveedor de conexión utilizado por los DAOs.
+
+Ejemplo:
+
+```java
+ConnectionProvider provider =
+        new PostgresConnection();
+```
+
+---
+
+# Preparado para múltiples bases de datos
+
+La arquitectura actual también permite que diferentes tablas trabajen sobre distintas tecnologías.
+
+Por ejemplo:
+
+```text
+Escaladors → PostgreSQL
+Vies → MySQL
+Disponibilitats → SQLite
+```
+
+Esto sería posible creando distintos:
+
+* DAOs
+* Providers
+* Configuraciones de conexión
+
+La lógica de negocio permanecería prácticamente igual gracias a la separación por capas.
+
+---
+
 # Gestión de dependencias
 
 Uno de los principales retos del proyecto fue gestionar correctamente las dependencias entre entidades relacionadas.
@@ -254,34 +477,6 @@ Algunos ejemplos:
 
 ---
 
-# Problemas y decisiones técnicas durante el desarrollo
-
-## Gestión de dependencias entre entidades
-
-Uno de los mayores retos del proyecto fue gestionar correctamente las relaciones entre entidades y el orden de eliminación de datos.
-
-La aplicación trabaja con múltiples relaciones:
-
-```text
-Escola → Sectors
-Sector → Vies
-Vies → Disponibilitats
-Vies → Llars
-Escaladors ↔ Vies
-```
-
-Esto provocaba problemas al eliminar registros, ya que las Foreign Keys impedían borrar entidades que todavía tenían dependencias activas.
-
-Por ejemplo:
-
-* No se podía eliminar una Escola si todavía existían Sectors asociados.
-* No se podía eliminar un Sector si contenía Vies.
-* No se podía eliminar una Via si seguían existiendo relaciones en tablas auxiliares.
-
-Para solucionar esto fue necesario implementar un flujo de eliminación manual siguiendo el orden correcto de dependencias.
-
----
-
 # Aprendizaje adquirido
 
 El proyecto permitió profundizar en:
@@ -332,7 +527,6 @@ Main.java
 # Autor
 
 Joel
-
 Darwin
 
 Proyecto DAW - Persistencia de dades
